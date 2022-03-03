@@ -12,11 +12,13 @@ let
     feh                  # image viewer
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
+    ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
     neovim
     neofetch             # command-line system information
+    nix-index            #  locate the package providing a certain file in nixpkgs
     pavucontrol          # pulseaudio volume control
     paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
@@ -63,6 +65,7 @@ let
     stylish-haskell
     stack
     termonad
+    xmobar
   ];
 
   xmonadPkgs = with pkgs; [
@@ -73,7 +76,8 @@ let
     xorg.xkbcomp           # keymaps modifier
     xorg.xmodmap           # keymaps modifier
     xorg.xrandr            # display manager (X Resize and Rotate protocol)
-    xmobar
+    xorg.xdpyinfo
+
   ];
 
 in
@@ -151,6 +155,12 @@ in
           enable = true;
           userName = "kayvank";
           userEmail = "kayvan@q2io.com";
+          sigining = "60969F8A84531894"
+          extraConfig = {
+            init = {
+              defaultBranch = "main";
+            };
+          };
         };
 
         htop = {

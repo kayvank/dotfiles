@@ -30,6 +30,14 @@ in {
         bind h select-pane -L
         bind j select-pane -D
         bind k select-pane -U
+        unbind-key -T copy-mode-vi Enter
+        bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xsel -ib"
+        unbind-key -T copy-mode-vi C-v
+        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+        unbind-key -T copy-mode-vi [
+        bind-key -T copy-mode-vi [ send-keys -X begin-selection
+        unbind-key -T copy-mode-vi ]
+        bind-key -T copy-mode-vi ] send-keys -X copy-selection
       '';
     };
   };
