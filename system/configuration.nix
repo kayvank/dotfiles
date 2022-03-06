@@ -23,6 +23,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # ./nvidia.nix
     ./wm/xmonad.nix
     ];
 
@@ -54,15 +55,39 @@ in
 
     fonts.fonts = with pkgs; [
       customFonts
-      font-awesome-ttf
+      font-awesome
     ];
 
     # Enable the X11 windowing system.
     services.xserver = {
       enable = true;
+      xrandrHeads = [
+        { output = "HDMI-1";
+        primary = true;
+        monitorConfig = ''
+          Option "PreferredMode"  "3840x2160"
+          Option "Position" "0 0"
+        '';
+        }
+        { output = "eDP-1";
+        monitorConfig = ''
+          Option "PreferredMode" "2560x1440"
+          Option "Position" "0 0"
+        '';
+        }
+      ];
+      resolutions = [
+        { x = 2048; y = 1152; }
+        { x = 1920; y = 1080; }
+        { x = 2560; y = 1440; }
+        { x = 3072; y = 1728; }
+        { x = 3840; y = 2160; }
+      ];
+
+
       videoDrivers = [ "intel" ];
-      dpi = 180;
-      libinput.enable = true;
+      # dpi = 180;
+      # libinput.enable = true;
       displayManager = {
         lightdm.enable = true;
         # sddm.enable = true;
@@ -72,13 +97,6 @@ in
       windowManager.xmonad.enable = true;
     };
 
-
-    # Configure keymap in X11
-    # services.xserver.layout = "us";
-    # services.xserver.xkbOptions = "eurosign:e";
-
-    # Enable CUPS to print documents.
-    # services.printing.enable = true;
 
     # Enable sound.
     sound.enable = true;
@@ -98,82 +116,82 @@ in
     };
 
 
-      # List packages installed in system profile. To search, run:
-      # $ nix search wget
-      environment.systemPackages = with pkgs; [
-        vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-        wget
-        firefox
-        konsole
-        home-manager
-      ];
+    # List packages installed in system profile. To search, run:
+    # $ nix search wget
+    environment.systemPackages = with pkgs; [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      firefox
+      konsole
+      home-manager
+    ];
 
 
-      # Nix daemon config
-      nix = {
-        # Automate `nix-store --optimise`
-        settings.auto-optimise-store = true;
+    # Nix daemon config
+    nix = {
+      # Automate `nix-store --optimise`
+      settings.auto-optimise-store = true;
 
-        # Automate garbage collection
-        gc = {
-          automatic = true;
-          dates     = "weekly";
-          options   = "--delete-older-than 7d";
-        };
-
-        ##
-        extraOptions = ''
-          experimental-features = nix-command flakes
-          keep-outputs          = true
-          keep-derivations      = true
-        '';
-
-        # Required by Cachix to be used as non-root user
-        settings.trusted-users = [ "root" "soostone" ];
+      # Automate garbage collection
+      gc = {
+        automatic = true;
+        dates     = "weekly";
+        options   = "--delete-older-than 7d";
       };
 
+      ##
+      extraOptions = ''
+        experimental-features = nix-command flakes
+        keep-outputs          = true
+        keep-derivations      = true
+      '';
 
-      # Some programs need SUID wrappers, can be configured further or are
-      # started in user sessions.
-      # programs.mtr.enable = true;
-      programs.gnupg.agent = {
+      # Required by Cachix to be used as non-root user
+      settings.trusted-users = [ "root" "soostone" ];
+    };
+
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    # programs.mtr.enable = true;
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+
+    # List services that you want to enable:
+
+    # Enable the OpenSSH daemon.
+    services.openssh.enable = true;
+
+    # Enable Docker
+    virtualisation = {
+      docker = {
         enable = true;
-        enableSSHSupport = true;
-      };
-
-      # List services that you want to enable:
-
-      # Enable the OpenSSH daemon.
-      services.openssh.enable = true;
-
-      # Enable Docker
-      virtualisation = {
-        docker = {
+        autoPrune = {
           enable = true;
-          autoPrune = {
-            enable = true;
-            dates = "weekly";
-          };
+          dates = "weekly";
         };
       };
+    };
 
-      # kvm Virt-manager
-      virtualisation.libvirtd.enable = true;
-      programs.dconf.enable = true;
+    # kvm Virt-manager
+    virtualisation.libvirtd.enable = true;
+    programs.dconf.enable = true;
 
-      # Open ports in the firewall.
-      # networking.firewall.allowedTCPPorts = [ ... ];
-      # networking.firewall.allowedUDPPorts = [ ... ];
-      # Or disable the firewall altogether.
-      # networking.firewall.enable = false;
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
 
-      # This value determines the NixOS release from which the default
-      # settings for stateful data, like file locations and database versions
-      # on your system were taken. It‘s perfectly fine and recommended to leave
-      # this value at the release version of the first install of this system.
-      # Before changing this value read the documentation for this option
-      # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-      system.stateVersion = "22.05"; # Did you read the comment?
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "22.05"; # Did you read the comment?
 
 }
 

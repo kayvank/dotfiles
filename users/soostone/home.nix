@@ -16,6 +16,7 @@ let
     killall              # kill processes by name
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
+    nemo                 # file explorer
     neovim
     neofetch             # command-line system information
     nix-index            #  locate the package providing a certain file in nixpkgs

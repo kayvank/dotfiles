@@ -9,7 +9,7 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = [ ];
+  boot.initrd.kernelModules = ["i915"];
   boot.kernelPackages = pkgs.linuxPackages_latest;
  boot.kernelParams = [ "mem_sleep_default=deep" ];
   boot.kernelModules = [ "kvm-intel" ];
@@ -44,4 +44,26 @@
   hardware.video.hidpi.enable = lib.mkDefault true;
   hardware.bluetooth.enable = true;
   hardware.pulseaudio.enable = true;
+
+  # This runs only Intel and nvidia does not drain power.
+
+  ##### disable nvidia, very nice battery life.
+   hardware.nvidiaOptimus.disable = lib.mkDefault true;
+   boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
+
+  environment.variables = {
+    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+  };
+
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiIntel
+    vaapiVdpau
+    libvdpau-va-gl
+    intel-media-driver
+  ];
+
+
 }

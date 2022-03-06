@@ -16,7 +16,11 @@
 
       libinput = {
         enable = true;
-        touchpad.disableWhileTyping = true;
+        touchpad = {
+        disableWhileTyping = true;
+        tapping = true;
+        buttonMapping = "lmr";
+        };
       };
 
       serverLayoutSection = ''
