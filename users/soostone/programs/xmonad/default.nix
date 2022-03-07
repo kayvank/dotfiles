@@ -2,7 +2,7 @@
 
 let
   extra = ''
-    ${pkgs.util-linux}/bin/setterm -blank 0 -powersave off -powerdown 0
+    ${pkgs.util-linux}bin/setterm -blank 0 -powersave off -powerdown 0
     ${pkgs.xorg.xset}/bin/xset s off
     ${pkgs.xcape}/bin/xcape -e "Hyper_L=Tab;Hyper_R=backslash"
     ${pkgs.xorg.xrandr}/bin/xrandr --auto

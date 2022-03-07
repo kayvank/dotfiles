@@ -16,7 +16,7 @@ let
     killall              # kill processes by name
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
-    nemo                 # file explorer
+    # nemo                 # file explorer
     neovim
     neofetch             # command-line system information
     nix-index            #  locate the package providing a certain file in nixpkgs
@@ -156,7 +156,8 @@ in
           enable = true;
           userName = "kayvank";
           userEmail = "kayvan@q2io.com";
-          sigining = "60969F8A84531894"
+          # signing = "60969F8A84531894";
+          # commit = {gpgSign = true;};
           extraConfig = {
             init = {
               defaultBranch = "main";

@@ -30,7 +30,6 @@ import           XMonad.Util.SpawnOnce
 -- certain contrib modules.
 --
 myTerminal = "termonad"
--- myTerminal = "gnome-terminal"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -87,15 +86,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
     [ ((noModMask, xF86XK_AudioLowerVolume), spawn "amixer -D pulse sset Master on && amixer -D pulse sset Master 5%- && ogg123 /home/baerg/Sounds/volume.ogg"),
       ((noModMask, xF86XK_AudioRaiseVolume), spawn "amixer -D pulse sset Master on && amixer -D pulse sset Master 5%+ && ogg123 /home/baerg/Sounds/volume.ogg"),
       ((noModMask, xF86XK_AudioMute), spawn "amixer -D pulse sset Master toggle"),
-      ((noModMask, xF86XK_MonBrightnessUp), spawn "/home/soostone/bin/brightness-up"),
-      ((noModMask, xF86XK_MonBrightnessDown), spawn "/home/soostone/bin/brightness-down"),
+      ((noModMask, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 10"),
+      ((noModMask, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10"),
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
       -- launch dmenu
       ((modm, xK_p), spawn "rofi -sidebar-mode -show run"),
       -- launch rofi
       ((modm .|. shiftMask, xK_p), spawn "dmenu_run"),
       -- launch lock-screen
-      ((modm, xK_z), spawn "xscreensaver-command -lock"),
+      ((modm, xK_z), spawn "multilockscreen -l dim"),
       -- launch slack
       ((modm, xK_F2), spawnOn comWs "slack"),
       -- close focused window
