@@ -124,6 +124,8 @@ in
       firefox
       konsole
       home-manager
+      pciutils
+      xorg.xbacklight
     ];
 
 

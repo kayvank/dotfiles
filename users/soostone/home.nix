@@ -7,6 +7,7 @@ let
     dmenu                # application launcher
     docker-compose       # docker manager
     direnv               # customize env per directory
+    evince
     exa                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
@@ -24,6 +25,7 @@ let
     paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
     pasystray            # pulseaudio systray
+    python39Full
     prettyping           # a nicer ping
     pulsemixer           # pulseaudio mixer
     ranger               # terminal file explorer
