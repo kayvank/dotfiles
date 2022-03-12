@@ -31,7 +31,7 @@ in
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "soostone-dev"; # Define your hostname.
+    networking.hostName = "saturnt480s"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable=true;
 
@@ -71,7 +71,7 @@ in
         }
         { output = "eDP-1";
         monitorConfig = ''
-          Option "PreferredMode" "2560x1440"
+          Option "PreferredMode" "1920x1080"
           Option "Position" "0 0"
         '';
         }
@@ -108,7 +108,7 @@ in
 
     programs.zsh.enable = true;
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.soostone = {
+    users.users.kayvan = {
       initialPassword = "123XXX"; ## change password post login
       isNormalUser = true;
       extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
@@ -122,6 +122,7 @@ in
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       wget
       firefox
+      git
       konsole
       home-manager
       pciutils
@@ -149,7 +150,7 @@ in
       '';
 
       # Required by Cachix to be used as non-root user
-      settings.trusted-users = [ "root" "soostone" ];
+      settings.trusted-users = [ "root" "kayvan" ];
     };
 
 

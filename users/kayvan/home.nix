@@ -6,7 +6,7 @@ let
     brave                # www browser
     dmenu                # application launcher
     docker-compose       # docker manager
-    direnv               # customize env per directory
+  #  direnv               # customize env per directory
     evince
     exa                  # a better `ls`
     fd                   # "find" for files
@@ -18,9 +18,7 @@ let
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
     # nemo                 # file explorer
-    neovim
     neofetch             # command-line system information
-    nix-index            #  locate the package providing a certain file in nixpkgs
     pavucontrol          # pulseaudio volume control
     paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
@@ -54,7 +52,6 @@ let
   ];
 
   haskellPkgs = with pkgs.haskellPackages; [
-    brittany                # code formatter
     cabal2nix               # convert cabal projects to nix
     cabal-install           # package manager
     ghc                     # compiler
@@ -98,7 +95,7 @@ in
 
    packages =
       defaultPkgs ++
-      gitPkgs ++
+      ##gitPkgs ++
       haskellPkgs ++
       xmonadPkgs
     ;
@@ -181,14 +178,6 @@ in
           enable = true;
           enableZshIntegration = true;
           #  nix-direnv.enable = true;
-        };
-
-        fzf = {
-          enable = true;
-          enableZshIntegration = true;
-          defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
-          defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
-          fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
         };
 
         jq.enable = true;

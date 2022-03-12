@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
 pushd ~/.dotfiles
-nix build .#homeManagerConfigurations.soostone.activationPackage 
+nix build .#homeManagerConfigurations.kayvan.activationPackage
 ./result/activate
 popd

@@ -21,15 +21,15 @@
 
   in {
     homeManagerConfigurations = {
-      soostone = home-manager.lib.homeManagerConfiguration {
+      kayvan = home-manager.lib.homeManagerConfiguration {
         inherit system pkgs;
-        username = "soostone";
-        homeDirectory = "/home/soostone";
-        configuration = import ./users/soostone/home.nix ;
+        username = "kayvan";
+        homeDirectory = "/home/kayvan";
+        configuration = import ./users/kayvan/home.nix ;
       };
     };
     nixosConfigurations = {
-      soostone-dev = lib.nixosSystem { ## gets all the system stuff by hostname, soostone-dev
+      saturnt480s = lib.nixosSystem { ## gets all the system stuff by hostname, saturn480s
       inherit system;
 
       modules = [

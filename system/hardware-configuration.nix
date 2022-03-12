@@ -8,62 +8,22 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = ["i915"];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
- boot.kernelParams = [ "mem_sleep_default=deep" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" ];
+  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXRoot";  ## "/dev/disk/by-uuid/0244ddaa-58fe-45b6-92e9-e183f732db6f";
+    { device = "/dev/disk/by-uuid/ccfd8aaa-7c18-4d1c-8bd9-267f8ffad04f";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/NIXBOOT"; ## "/dev/disk/by-uuid/6D46-5A36";
+    { device = "/dev/disk/by-uuid/0D83-414F";
       fsType = "vfat";
     };
 
-  sound.enable = true;
+  swapDevices = [ ];
 
-  swapDevices = [ 
-   {
-     device = "/.swapfile";
-   }
-
-  ];
-
-  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
- powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "ondemand";
-  };
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-  hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # This runs only Intel and nvidia does not drain power.
-
-  ##### disable nvidia, very nice battery life.
-   hardware.nvidiaOptimus.disable = lib.mkDefault true;
-   boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
-
-  environment.variables = {
-    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
-  };
-
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiIntel
-    vaapiVdpau
-    libvdpau-va-gl
-    intel-media-driver
-  ];
-
-
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
