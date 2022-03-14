@@ -9,9 +9,11 @@ my collection of dot files which I use to build my nixos systems and control how
 ``` sh
 git clone git@github.com:kayvank/dotfiles.git ~/.dotfiles
 cd ./dotfiles
-./apply-user
+./apply-user ## to make user related changes
 ./update
-./system-apply.sh
+### or for system related changes ###
+./apply-system.sh
+./update
 ```
 
 ##  vms
