@@ -17,7 +17,7 @@ let
     killall              # kill processes by name
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
-    # nemo                 # file explorer
+    cinnamon.nemo        # file explorer
     neovim
     neofetch             # command-line system information
     nix-index            #  locate the package providing a certain file in nixpkgs
@@ -31,6 +31,7 @@ let
     ranger               # terminal file explorer
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
+    sqlite
     stalonetray
     slack                # messaging client
     terraform            # terraform
@@ -45,7 +46,7 @@ let
     # fixes the `ar` error required by cabal
     binutils-unwrapped
   ];
- home.stateVersion = "22.05";
+  home.stateVersion = "22.05";
   gitPkgs = with pkgs.gitAndTools; [
     diff-so-fancy # git diff with colors
     git-crypt     # git files encryption
@@ -54,7 +55,6 @@ let
   ];
 
   haskellPkgs = with pkgs.haskellPackages; [
-    brittany                # code formatter
     cabal2nix               # convert cabal projects to nix
     cabal-install           # package manager
     ghc                     # compiler
@@ -96,17 +96,17 @@ in
   # paths it should manage.
   home = {
 
-   packages =
+    packages =
       defaultPkgs ++
       gitPkgs ++
       haskellPkgs ++
       xmonadPkgs
-    ;
+      ;
 
-   sessionVariables = {
-      DISPLAY = ":0";
-      EDITOR = "vim";
-    };
+      sessionVariables = {
+        DISPLAY = ":0";
+        EDITOR = "vim";
+      };
   };
   # notifications about home-manager news
   news.display = "silent";
@@ -135,71 +135,76 @@ in
     flameshot.enable = true;
   };
 
- programs = {
+  programs = {
 
-   zsh =  {
+    zsh =  {
       enable = true;
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "sudo" "docker" "kubectl" ];
       };
-   };
+    };
 
-        tmux.enable = true;
-        emacs = {
-          enable = true;
-          extraPackages = epkgs: [
-            epkgs.nix-mode
-            epkgs.magit
-          ];
+    tmux.enable = true;
+    emacs = {
+      enable = true;
+      extraPackages = epkgs: [
+        epkgs.nix-mode
+        epkgs.magit
+      ];
+    };
+
+    git = {
+      enable = true;
+      userName = "kayvank";
+      userEmail = "kayvan@q2io.com";
+      # signing = "60969F8A84531894";
+      extraConfig = {
+        init = {
+          defaultBranch = "main";
         };
-
-        git = {
-          enable = true;
-          userName = "kayvank";
-          userEmail = "kayvan@q2io.com";
-          # signing = "60969F8A84531894";
-          # commit = {gpgSign = true;};
-          extraConfig = {
-            init = {
-              defaultBranch = "main";
-            };
-          };
-        };
-
-        htop = {
-          enable = true;
-          settings = {
-            sort_direction = true;
-            sort_key = "PERCENT_CPU";
-          };
-        };
-
-        bat.enable = true;
-
-        direnv = {
-          enable = true;
-          enableZshIntegration = true;
-          #  nix-direnv.enable = true;
-        };
-
-        fzf = {
-          enable = true;
-          enableZshIntegration = true;
-          defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
-          defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
-          fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
-        };
-
-        jq.enable = true;
-        ssh.enable = true;
-
-        zoxide = {
-          enable = true;
-          enableZshIntegration = true;
-          options = [];
-        };
-
-
       };
-    }
+    };
+
+    htop = {
+      enable = true;
+      settings = {
+        sort_direction = true;
+        sort_key = "PERCENT_CPU";
+      };
+    };
+
+    bat.enable = true;
+
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      #  nix-direnv.enable = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+      defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
+      defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
+      fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
+    };
+
+    jq.enable = true;
+    ssh = {
+      enable = true;
+      extraConfig = ''
+        Host = "dev"
+        HostName = "192.168.183.166"
+        User = "kayvan"
+      '';
+    };
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [];
+    };
+
+
+  };
+}
