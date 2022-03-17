@@ -194,9 +194,17 @@ in
     ssh = {
       enable = true;
       extraConfig = ''
-        Host = "dev"
-        HostName = "192.168.183.166"
-        User = "kayvan"
+
+        # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+        Host dev
+            HostName XXX.XXX.XXX.XXX
+            User soostone
+        Host devkayvan
+            HostName XXX.XXX.XXX.XXX
+            User kayvan
+        Host soostone
+            HostName 192.168.183.166
+            User kayvan
       '';
     };
     zoxide = {
