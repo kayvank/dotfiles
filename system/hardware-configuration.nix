@@ -8,62 +8,30 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = ["i915"];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
- boot.kernelParams = [ "mem_sleep_default=deep" ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXRoot";  ## "/dev/disk/by-uuid/0244ddaa-58fe-45b6-92e9-e183f732db6f";
+    { device = "/dev/disk/by-uuid/6813901b-f560-44d1-a06c-5d7a3503b5ae";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/NIXBOOT"; ## "/dev/disk/by-uuid/6D46-5A36";
+    { device = "/dev/disk/by-uuid/1FE8-921B";
       fsType = "vfat";
     };
 
-  sound.enable = true;
+  swapDevices = [ ];
 
-  swapDevices = [ 
-   {
-     device = "/.swapfile";
-   }
+  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+  # Per-interface useDHCP will be mandatory in the future, so this generated config
+  # replicates the default behaviour.
+  networking.useDHCP = lib.mkDefault false;
+  networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
+  networking.interfaces.wlp82s0.useDHCP = lib.mkDefault true;
 
-  ];
-
-  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
- powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "ondemand";
-  };
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-  hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # This runs only Intel and nvidia does not drain power.
-
-  ##### disable nvidia, very nice battery life.
-   hardware.nvidiaOptimus.disable = lib.mkDefault true;
-   boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
-
-  environment.variables = {
-    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
-  };
-
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiIntel
-    vaapiVdpau
-    libvdpau-va-gl
-    intel-media-driver
-  ];
-
-
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

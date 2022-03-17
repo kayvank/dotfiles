@@ -201,10 +201,10 @@ in
             User soostone
         Host devkayvan
             HostName XXX.XXX.XXX.XXX
-            User kayvan
-        Host soostone
-            HostName 192.168.183.166
-            User kayvan
+            User soostone
+        Host soostone-dev
+            HostName 192.168.183.229
+            User soostone
       '';
     };
     zoxide = {

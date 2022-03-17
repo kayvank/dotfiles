@@ -31,7 +31,7 @@ in
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "soostone-dev"; # Define your hostname.
+    networking.hostName = "saturn-xeon"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager.enable=true;
 
@@ -41,8 +41,8 @@ in
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
-    networking.useDHCP = false;
-    networking.interfaces.wlp59s0.useDHCP = true;
+    # networking.useDHCP = false;
+    # networking.interfaces.wlp59s0.useDHCP = true;
     ##networking.interfaces.enp58s0u1.useDHCP = true;
 
     # Configure network proxy if necessary
@@ -108,7 +108,7 @@ in
 
     programs.zsh.enable = true;
     # Define a user account. Don't forget to set a password with ‘passwd’.
-    users.users.soostone = {
+    users.users.kayvan = {
       initialPassword = "123XXX"; ## change password post login
       isNormalUser = true;
       extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
@@ -120,6 +120,7 @@ in
     # $ nix search wget
     environment.systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      git
       wget
       firefox
       konsole
@@ -149,7 +150,7 @@ in
       '';
 
       # Required by Cachix to be used as non-root user
-      settings.trusted-users = [ "root" "soostone" ];
+      settings.trusted-users = [ "root" "kayvan" ];
     };
 
 
