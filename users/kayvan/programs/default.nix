@@ -1,6 +1,6 @@
 [
-  ./doom
   ./rofi
   ./shell
   ./xmonad
+ # ./doom
 ]

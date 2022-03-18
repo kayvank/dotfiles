@@ -8,10 +8,18 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usb_storage" "sd_mod" "sdhci_pci" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "nvme"
+    "usb_storage"
+    "sd_mod"
+    "sdhci_pci" ];
+  boot.initrd.kernelModules = ["i915" ];
+  boot.kernelModules = ["kvm-intel" ];
+  boot.extraModulePackages = [];
+  # boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
+  # boot.blacklistedKernelModules = ["nouveau" "nvidia_drm" "nvidia_modeset" "nvidia"];
+  boot.kernelParams = [ "mem_sleep_default=deep" ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/6813901b-f560-44d1-a06c-5d7a3503b5ae";
@@ -23,15 +31,50 @@
       fsType = "vfat";
     };
 
-  swapDevices = [ ];
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = lib.mkDefault false;
-  networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
-  networking.interfaces.wlp82s0.useDHCP = lib.mkDefault true;
+  swapDevices = [
+   {
+     device = "/.swapfile";
+   }
 
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  ];
+ # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+ powerManagement = {
+    enable = true;
+    powertop.enable = true;
+    cpuFreqGovernor = lib.mkDefault "ondemand";
+  };
+  # high-resolution display
+  hardware.video.hidpi.enable = lib.mkDefault true;
+  hardware.bluetooth.enable = true;
+  hardware.pulseaudio.enable = true;
+#  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+  # This runs only Intel and nvidia does not drain power.
+
+  ##### disable nvidia, very nice battery life.
+   #hardware.nvidiaOptimus.disable = lib.mkDefault true;
+
+  environment.variables = {
+    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+  };
+
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
+
+  hardware.opengl.extraPackages = with pkgs; [
+    vaapiIntel
+    vaapiVdpau
+    libvdpau-va-gl
+    intel-media-driver
+  ];
+
+
+  # swapDevices = [ ];
+  # networking.useDHCP = lib.mkDefault false;
+  # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
+  # networking.interfaces.wlp82s0.useDHCP = lib.mkDefault true;
+
+  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

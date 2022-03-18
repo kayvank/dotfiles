@@ -4,6 +4,7 @@
   programs.dconf.enable = true;
 
   services = {
+    gnome.gnome-keyring.enable = true;
     upower.enable = true;
 
     dbus = {
@@ -17,9 +18,9 @@
       libinput = {
         enable = true;
         touchpad = {
-        disableWhileTyping = true;
-        tapping = true;
-        buttonMapping = "lmr";
+          disableWhileTyping = true;
+          tapping = true;
+          buttonMapping = "lmr";
         };
       };
 
@@ -33,11 +34,21 @@
         defaultSession = "none+xmonad";
       };
 
+
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
       };
 
+    };
+  };
+  hardware.bluetooth = {
+    enable = true;
+    hsphfpd.enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+      };
     };
   };
 

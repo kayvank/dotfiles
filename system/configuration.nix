@@ -17,7 +17,6 @@ let
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';
-
 in
 {
   imports =
@@ -27,18 +26,22 @@ in
     ./wm/xmonad.nix
     ];
 
+    nixpkgs.config.allowUnfree = true;
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    networking.hostName = "saturn-xeon"; # Define your hostname.
-    # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    networking.networkmanager.enable=true;
+    networking = {
+      hostName = "saturn-xeon"; # Define your hostname.
+      networkmanager.enable=true;
+      useDHCP = false; # The global useDHCP flag is deprecated, therefore explicitly set to false here.
+      firewall.enable = false;
+      # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    };
 
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
 
-    # The global useDHCP flag is deprecated, therefore explicitly set to false here.
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
     # networking.useDHCP = false;
@@ -59,19 +62,20 @@ in
     ];
 
     # Enable the X11 windowing system.
+    services.openssh.enable = true;
     services.xserver = {
       enable = true;
       xrandrHeads = [
         { output = "HDMI-1";
-        primary = true;
+        primary = false;
         monitorConfig = ''
-          Option "PreferredMode"  "3840x2160"
+          Option "PreferredMode" "3840x2160"
           Option "Position" "0 0"
         '';
-        }
-        { output = "eDP-1";
+        } { output = "eDP-1";
+        primary = true;
         monitorConfig = ''
-          Option "PreferredMode" "2560x1440"
+          Option "PreferredMode" "1920x1080"
           Option "Position" "0 0"
         '';
         }
@@ -84,29 +88,31 @@ in
         { x = 3840; y = 2160; }
       ];
 
-
-      videoDrivers = [ "intel" ];
+      videoDrivers = ["intel"]; ##["nouveau" ]; ## ["intel"];
       # dpi = 180;
-      # libinput.enable = true;
+      libinput.enable = true;
+
       displayManager = {
-        lightdm.enable = true;
-        # sddm.enable = true;
-        # plasma5.enable = true;
-        #startx.enable = true;
+        lightdm.enable = true; # sddm.enable = true; plasma5.enable = true; startx.enable = true;
       };
       windowManager.xmonad.enable = true;
     };
-
-
     # Enable sound.
     sound.enable = true;
-    hardware.pulseaudio.enable = true;
-    hardware.bluetooth.enable = true;
+
+    hardware = {
+      pulseaudio = {
+        enable = true;
+        extraModules = [ pkgs.pulseaudio-modules-bt ];
+        package = pkgs.pulseaudioFull;
+      };
+      bluetooth.enable = true;
+    };
+
 
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
 
-    programs.zsh.enable = true;
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.kayvan = {
       initialPassword = "123XXX"; ## change password post login
@@ -132,8 +138,6 @@ in
 
     # Nix daemon config
     nix = {
-      # Automate `nix-store --optimise`
-      settings.auto-optimise-store = true;
 
       # Automate garbage collection
       gc = {
@@ -150,13 +154,19 @@ in
       '';
 
       # Required by Cachix to be used as non-root user
-      settings.trusted-users = [ "root" "kayvan" ];
+      settings = {
+        trusted-users = [ "root" "kayvan" ];
+        # Automate `nix-store --optimise`
+        auto-optimise-store = true;
+      };
     };
 
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     # programs.mtr.enable = true;
+    programs.dconf.enable = true;
+    programs.zsh.enable = true;
     programs.gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -165,7 +175,6 @@ in
     # List services that you want to enable:
 
     # Enable the OpenSSH daemon.
-    services.openssh.enable = true;
 
     # Enable Docker
     virtualisation = {
@@ -180,7 +189,6 @@ in
 
     # kvm Virt-manager
     virtualisation.libvirtd.enable = true;
-    programs.dconf.enable = true;
 
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];

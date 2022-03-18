@@ -3,13 +3,23 @@
 
   ## all the required external stuff
   inputs = {
-    # Specify the source of Home Manager and Nixpkgs
-    home-manager.url = "github:nix-community/home-manager";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs"; ## use our nixpkgs instead of HM one
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs"; ## use our nixpkgs instead of HM one
+    };
+    nurpkgs = {
+      url = github:nix-community/NUR;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    text2nix = {
+      url = github:Mic92/tex2nix/4b17bc0;
+      inputs.utils.follows = "nixpkgs";
+    };
+    nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = inputs @ {self, nixpkgs, nurpkgs, home-manager, text2nix,  nix-doom-emacs, ... }:
   let
     system = "x86_64-linux";
 
@@ -21,7 +31,7 @@
 
   in {
     homeManagerConfigurations = {
-      soostone = home-manager.lib.homeManagerConfiguration {
+      kayvan = home-manager.lib.homeManagerConfiguration {
         inherit system pkgs;
         username = "kayvan";
         homeDirectory = "/home/kayvan";

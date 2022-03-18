@@ -2,6 +2,8 @@
 let
   defaultPkgs = with pkgs; [
     arandr               # simple GUI for xrandr
+    awscli2
+    autorandr
     blueman
     brave                # www browser
     dmenu                # application launcher
@@ -37,6 +39,7 @@ let
     terraform            # terraform
     tldr                 # summary of a man page
     tmux                 # tmux
+    trayer
     tree                 # display files in a tree view
     volumeicon           # volume icon for trayer
     # virt-manager
@@ -202,7 +205,7 @@ in
         Host devkayvan
             HostName XXX.XXX.XXX.XXX
             User soostone
-        Host soostone-dev
+        Host soostone-laptop
             HostName 192.168.183.229
             User soostone
       '';
