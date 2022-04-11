@@ -22,8 +22,8 @@ in
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    # ./nvidia.nix
     ./wm/xmonad.nix
+    ./cache.nix
     ];
 
     nixpkgs.config.allowUnfree = true;
@@ -42,16 +42,6 @@ in
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
 
-    # Per-interface useDHCP will be mandatory in the future, so this generated config
-    # replicates the default behaviour.
-    # networking.useDHCP = false;
-    # networking.interfaces.wlp59s0.useDHCP = true;
-    ##networking.interfaces.enp58s0u1.useDHCP = true;
-
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
     # Select internationalisation properties.
     i18n.defaultLocale = "en_US.UTF-8";
     #   console = { font = "latarcyrheb-sun32";  ##"Lat2-Terminus16"; keyMap = "us"; };
@@ -64,38 +54,10 @@ in
     # Enable the X11 windowing system.
     services.openssh.enable = true;
     services.xserver = {
-      enable = true;
-      xrandrHeads = [
-        { output = "HDMI-1";
-        primary = false;
-        monitorConfig = ''
-          Option "PreferredMode" "3840x2160"
-          Option "Position" "0 0"
-        '';
-        } { output = "eDP-1";
-        primary = true;
-        monitorConfig = ''
-          Option "PreferredMode" "1920x1080"
-          Option "Position" "0 0"
-        '';
-        }
-      ];
-      resolutions = [
-        { x = 2048; y = 1152; }
-        { x = 1920; y = 1080; }
-        { x = 2560; y = 1440; }
-        { x = 3072; y = 1728; }
-        { x = 3840; y = 2160; }
-      ];
-
-      videoDrivers = ["intel"]; ##["nouveau" ]; ## ["intel"];
-      # dpi = 180;
       libinput.enable = true;
-
-      displayManager = {
-        lightdm.enable = true; # sddm.enable = true; plasma5.enable = true; startx.enable = true;
-      };
+      displayManager.lightdm.enable = true; # sddm.enable = true; plasma5.enable = true; startx.enable = true;
       windowManager.xmonad.enable = true;
+      enable = true;
     };
     # Enable sound.
     sound.enable = true;

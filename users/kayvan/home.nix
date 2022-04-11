@@ -9,6 +9,7 @@ let
     dmenu                # application launcher
     docker-compose       # docker manager
     direnv               # customize env per directory
+    discord
     evince
     exa                  # a better `ls`
     fd                   # "find" for files
@@ -27,6 +28,7 @@ let
     paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
     pasystray            # pulseaudio systray
+    polybar
     python39Full
     prettyping           # a nicer ping
     pulsemixer           # pulseaudio mixer
@@ -200,11 +202,11 @@ in
 
         # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
         Host dev
-            HostName XXX.XXX.XXX.XXX
+            HostName 173.198.252.23
             User soostone
-        Host devkayvan
-            HostName XXX.XXX.XXX.XXX
-            User soostone
+        Host saturn-t480
+            HostName 192.168.183.240
+            User kayvan
         Host soostone-laptop
             HostName 192.168.183.229
             User soostone

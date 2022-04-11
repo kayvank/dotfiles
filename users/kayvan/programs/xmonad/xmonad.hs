@@ -6,7 +6,6 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
-import qualified Data.Default                 as DD
 import qualified Data.Map                     as M
 import           Data.Monoid
 import           Graphics.X11.ExtraTypes.XF86
@@ -15,6 +14,8 @@ import           XMonad
 import           XMonad.Actions.SpawnOn       (manageSpawn, spawnOn)
 import           XMonad.Actions.WithAll       (killAll)
 import           XMonad.Hooks.DynamicLog
+import           XMonad.Hooks.EwmhDesktops    (ewmh, ewmhDesktopsEventHook,
+                                               fullscreenEventHook)
 import           XMonad.Hooks.ManageDocks
 import           XMonad.Layout.Fullscreen
 import           XMonad.Layout.NoBorders
@@ -200,22 +201,12 @@ myLayout =
     ( ThreeColMid 1 (3 / 100) (1 / 2)
         ||| Tall 1 (3 / 100) (1 / 2)
         ||| Mirror (Tall 1 (3 / 100) (1 / 2))
-        ||| tabbed shrinkText tabConfig
+        -- ||| tabbed shrinkText tabConfig
         ||| Full
         ||| spiral (6 / 7)
     )
     ||| noBorders (fullscreenFull Full)
 
--- Colors for text and backgrounds of each tab when in "Tabbed" layout.
-tabConfig =
-  defaultTheme
-    { activeBorderColor = "#7C7C7C",
-      activeTextColor = "#CEFFAC",
-      activeColor = "#000000",
-      inactiveBorderColor = "#7C7C7C",
-      inactiveTextColor = "#EEEEEE",
-      inactiveColor = "#000000"
-    }
 
 myLayout' = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
@@ -265,7 +256,8 @@ myManageHook =
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = handleEventHook DD.def <+> docksEventHook -- mempty
+-- myEventHook = handleEventHook  <+> docksEventHook -- mempty
+myEventHook = docksEventHook <+> ewmhDesktopsEventHook --  <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -289,11 +281,13 @@ myBar = "xmobar"
 
 myStartupHook = do
   spawnOnce "xscreensaver"
-  spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/ussInterprise.jpg"
+  -- spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/ussInterprise.jpg"
+  spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/Fantastic-HD-Black-Wallpapers.jpg" -- ussInterprise.jpg"
+
   spawnOnce myBar
   spawnOnce "blueman-applet"
   spawnOnce "nm-applet"
-  -- spawnOnce "volumeicon"
+  spawnOnce "volumeicon"
   spawnOnce "pa-applet"
   spawnOnce "flameshot"
   -- spawn "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --alpha 0  --height 18"

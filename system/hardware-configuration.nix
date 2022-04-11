@@ -10,10 +10,12 @@
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
+    "ahci"
     "nvme"
     "usb_storage"
     "sd_mod"
-    "sdhci_pci" ];
+    "rtsx_pci_sdmmc"
+    ];
   boot.initrd.kernelModules = ["i915" ];
   boot.kernelModules = ["kvm-intel" ];
   boot.extraModulePackages = [];
@@ -53,7 +55,7 @@
   # This runs only Intel and nvidia does not drain power.
 
   ##### disable nvidia, very nice battery life.
-   #hardware.nvidiaOptimus.disable = lib.mkDefault true;
+# hardware.nvidiaOptimus.disable = lib.mkDefault true;
 
   environment.variables = {
     VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
@@ -69,11 +71,6 @@
     intel-media-driver
   ];
 
-
-  # swapDevices = [ ];
-  # networking.useDHCP = lib.mkDefault false;
-  # networking.interfaces.enp0s31f6.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp82s0.useDHCP = lib.mkDefault true;
 
   # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
