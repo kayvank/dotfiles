@@ -99,9 +99,20 @@ in
           windowManager.xmonad.enable = true;          ## window manager
         };
         openssh.enable = true;                         ## open ssh
+        avahi = {
+          enable = true;
+          publish = {
+            enable = true;
+            userServices = true;
+          };
+        };
         printing = {
           enable = true;
           drivers = [pkgs.mfcj6510dwlpr];              ## printer driver
+          browsing = true;
+          listenAddresses = [ "*:631" ];
+          allowFrom = [ "all" ];
+          defaultShared = true;
         };
       };
 
@@ -133,9 +144,9 @@ in
       nix = {
         settings.auto-optimise-store = true;        # Automate `nix-store --optimise`
         gc = {  # Automate garbage collection
-          automatic = true;
-          dates     = "weekly";
-          options   = "--delete-older-than 7d";
+        automatic = true;
+        dates     = "weekly";
+        options   = "--delete-older-than 7d";
         };
         extraOptions = ''
           experimental-features = nix-command flakes
@@ -157,13 +168,13 @@ in
         enableSSHSupport = true;
       };
       virtualisation = {      # Enable Docker
-        docker = {
+      docker = {
+        enable = true;
+        autoPrune = {
           enable = true;
-          autoPrune = {
-            enable = true;
-            dates = "weekly";
-          };
+          dates = "weekly";
         };
+      };
       };
 
       virtualisation.libvirtd.enable = true;      # kvm Virt-manager
