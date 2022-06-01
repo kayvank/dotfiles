@@ -29,7 +29,7 @@ import           XMonad.Util.SpawnOnce
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "termonad"
+myTerminal = "konsole" -- "termonad"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -296,8 +296,8 @@ myStartupHook = do
   -- spawnOnce "volumeicon"
   spawnOnce "pa-applet"
   spawnOnce "flameshot"
-  -- spawn "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --alpha 0  --height 18"
-  spawnOnce "stalonetray"
+  spawn "trayer --edge top --align right --widthtype request --padding 5 --SetDockType true --SetPartialStrut false --expand true --monitor 1 --alpha 255 --tint 0x000 --height 12 --transparent true"
+  -- spawnOnce "stalonetray"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -313,7 +313,7 @@ main = xmonad =<< xmobar (docks defaults)
 -- main = xmonad (docks defaults)
 
 -- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
+-- fields in the default config. Any you don't ov3rride, will
 -- use the defaults defined in xmonad/XMonad/Config.hs
 --
 -- No need to modify this.

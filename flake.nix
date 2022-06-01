@@ -29,7 +29,7 @@
       };
     };
     nixosConfigurations = {
-      soostone-dev = lib.nixosSystem { ## gets all the system stuff by hostname, soostone-dev
+      soostone-laptop = lib.nixosSystem { ## gets all the system stuff by hostname
       inherit system;
 
       modules = [

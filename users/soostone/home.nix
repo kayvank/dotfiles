@@ -2,6 +2,8 @@
 let
   defaultPkgs = with pkgs; [
     arandr               # simple GUI for xrandr
+    awscli2                  # AWS cli
+    aws-mfa              # Manage AWS MFA Security Credentials
     blueman
     brave                # www browser
     dmenu                # application launcher
@@ -11,6 +13,7 @@ let
     exa                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
+    google-cloud-sdk
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
     ispell               # An interactive spell-checking program for Unix usec by emacs
@@ -25,6 +28,8 @@ let
     paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
     pasystray            # pulseaudio systray
+    pgadmin              # postgres admin ui
+    postgresql
     python39Full
     prettyping           # a nicer ping
     pulsemixer           # pulseaudio mixer

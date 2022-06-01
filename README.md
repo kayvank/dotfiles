@@ -46,6 +46,7 @@ $ sudo sync
 
 ## Installing minimal NixOs system
 Follow the [NixOs Chapter2 user-guide](https://nixos.org/manual/nixos/stable/index.html#sec-installation)
+and the [companion guide](https://nixos.wiki/wiki/NixOS_Installation_Guide#Partitioning).
 
 ### Side Note
 For my system, I used [swap file](https://linuxize.com/post/create-a-linux-swap-file/) in favor of swap partition.

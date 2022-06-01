@@ -38,7 +38,7 @@ in
     };
     oh-my-zsh = {
       enable = true;
-      theme = "lambda";  ## "robbyrussell";
+      theme = "robbyrussell";
     };
 
     initExtra   = zshConfig;
