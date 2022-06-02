@@ -1,5 +1,0 @@
-[
-  ./screenlocker
-  ./gpg-agent
-  ./networkmanager
-]

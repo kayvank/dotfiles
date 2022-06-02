@@ -9,7 +9,6 @@ let
 in
 {
 
-  imports = [ ./tmux.nix ];
   programs.zsh = {
     shellAliases = {
       # cat     = "bat";
@@ -26,7 +25,7 @@ in
       wsoos     = "cd ~/dev/workspaces/workspace-soostone";
       wproto    = "cd ~/dev/workspaces/workspace-proto";
       wnixos    = "cd ~/dev/workspaces/workspace-nixos";
-      tmx       = "tmux new-session -s $USER-`date +%s`";
+      wniohk    = "cd ~/dev/workspaces/workspace-iohk";
     };
     sessionVariables = { ## shell env vars are set here
       "EDITOR" = "vim";

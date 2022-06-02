@@ -5,65 +5,20 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
-  boot.initrd.kernelModules = ["i915"];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
- boot.kernelParams = [ "mem_sleep_default=deep" ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.initrd.availableKernelModules = [ "ata_piix" "uhci_hcd" "virtio_pci" "sr_mod" "virtio_blk" ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-label/NIXRoot";  ## "/dev/disk/by-uuid/0244ddaa-58fe-45b6-92e9-e183f732db6f";
+    { device = "/dev/disk/by-uuid/7645c1e2-2102-4ec6-b338-317ed3f50cd2";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/NIXBOOT"; ## "/dev/disk/by-uuid/6D46-5A36";
-      fsType = "vfat";
-    };
+  swapDevices = [ { device = "/.swapfile"; } ];
 
-  sound.enable = true;
-
-  swapDevices = [ 
-   {
-     device = "/.swapfile";
-   }
-
-  ];
-
-  # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
- powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "ondemand";
-  };
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-  hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # This runs only Intel and nvidia does not drain power.
-
-  ##### disable nvidia, very nice battery life.
-   hardware.nvidiaOptimus.disable = lib.mkDefault true;
-   boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
-
-  environment.variables = {
-    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
-  };
-
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiIntel
-    vaapiVdpau
-    libvdpau-va-gl
-    intel-media-driver
-  ];
-
-
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

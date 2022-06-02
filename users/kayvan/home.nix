@@ -1,51 +1,25 @@
 { config, pkgs, lib, stdenv, ... }:
 let
   defaultPkgs = with pkgs; [
-    arandr               # simple GUI for xrandr
     awscli2                  # AWS cli
     aws-mfa              # Manage AWS MFA Security Credentials
-    blueman
-    brave                # www browser
-    dmenu                # application launcher
     docker-compose       # docker manager
     direnv               # customize env per directory
-    evince
     exa                  # a better `ls`
     fd                   # "find" for files
-    feh                  # image viewer
     google-cloud-sdk
-    gimp                 # gnu image manipulation program
-    glow                 # terminal markdown viewer
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
-    multilockscreen      # fast lockscreen based on i3lock
-    cinnamon.nemo        # file explorer
-    neovim
     neofetch             # command-line system information
-    nix-index            #  locate the package providing a certain file in nixpkgs
-    pavucontrol          # pulseaudio volume control
-    paprefs              # pulseaudio preferences
-    pa_applet            # pulseaudio applet for trayer
-    pasystray            # pulseaudio systray
-    pgadmin              # postgres admin ui
     postgresql
     python39Full
-    prettyping           # a nicer ping
-    pulsemixer           # pulseaudio mixer
-    ranger               # terminal file explorer
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
     sqlite
-    stalonetray
-    slack                # messaging client
     terraform            # terraform
-    tldr                 # summary of a man page
-    tmux                 # tmux
     tree                 # display files in a tree view
-    volumeicon           # volume icon for trayer
     # virt-manager
-    vscode
     xsel                 # clipboard support (also for neovim)
 
     # fixes the `ar` error required by cabal
@@ -72,20 +46,6 @@ let
     ormolu
     stylish-haskell
     stack
-    termonad
-    xmobar
-  ];
-
-  xmonadPkgs = with pkgs; [
-    networkmanager_dmenu   # networkmanager on dmenu
-    networkmanagerapplet   # networkmanager applet
-    nitrogen               # wallpaper manager
-    xcape                  # keymaps modifier
-    xorg.xkbcomp           # keymaps modifier
-    xorg.xmodmap           # keymaps modifier
-    xorg.xrandr            # display manager (X Resize and Rotate protocol)
-    xorg.xdpyinfo
-
   ];
 
 in
@@ -101,11 +61,10 @@ in
   # paths it should manage.
   home = {
 
-    packages =
-      defaultPkgs ++
-      gitPkgs ++
-      haskellPkgs ++
-      xmonadPkgs
+    packages = 
+       defaultPkgs 
+       ++ gitPkgs 
+       ## ++ haskellPkgs 
       ;
 
       sessionVariables = {
@@ -123,22 +82,11 @@ in
     # packageOverrides = p: {nur = import (import pinned/nur.nix) { inherit pkgs; };};
   };
 
-  # Let Home Manager install and manage itself.
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
 
   # restart services on change
   systemd.user.startServices = "sd-switch";
 
   # notifications about home-manager news
-
-
-  services = {
-    flameshot.enable = true;
-  };
 
   programs = {
 

@@ -20,16 +20,16 @@
     lib = nixpkgs.lib;
 
   in {
-    homeManagerConfigurations = {
-      soostone = home-manager.lib.homeManagerConfiguration {
+    homeManagerConfig = {
+      kayvan = home-manager.lib.homeManagerConfiguration {
         inherit system pkgs;
-        username = "soostone";
-        homeDirectory = "/home/soostone";
-        configuration = import ./users/soostone/home.nix ;
+        username = "kayvan";
+        homeDirectory = "/home/kayvan";
+        configuration = import ./users/kayvan/home.nix ;
       };
     };
     nixosConfigurations = {
-      soostone-laptop = lib.nixosSystem { ## gets all the system stuff by hostname
+      dev-saturn = lib.nixosSystem { ## gets all the system stuff by hostname
       inherit system;
 
       modules = [
