@@ -35,10 +35,7 @@ in
       "HISTTIMEFORMAT"="[%F %T] ";
       DIRENV_ALLOW_NIX=1;
     };
-    oh-my-zsh = {
-      enable = true;
-      theme = "robbyrussell";
-    };
+    ##oh-my-zsh = { enable = true; theme = "robbyrussell"; };
 
     initExtra   = zshConfig;
   };

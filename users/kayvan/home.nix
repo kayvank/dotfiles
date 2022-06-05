@@ -89,15 +89,7 @@ in
   # notifications about home-manager news
 
   programs = {
-
-    zsh =  {
-      enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "sudo" "docker" "kubectl" ];
-      };
-    };
-
+    zsh = { enable = true; };
     tmux.enable = true;
     emacs = {
       enable = true;
