@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-pushd ~/.dotfiles
+pushd ~/dotfiles
 sudo nixos-rebuild switch  --flake .#
 popd

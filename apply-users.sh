@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-pushd ~/.dotfiles
+pushd ~/dotfiles
 nix build .#homeManagerConfig.kayvan.activationPackage 
 ./result/activate
 popd
