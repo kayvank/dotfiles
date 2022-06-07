@@ -1,15 +1,14 @@
 { config, lib, pkgs, ... }:
 
 let
-  zshConfig = ''
-    bindkey -v
-    eval "$(direnv hook zsh)"
-    # neofetch
+  bashConfig = ''
+    set -o vi
+    eval "$(direnv hook bash)"
     '';
 in
 {
 
-  programs.zsh = {
+  programs.bash = {
     shellAliases = {
       # cat     = "bat";
       config    = "git --git-dir=$HOME/.cfg/ --work-tree=$HOME";
@@ -34,9 +33,10 @@ in
       "HISTSIZE" = "1000000000";
       "HISTTIMEFORMAT"="[%F %T] ";
       DIRENV_ALLOW_NIX=1;
+      PATH="$PATH:~/bin";
     };
     ##oh-my-zsh = { enable = true; theme = "robbyrussell"; };
 
-    initExtra   = zshConfig;
+    initExtra   = bashConfig;
   };
 }

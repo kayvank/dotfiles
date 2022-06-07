@@ -8,10 +8,10 @@ let
     exa                  # a better `ls`
     fd                   # "find" for files
     google-cloud-sdk
-    ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
     neofetch             # command-line system information
+    nodejs
     postgresql
     python39Full
     ripgrep              # fast grep
@@ -20,7 +20,6 @@ let
     terraform            # terraform
     tree                 # display files in a tree view
     # virt-manager
-    xsel                 # clipboard support (also for neovim)
 
     # fixes the `ar` error required by cabal
     binutils-unwrapped
@@ -89,6 +88,7 @@ in
   # notifications about home-manager news
 
   programs = {
+    bash = { enable = true; };
     zsh = { enable = true; };
     tmux.enable = true;
     emacs = {

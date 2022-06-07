@@ -34,7 +34,7 @@
     isNormalUser = true;
     initialPassword="password123";
     extraGroups = [ "wheel" "libvirtd" "docker" ]; # Enable ‘sudo’ for the user.
-    shell = pkgs.zsh;
+    shell = pkgs.bash;
   };
 
   # List packages installed in system profile. To search, run:
@@ -48,7 +48,6 @@
   # started in user sessions.
   # programs.mtr.enable = true;
   programs = { 
-    zsh.enable = true;
     gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
