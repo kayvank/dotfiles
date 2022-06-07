@@ -22,6 +22,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    # ./nvidia.nix
     ./wm/xmonad.nix
     ./cache.nix
     ];
@@ -79,7 +80,7 @@ in
     users.users.kayvan = {
       initialPassword = "123XXX"; ## change password post login
       isNormalUser = true;
-      extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
+      extraGroups = [ "libvirtd" "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
       shell = pkgs.zsh;
     };
 
@@ -151,7 +152,11 @@ in
 
     # kvm Virt-manager
     virtualisation.libvirtd.enable = true;
-
+    ## add google dns
+    networking.networkmanager.insertNameservers = [
+      "8.8.8.8"
+      "8.8.4.4"
+    ];
     # Open ports in the firewall.
     # networking.firewall.allowedTCPPorts = [ ... ];
     # networking.firewall.allowedUDPPorts = [ ... ];

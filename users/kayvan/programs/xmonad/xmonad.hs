@@ -30,7 +30,7 @@ import           XMonad.Util.SpawnOnce
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal = "termonad"
+myTerminal = "konsole" -- "termonad"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -281,17 +281,19 @@ myBar = "xmobar"
 
 myStartupHook = do
   spawnOnce "xscreensaver"
-  -- spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/ussInterprise.jpg"
-  spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/Fantastic-HD-Black-Wallpapers.jpg" -- ussInterprise.jpg"
-
+  -- spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/Fantastic-HD-Black-Wallpapers.jpg" -- ussInterprise.jpg"
+  spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/ussInterprise.jpg"
   spawnOnce myBar
   spawnOnce "blueman-applet"
   spawnOnce "nm-applet"
-  spawnOnce "volumeicon"
+  -- spawnOnce "volumeicon"
   spawnOnce "pa-applet"
   spawnOnce "flameshot"
-  -- spawn "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --alpha 0  --height 18"
-  spawnOnce "stalonetray"
+  spawnOnce "trayer --edge top --align right --widthtype request --padding 5 --SetDockType true --SetPartialStrut false --expand true --alpha 255 --tint 0x000 --height 15 --transparent true"
+  -- spawn "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --alpha 0  --height 16"
+  -- spawnOnce "stalonetray"
+
+
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

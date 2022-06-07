@@ -2,11 +2,13 @@
 let
   defaultPkgs = with pkgs; [
     arandr               # simple GUI for xrandr
+    aspell
     awscli2
-    autorandr
+    aws-mfa              # Manage AWS MFA Security Credentials
+    brightnessctl        ## Xbacklight (Hardware Level)
     blueman
     brave                # www browser
-    dmenu                # application launcher
+    # dmenu                # application launcher
     docker-compose       # docker manager
     direnv               # customize env per directory
     discord
@@ -14,8 +16,11 @@ let
     exa                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
+    file
+    google-cloud-sdk
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
+    graphviz
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
@@ -23,30 +28,37 @@ let
     cinnamon.nemo        # file explorer
     neovim
     neofetch             # command-line system information
+    nixfmt
     nix-index            #  locate the package providing a certain file in nixpkgs
-    pavucontrol          # pulseaudio volume control
-    paprefs              # pulseaudio preferences
+    # pavucontrol          # pulseaudio volume control
+    # paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
-    pasystray            # pulseaudio systray
+    # pasystray            # pulseaudio systray
     polybar
     python39Full
     prettyping           # a nicer ping
-    pulsemixer           # pulseaudio mixer
+    # pulsemixer           # pulseaudio mixer
     ranger               # terminal file explorer
+    rtags
+    redis
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
+    sbcl
     sqlite
     stalonetray
     slack                # messaging client
     terraform            # terraform
-    tldr                 # summary of a man page
+    # tldr                 # summary of a man page
     tmux                 # tmux
     trayer
     tree                 # display files in a tree view
     volumeicon           # volume icon for trayer
-    # virt-manager
+    virt-manager
+    virt-viewer
     vscode
     xsel                 # clipboard support (also for neovim)
+    xclip
+    yarn
 
     # fixes the `ar` error required by cabal
     binutils-unwrapped
@@ -71,6 +83,7 @@ let
     nix-tree                # visualize nix dependencies
     ormolu
     stylish-haskell
+    implicit-hie
     stack
     termonad
     xmobar
@@ -85,7 +98,6 @@ let
     xorg.xmodmap           # keymaps modifier
     xorg.xrandr            # display manager (X Resize and Rotate protocol)
     xorg.xdpyinfo
-
   ];
 
 in
@@ -116,7 +128,6 @@ in
   # notifications about home-manager news
   news.display = "silent";
 
-
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;
@@ -138,6 +149,8 @@ in
 
   services = {
     flameshot.enable = true;
+    lorri.enable = true;
+    nixos-vscode-ssh-fix.enable = true;
   };
 
   programs = {
@@ -163,7 +176,6 @@ in
       enable = true;
       userName = "kayvank";
       userEmail = "kayvan@q2io.com";
-      # signing = "60969F8A84531894";
       extraConfig = {
         init = {
           defaultBranch = "main";
@@ -199,18 +211,27 @@ in
     ssh = {
       enable = true;
       extraConfig = ''
-
-        # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
-        Host dev
-            HostName 173.198.252.23
-            User soostone
-        Host saturn-t480
-            HostName 192.168.183.240
-            User kayvan
-        Host soostone-laptop
-            HostName 192.168.183.229
-            User soostone
-      '';
+      Host *
+      ControlMaster auto
+      ControlPath /tmp/%r@%h:%p
+      ControlPersist 2h
+      # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+      Host dev-saturn
+      HostName 66.206.39.66
+      User kayvan
+      Host saturn-t480
+      HostName 192.168.183.240
+      User kayvan
+      Host soostone-laptop
+      HostName 192.168.183.229
+      User soostone
+      Host saturn-dev-ubuntu
+      HostName 192.168.122.112
+      User kayvan
+      Host saturn-dev-suse
+      HostName 192.168.122.182
+      User kayvan
+    '';
     };
     zoxide = {
       enable = true;
