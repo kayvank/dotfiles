@@ -34,6 +34,7 @@ let
     # paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
     # pasystray            # pulseaudio systray
+    pgadmin4
     polybar
     python39Full
     prettyping           # a nicer ping
