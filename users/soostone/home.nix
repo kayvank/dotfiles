@@ -1,6 +1,7 @@
 { config, pkgs, lib, stdenv, ... }:
 let
   defaultPkgs = with pkgs; [
+    amazon-ecs-cli       # amazon ecs client
     arandr               # simple GUI for xrandr
     awscli2                  # AWS cli
     aws-mfa              # Manage AWS MFA Security Credentials
@@ -19,6 +20,7 @@ let
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
+    litecli              # cli interface for sqlite3
     multilockscreen      # fast lockscreen based on i3lock
     cinnamon.nemo        # file explorer
     neovim
@@ -36,6 +38,7 @@ let
     ranger               # terminal file explorer
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
+    signal-desktop       # signal-chat
     sqlite
     stalonetray
     slack                # messaging client
@@ -44,8 +47,8 @@ let
     tmux                 # tmux
     tree                 # display files in a tree view
     volumeicon           # volume icon for trayer
-    # virt-manager
-    vscode
+    virt-manager
+    w3m
     xsel                 # clipboard support (also for neovim)
 
     # fixes the `ar` error required by cabal
@@ -141,6 +144,28 @@ in
   };
 
   programs = {
+    vscode = {
+      enable = true;
+      package = pkgs.vscodium;    # You can skip this if you want to use the unfree version
+      extensions = with pkgs.vscode-extensions; [
+        dracula-theme.theme-dracula
+        vscodevim.vim
+        haskell.haskell
+        justusadam.language-haskell
+        hashicorp.terraform
+        ms-python.python
+        mikestead.dotenv
+        dhall.dhall-lang
+        redhat.vscode-yaml
+        jnoortheen.nix-ide
+        brettm12345.nixfmt-vscode
+        graphql.vscode-graphql
+        alanz.vscode-hie-server
+        streetsidesoftware.code-spell-checker
+        ms-vscode-remote.remote-ssh
+        yzhang.markdown-all-in-one
+      ];
+    };
 
     zsh =  {
       enable = true;
@@ -200,17 +225,24 @@ in
       enable = true;
       extraConfig = ''
 
-        # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
-        Host dev
-            HostName XXX.XXX.XXX.XXX
-            User soostone
-        Host devkayvan
-            HostName XXX.XXX.XXX.XXX
-            User kayvan
-        Host soostone
-            HostName 192.168.183.166
-            User kayvan
-      '';
+      # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+      Host *
+      ControlMaster auto
+      ControlPath ~/.ssh/sockets/%r@%h-%p
+      ControlPersist 600
+
+      Host 8e507.cloudserverpanel.com
+      HostName 66.206.39.66
+      User kayvan
+
+      Host saturn-xeon
+      HostName 192.168.183.166
+      User kayvan
+
+      Host dev-saturn
+      HostName 66.206.39.66
+      User kayvan
+    '';
     };
     zoxide = {
       enable = true;
