@@ -289,9 +289,8 @@ myStartupHook = do
   -- spawnOnce "volumeicon"
   spawnOnce "pa-applet"
   spawnOnce "flameshot"
-  spawnOnce "trayer --edge top --align right --widthtype request --padding 5 --SetDockType true --SetPartialStrut false --expand true --alpha 255 --tint 0x000 --height 15 --transparent true"
-  -- spawn "trayer --edge top --align right --widthtype request --padding 6 --SetDockType true --SetPartialStrut true --expand true --monitor 1 --alpha 0  --height 16"
-  -- spawnOnce "stalonetray"
+  -- spawnOnce "trayer --edge top --align right --widthtype request --padding 5 --SetDockType true --SetPartialStrut false --expand true --alpha 255 --tint 0x000 --height 15 --transparent true"
+  spawnOnce "stalonetray"
 
 
 
