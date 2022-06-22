@@ -30,6 +30,7 @@ let
     neofetch             # command-line system information
     nixfmt
     nix-index            #  locate the package providing a certain file in nixpkgs
+    nodejs
     # pavucontrol          # pulseaudio volume control
     # paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
@@ -158,10 +159,7 @@ in
 
     zsh =  {
       enable = true;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" "sudo" "docker" "kubectl" ];
-      };
+      oh-my-zsh = {enable = true; plugins = [ "git" "sudo" "docker" "kubectl" ];};
     };
 
     tmux.enable = true;
@@ -196,12 +194,14 @@ in
 
     direnv = {
       enable = true;
+      # enableBashIntegration = true;
       enableZshIntegration = true;
-      #  nix-direnv.enable = true;
+       nix-direnv.enable = true;
     };
 
     fzf = {
       enable = true;
+      # enableBashIntegration = true;
       enableZshIntegration = true;
       defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
       defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
@@ -237,6 +237,7 @@ in
     zoxide = {
       enable = true;
       enableZshIntegration = true;
+      # enableBashIntegration = true;
       options = [];
     };
 
