@@ -81,7 +81,8 @@ in
       initialPassword = "123XXX"; ## change password post login
       isNormalUser = true;
       extraGroups = [ "libvirtd" "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
-      shell = pkgs.zsh;
+      # shell = pkgs.zsh;
+      shell = pkgs.bash;
     };
 
 
@@ -126,7 +127,7 @@ in
     # started in user sessions.
     # programs.mtr.enable = true;
     programs = {
-      zsh.enable = true;
+      # zsh.enable = true;
       dconf.enable = true;
       gnupg.agent = {
         enable = true;

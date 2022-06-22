@@ -20,7 +20,9 @@ in {
       aggressiveResize = true;
       keyMode = "vi";
       shortcut = "a";
-
+      # shell = "${pkgs.bash}/bin/bash";
+      # shell.default = "bash";
+      # defaultShell = "${pkgs.bash}/bin/bash";
       extraConfig = ''
         set -g status off
         setw -g mouse on

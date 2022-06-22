@@ -51,7 +51,7 @@ let
     slack                # messaging client
     terraform            # terraform
     # tldr                 # summary of a man page
-    tmux                 # tmux
+    # tmux                 # tmux
     trayer
     tree                 # display files in a tree view
     volumeicon           # volume icon for trayer
@@ -157,12 +157,16 @@ in
 
   programs = {
 
-    zsh =  {
-      enable = true;
-      oh-my-zsh = {enable = true; plugins = [ "git" "sudo" "docker" "kubectl" ];};
-    };
+    bash.enable = true;
+    # zsh =  {
+      # enable = true;
+      # oh-my-zsh = {enable = true; plugins = [ "git" "sudo" "docker" "kubectl" ];};
+    # };
 
-    tmux.enable = true;
+    tmux = {
+      enable = true;
+      # shell = "${pkgs.bash}/bin/bash";
+    };
     emacs = {
       enable = true;
       extraPackages = epkgs: [
@@ -194,19 +198,11 @@ in
 
     direnv = {
       enable = true;
-      # enableBashIntegration = true;
-      enableZshIntegration = true;
-       nix-direnv.enable = true;
+      enableBashIntegration = true;
+      # enableZshIntegration = true;
+       # nix-direnv.enable = true;
     };
 
-    fzf = {
-      enable = true;
-      # enableBashIntegration = true;
-      enableZshIntegration = true;
-      defaultCommand = "fd --type file --follow"; # FZF_DEFAULT_COMMAND
-      defaultOptions = [ "--height 20%" ]; # FZF_DEFAULT_OPTS
-      fileWidgetCommand = "fd --type file --follow"; # FZF_CTRL_T_COMMAND
-    };
 
     jq.enable = true;
     ssh = {
@@ -236,8 +232,8 @@ in
     };
     zoxide = {
       enable = true;
-      enableZshIntegration = true;
-      # enableBashIntegration = true;
+      enableBashIntegration = true;
+      # enableZshIntegration = true;
       options = [];
     };
 
