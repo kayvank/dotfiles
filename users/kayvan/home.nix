@@ -1,6 +1,7 @@
 { config, pkgs, lib, stdenv, ... }:
 let
   defaultPkgs = with pkgs; [
+    amazon-ecs-cli       # amazon ecs client
     arandr               # simple GUI for xrandr
     aspell
     awscli2
@@ -8,7 +9,6 @@ let
     brightnessctl        ## Xbacklight (Hardware Level)
     blueman
     brave                # www browser
-    # dmenu                # application launcher
     docker-compose       # docker manager
     direnv               # customize env per directory
     discord
@@ -30,7 +30,6 @@ let
     neofetch             # command-line system information
     nixfmt
     nix-index            #  locate the package providing a certain file in nixpkgs
-    nodejs
     # pavucontrol          # pulseaudio volume control
     # paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
@@ -47,6 +46,7 @@ let
     rnix-lsp             # nix lsp server
     sbcl
     sqlite
+    signal-desktop
     stalonetray
     slack                # messaging client
     terraform            # terraform
@@ -145,10 +145,6 @@ in
 
   # restart services on change
   systemd.user.startServices = "sd-switch";
-
-  # notifications about home-manager news
-
-
   services = {
     flameshot.enable = true;
     lorri.enable = true;
