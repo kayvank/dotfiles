@@ -37,7 +37,11 @@ in
       networkmanager.enable=true;
       useDHCP = false; # The global useDHCP flag is deprecated, therefore explicitly set to false here.
       firewall.enable = false;
-      # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+      extraHosts =
+        ''
+          127.0.0.1 redis aws gcs googl postgres dynamodb
+        '';
+        # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     };
 
     # Set your time zone.
@@ -52,16 +56,54 @@ in
       font-awesome
     ];
 
-    # Enable the X11 windowing system.
-    services.openssh.enable = true;
-    services.xserver = {
-      libinput.enable = true;
-      displayManager.lightdm.enable = true; # sddm.enable = true; plasma5.enable = true; startx.enable = true;
-      windowManager.xmonad.enable = true;
-      enable = true;
+    services = {
+      # Enable the X11 windowing system.
+      xserver = {
+        enable = true;
+        # videoDrivers = [ "intel" ];
+        displayManager = {
+          lightdm.enable = true;        ## login manager
+          defaultSession = "none+xmonad";
+        };
+        windowManager.xmonad = {
+          enable = true;
+          enableContribAndExtras = true;
+        };
+        libinput = {
+          enable = true;
+          touchpad = {
+            disableWhileTyping = true;
+            tapping = true;
+            buttonMapping = "lmr";
+          };
+        };
+      };
+      gnome.gnome-keyring.enable = true;
+      upower.enable = true;
+      dbus = {
+        enable = true;
+        packages = [ pkgs.dconf ];
+      };
+      openssh.enable = true;                         ## open ssh
+      avahi = {
+        enable = true;
+        publish = {
+          enable = true;
+          userServices = true;
+        };
+      };
+      printing = {
+        enable = true;
+        drivers = [pkgs.mfcj6510dwlpr];              ## printer driver
+        browsing = true;
+        listenAddresses = [ "*:631" ];
+        allowFrom = [ "all" ];
+        defaultShared = true;
+      };
     };
-    # Enable sound.
+
     sound.enable = true;
+    # Enable sound.
 
     hardware = {
       pulseaudio = {
