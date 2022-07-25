@@ -38,7 +38,7 @@ let
     ranger               # terminal file explorer
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
-    signal-desktop       # signal-chat
+    # signal-desktop       # signal-chat
     sqlite
     stalonetray
     slack                # messaging client
