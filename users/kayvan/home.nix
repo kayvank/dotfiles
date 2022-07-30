@@ -5,11 +5,9 @@ let
     aws-mfa              # Manage AWS MFA Security Credentials
     docker-compose       # docker manager
     direnv               # customize env per directory
-    exa                  # a better `ls`
     fd                   # "find" for files
     google-cloud-sdk
     killall              # kill processes by name
-    libnotify            # notify-send command
     neofetch             # command-line system information
     nodejs
     postgresql
@@ -17,9 +15,7 @@ let
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
     sqlite
-    terraform            # terraform
     tree                 # display files in a tree view
-    # virt-manager
 
     # fixes the `ar` error required by cabal
     binutils-unwrapped
@@ -28,23 +24,6 @@ let
   gitPkgs = with pkgs.gitAndTools; [
     diff-so-fancy # git diff with colors
     git-crypt     # git files encryption
-    hub           # github command-line client
-    tig           # diff and commit view
-  ];
-
-  haskellPkgs = with pkgs.haskellPackages; [
-    cabal2nix               # convert cabal projects to nix
-    cabal-install           # package manager
-    ghc                     # compiler
-    ghcid                   # ghcid for continues build
-    haskell-language-server # haskell IDE (ships with ghcide)
-    dhall-lsp-server
-    hoogle                  # documentation
-    hlint
-    nix-tree                # visualize nix dependencies
-    ormolu
-    stylish-haskell
-    stack
   ];
 
 in
@@ -63,7 +42,6 @@ in
     packages = 
        defaultPkgs 
        ++ gitPkgs 
-       ## ++ haskellPkgs 
       ;
 
       sessionVariables = {

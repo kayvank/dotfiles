@@ -20,16 +20,23 @@
     lib = nixpkgs.lib;
 
   in {
-    homeManagerConfig = {
+    homeManagerConfigurations = {
       kayvan = home-manager.lib.homeManagerConfiguration {
-        inherit system pkgs;
+ pkgs = nixpkgs.legacyPackages.${system};
+modules = [
+./users/kayvan/home.nix
+{
+      home = {
         username = "kayvan";
         homeDirectory = "/home/kayvan";
-        configuration = import ./users/kayvan/home.nix ;
+        stateVersion = "22.05";
+      };
+    }
+];
       };
     };
     nixosConfigurations = {
-      dev-saturn = lib.nixosSystem { ## gets all the system stuff by hostname
+      nixos-vm = lib.nixosSystem { ## gets all the system stuff by hostname
       inherit system;
 
       modules = [
