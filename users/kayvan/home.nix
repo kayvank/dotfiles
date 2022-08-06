@@ -17,7 +17,7 @@ let
     killall              # kill processes by name
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
-    # nemo                 # file explorer
+    cinnamon.nemo        # file explorer
     neofetch             # command-line system information
     pavucontrol          # pulseaudio volume control
     paprefs              # pulseaudio preferences
@@ -29,16 +29,21 @@ let
     ranger               # terminal file explorer
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
+    sbcl
     stalonetray
     slack                # messaging client
+    sqlite
     terraform            # terraform
     tldr                 # summary of a man page
     tmux                 # tmux
     tree                 # display files in a tree view
+    usbutils
     volumeicon           # volume icon for trayer
-    # virt-manager
+    virt-manager
     vscode
+    xclip
     xsel                 # clipboard support (also for neovim)
+    gnome.gnome-disk-utility
 
     # fixes the `ar` error required by cabal
     binutils-unwrapped

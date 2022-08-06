@@ -42,7 +42,7 @@ in
     # Per-interface useDHCP will be mandatory in the future, so this generated config
     # replicates the default behaviour.
     networking.useDHCP = false;
-    networking.interfaces.wlp59s0.useDHCP = true;
+    # networking.interfaces.wlp59s0.useDHCP = true;
     ##networking.interfaces.enp58s0u1.useDHCP = true;
 
     # Configure network proxy if necessary
@@ -114,6 +114,12 @@ in
       extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
       shell = pkgs.zsh;
     };
+    users.users.sam = {
+      initialPassword = "123sam"; ## change password post login
+      isNormalUser = true;
+      extraGroups = [ "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
+      shell = pkgs.zsh;
+    };
 
 
     # List packages installed in system profile. To search, run:
@@ -150,7 +156,7 @@ in
       '';
 
       # Required by Cachix to be used as non-root user
-      settings.trusted-users = [ "root" "kayvan" ];
+      settings.trusted-users = [ "root" "kayvan" "sam"];
     };
 
 
