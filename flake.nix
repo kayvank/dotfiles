@@ -22,19 +22,24 @@
   in {
     homeManagerConfigurations = {
       kayvan = home-manager.lib.homeManagerConfiguration {
-        inherit system pkgs;
-        username = "kayvan";
-        homeDirectory = "/home/kayvan";
-        configuration = import ./users/kayvan/home.nix ;
+        pkgs = nixpkgs.legacyPackages.${system};
+        modules = [
+          ./users/kayvan/home.nix
+          {
+            home = {
+              username = "kayvan";
+              homeDirectory = "/home/kayvan";
+              stateVersion = "22.05";
+            };
+          }
+        ];
       };
     };
+
     nixosConfigurations = {
       saturnt480s = lib.nixosSystem { ## gets all the system stuff by hostname, saturn480s
       inherit system;
-
-      modules = [
-        ./system/configuration.nix
-      ];
+      modules = [./system/configuration.nix];
       };
     };
   };

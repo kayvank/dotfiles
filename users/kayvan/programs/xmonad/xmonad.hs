@@ -1,4 +1,4 @@
--- xmonad example config file.
+
 --
 -- A template showing all available configuration hooks,
 -- and how to override the defaults in your own xmonad.hs conf file.
@@ -6,7 +6,6 @@
 -- Normally, you'd only override those defaults you care about.
 --
 
-import qualified Data.Default                 as DD
 import qualified Data.Map                     as M
 import           Data.Monoid
 import           Graphics.X11.ExtraTypes.XF86
@@ -25,6 +24,7 @@ import           XMonad.Layout.ThreeColumns
 import qualified XMonad.StackSet              as W
 import           XMonad.Util.EZConfig         (additionalKeys, additionalKeysP)
 import           XMonad.Util.SpawnOnce
+import XMonad.Layout.DecorationAddons
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -207,15 +207,7 @@ myLayout =
     ||| noBorders (fullscreenFull Full)
 
 -- Colors for text and backgrounds of each tab when in "Tabbed" layout.
-tabConfig =
-  defaultTheme
-    { activeBorderColor = "#7C7C7C",
-      activeTextColor = "#CEFFAC",
-      activeColor = "#000000",
-      inactiveBorderColor = "#7C7C7C",
-      inactiveTextColor = "#EEEEEE",
-      inactiveColor = "#000000"
-    }
+tabConfig = defaultThemeWithButtons
 
 myLayout' = avoidStruts (tiled ||| Mirror tiled ||| Full)
   where
@@ -265,7 +257,7 @@ myManageHook =
 -- return (All True) if the default handler is to be run afterwards. To
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
-myEventHook = handleEventHook DD.def <+> docksEventHook -- mempty
+myEventHook = mempty -- handleEventHook mempty <+> docksEventHook -- mempty
 
 ------------------------------------------------------------------------
 -- Status bars and logging

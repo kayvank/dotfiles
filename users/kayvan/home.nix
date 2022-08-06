@@ -2,11 +2,13 @@
 let
   defaultPkgs = with pkgs; [
     arandr               # simple GUI for xrandr
+    awscli2
+    aws-mfa
     blueman
     brave                # www browser
     dmenu                # application launcher
     docker-compose       # docker manager
-  #  direnv               # customize env per directory
+    #  direnv               # customize env per directory
     evince
     exa                  # a better `ls`
     fd                   # "find" for files
@@ -48,13 +50,6 @@ let
     # fixes the `ar` error required by cabal
     binutils-unwrapped
   ];
- home.stateVersion = "22.05";
-  gitPkgs = with pkgs.gitAndTools; [
-    diff-so-fancy # git diff with colors
-    git-crypt     # git files encryption
-    hub           # github command-line client
-    tig           # diff and commit view
-  ];
 
   haskellPkgs = with pkgs.haskellPackages; [
     cabal2nix               # convert cabal projects to nix
@@ -82,13 +77,15 @@ let
     xorg.xmodmap           # keymaps modifier
     xorg.xrandr            # display manager (X Resize and Rotate protocol)
     xorg.xdpyinfo
-
   ];
 
 in
-
 {
 
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowBroken = true;
+  };
   programs.home-manager.enable = true;
   imports = (import ./programs) ++ (import ./services);
 
@@ -97,28 +94,21 @@ in
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-
-   packages =
+    packages =
       defaultPkgs ++
       ##gitPkgs ++
       haskellPkgs ++
       xmonadPkgs
-    ;
+      ;
 
-   sessionVariables = {
-      DISPLAY = ":0";
-      EDITOR = "vim";
-    };
+      sessionVariables = {
+        DISPLAY = ":0";
+        EDITOR = "vim";
+      };
   };
   # notifications about home-manager news
   news.display = "silent";
 
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowBroken = true;
-    # packageOverrides = p: {nur = import (import pinned/nur.nix) { inherit pkgs; };};
-  };
 
   # Let Home Manager install and manage itself.
   services.gpg-agent = {
@@ -137,63 +127,63 @@ in
     flameshot.enable = true;
   };
 
- programs = {
+  programs = {
 
-   zsh =  {
+    zsh =  {
       enable = true;
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "sudo" "docker" "kubectl" ];
       };
-   };
+    };
 
-        tmux.enable = true;
-        emacs = {
-          enable = true;
-          extraPackages = epkgs: [
-            epkgs.nix-mode
-            epkgs.magit
-          ];
+    tmux.enable = true;
+    emacs = {
+      enable = true;
+      extraPackages = epkgs: [
+        epkgs.nix-mode
+        epkgs.magit
+      ];
+    };
+
+    git = {
+      enable = true;
+      userName = "kayvank";
+      userEmail = "kayvan@q2io.com";
+      # signing = "60969F8A84531894";
+      # commit = {gpgSign = true;};
+      extraConfig = {
+        init = {
+          defaultBranch = "main";
         };
-
-        git = {
-          enable = true;
-          userName = "kayvank";
-          userEmail = "kayvan@q2io.com";
-          # signing = "60969F8A84531894";
-          # commit = {gpgSign = true;};
-          extraConfig = {
-            init = {
-              defaultBranch = "main";
-            };
-          };
-        };
-
-        htop = {
-          enable = true;
-          settings = {
-            sort_direction = true;
-            sort_key = "PERCENT_CPU";
-          };
-        };
-
-        bat.enable = true;
-
-        direnv = {
-          enable = true;
-          enableZshIntegration = true;
-          #  nix-direnv.enable = true;
-        };
-
-        jq.enable = true;
-        ssh.enable = true;
-
-        zoxide = {
-          enable = true;
-          enableZshIntegration = true;
-          options = [];
-        };
-
-
       };
-    }
+    };
+
+    htop = {
+      enable = true;
+      settings = {
+        sort_direction = true;
+        sort_key = "PERCENT_CPU";
+      };
+    };
+
+    bat.enable = true;
+
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      #  nix-direnv.enable = true;
+    };
+
+    jq.enable = true;
+    ssh.enable = true;
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+      options = [];
+    };
+
+
+  };
+}

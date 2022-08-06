@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 #
 pushd ~/.dotfiles
-nix build .#homeManagerConfigurations.kayvan.activationPackage
+export NIXPKGS_ALLOW_UNFREE=1
+nix build --impure .#homeManagerConfigurations.kayvan.activationPackage
 ./result/activate
 popd
