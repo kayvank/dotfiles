@@ -4,12 +4,14 @@ let
   zshConfig = ''
     bindkey -v
     eval "$(direnv hook zsh)"
+    # eval "$(starship init zsh)"
     # neofetch
     '';
 in
 {
 
   programs.zsh = {
+    enable = true;
     shellAliases = {
       # cat     = "bat";
       config    = "git --git-dir=$HOME/.cfg/ --work-tree=$HOME";
@@ -37,7 +39,7 @@ in
     };
     oh-my-zsh = {
       enable = true;
-      theme = "lambda" ; ##robbyrussell";
+      theme = "robbyrussell" ; ## lambda
     };
 
     initExtra   = zshConfig;

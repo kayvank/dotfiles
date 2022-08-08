@@ -31,6 +31,10 @@ in
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.kernelParams = [ "psmouse.synaptics_intertouch=0" ];
+    boot.kernelModules = [ "kvm-intel" "kvm-amd"];
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.extraModprobeConfig = "options kvm_intel nested=1";
 
     networking = {
       hostName = "saturn-xeon"; # Define your hostname.
@@ -54,6 +58,7 @@ in
     fonts.fonts = with pkgs; [
       customFonts
       font-awesome
+      nerdfonts
     ];
 
     services = {
@@ -122,9 +127,15 @@ in
     users.users.kayvan = {
       initialPassword = "123XXX"; ## change password post login
       isNormalUser = true;
-      extraGroups = [ "libvirtd" "docker" "networkmanager" "wheel" "scanner" "lp" ]; # wheel for ‘sudo’.
-      # shell = pkgs.zsh;
-      shell = pkgs.bash;
+      extraGroups = [
+        "qemu-libvirtd"
+        "libvirtd"
+        "docker"
+        "networkmanager"
+        "wheel"
+        "scanner"
+        "lp" ]; # wheel for ‘sudo’.
+      shell = pkgs.zsh;
     };
 
 
@@ -139,6 +150,7 @@ in
       home-manager
       pciutils
       xorg.xbacklight
+      qemu_kvm
     ];
 
 
@@ -187,10 +199,11 @@ in
           dates = "weekly";
         };
       };
+    libvirtd.enable = true;
+
     };
 
     # kvm Virt-manager
-    virtualisation.libvirtd.enable = true;
     ## add google dns
     networking.networkmanager.insertNameservers = [
       "8.8.8.8"

@@ -18,6 +18,7 @@ let
     feh                  # image viewer
     file
     google-cloud-sdk
+    google-drive-ocamlfuse # mount your Google Drive
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
     graphviz
@@ -48,6 +49,7 @@ let
     sqlite
     signal-desktop
     stalonetray
+    starship             # zsh prompt
     slack                # messaging client
     terraform            # terraform
     # tldr                 # summary of a man page
@@ -61,6 +63,7 @@ let
     xsel                 # clipboard support (also for neovim)
     xclip
     yarn
+    zip
 
     # fixes the `ar` error required by cabal
     binutils-unwrapped
@@ -153,16 +156,11 @@ in
 
   programs = {
 
-    bash.enable = true;
-    # zsh =  {
-      # enable = true;
-      # oh-my-zsh = {enable = true; plugins = [ "git" "sudo" "docker" "kubectl" ];};
+    bash.enable = false;
+    # tmux = {
+    #   enable = true;
+    #   # shell = "${pkgs.bash}/bin/bash";
     # };
-
-    tmux = {
-      enable = true;
-      # shell = "${pkgs.bash}/bin/bash";
-    };
     emacs = {
       enable = true;
       extraPackages = epkgs: [
@@ -194,9 +192,9 @@ in
 
     direnv = {
       enable = true;
-      enableBashIntegration = true;
-      # enableZshIntegration = true;
-       # nix-direnv.enable = true;
+      # enableBashIntegration = true;
+      enableZshIntegration = true;
+      # nix-direnv.enable = true;
     };
 
 
@@ -204,32 +202,32 @@ in
     ssh = {
       enable = true;
       extraConfig = ''
-      Host *
-      ControlMaster auto
-      ControlPath /tmp/%r@%h:%p
-      ControlPersist 2h
-      # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
-      Host dev-saturn
-      HostName 66.206.39.66
-      User kayvan
-      Host saturn-t480
-      HostName 192.168.183.240
-      User kayvan
-      Host soostone-laptop
-      HostName 192.168.183.229
-      User soostone
-      Host saturn-dev-ubuntu
-      HostName 192.168.122.112
-      User kayvan
-      Host saturn-dev-suse
-      HostName 192.168.122.182
-      User kayvan
-    '';
+        Host *
+        ControlMaster auto
+        ControlPath /tmp/%r@%h:%p
+        ControlPersist 2h
+        # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+        Host dev-saturn
+        HostName 66.206.39.66
+        User kayvan
+        Host saturn-t480
+        HostName 192.168.183.240
+        User kayvan
+        Host soostone-laptop
+        HostName 192.168.183.229
+        User soostone
+        Host saturn-dev-ubuntu
+        HostName 192.168.122.112
+        User kayvan
+        Host saturn-dev-suse
+        HostName 192.168.122.182
+        User kayvan
+      '';
     };
     zoxide = {
       enable = true;
-      enableBashIntegration = true;
-      # enableZshIntegration = true;
+      # enableBashIntegration = true;
+      enableZshIntegration = true;
       options = [];
     };
 
