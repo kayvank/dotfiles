@@ -257,7 +257,7 @@ myManageHook =
 -- combine event hooks use mappend or mconcat from Data.Monoid.
 --
 -- myEventHook = handleEventHook  <+> docksEventHook -- mempty
-myEventHook = docksEventHook <+> ewmhDesktopsEventHook --  <+> fullscreenEventHook
+-- myEventHook = docksEventHook <+> ewmhDesktopsEventHook --  <+> fullscreenEventHook
 
 ------------------------------------------------------------------------
 -- Status bars and logging
@@ -277,13 +277,12 @@ myLogHook = return ()
 -- By default, do nothing.
 
 -- Command to launch the bar.
-myBar = "xmobar"
 
 myStartupHook = do
   spawnOnce "xscreensaver"
   -- spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/Fantastic-HD-Black-Wallpapers.jpg" -- ussInterprise.jpg"
   spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/ussInterprise.jpg"
-  spawnOnce myBar
+  spawnOnce "xmobar"
   spawnOnce "blueman-applet"
   spawnOnce "nm-applet"
   -- spawnOnce "volumeicon"
@@ -291,8 +290,6 @@ myStartupHook = do
   spawnOnce "flameshot"
   -- spawnOnce "trayer --edge top --align right --widthtype request --padding 5 --SetDockType true --SetPartialStrut false --expand true --alpha 255 --tint 0x000 --height 15 --transparent true"
   spawnOnce "stalonetray"
-
-
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -303,7 +300,7 @@ myStartupHook = do
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
 -- myPP = xmobarPP {ppCurrent = xmobarColor "#429942" "" . wrap "<" ">"}
 
-main = xmonad =<< xmobar (docks defaults)
+main = xmonad  =<< xmobar (docks defaults)
 
 -- main = xmonad (docks defaults)
 
@@ -330,7 +327,7 @@ defaults =
       -- hooks, layouts
       layoutHook = spacingRaw True (Border 0 8 8 8) True (Border 8 8 8 8) True $ myLayout,
       manageHook = myManageHook,
-      handleEventHook = myEventHook,
+      -- handleEventHook = myEventHook,
       logHook = myLogHook,
       startupHook = myStartupHook
     }

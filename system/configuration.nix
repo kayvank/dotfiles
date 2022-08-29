@@ -145,7 +145,8 @@ in
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
       git
       wget
-      firefox
+      brave
+      # firefox
       konsole
       home-manager
       pciutils

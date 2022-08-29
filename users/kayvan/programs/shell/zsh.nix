@@ -25,6 +25,10 @@ in
       pbpaste   = "xsel -ob";
       whaskell  = "cd ~/dev/workspaces/workspace-haskell";
       wsoos     = "cd ~/dev/workspaces/workspace-soostone";
+      wiohg     = "cd ~/dev/workspaces/workspace-iohg";
+      wumb      = "cd ~/dev/workspaces/workspace-umbrage";
+      wdev      = "cd ~/dev";
+      wwork     = "cd ~/dev/workspaces";
       wproto    = "cd ~/dev/workspaces/workspace-proto";
       wnixos    = "cd ~/dev/workspaces/workspace-nixos";
       tmx       = "tmux new-session -s $USER-`date +%s`";
@@ -35,6 +39,7 @@ in
       "HISTFILESIZE" = "1000000000"; # Bigger history files for all users
       "HISTSIZE" = "1000000000";
       "HISTTIMEFORMAT"="[%F %T] ";
+      "PATH" = "$PATH:/home/kayvan/bin";
       DIRENV_ALLOW_NIX=1;
     };
     oh-my-zsh = {
