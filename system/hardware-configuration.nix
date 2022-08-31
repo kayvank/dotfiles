@@ -8,66 +8,81 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "ahci"
-    "nvme"
-    "usb_storage"
-    "sd_mod"
-    "rtsx_pci_sdmmc"
+    boot.initrd.availableKernelModules = [
+      "xhci_pci"
+      "ahci"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+      "rtsx_pci_sdmmc"
     ];
-  boot.initrd.kernelModules = ["i915" ];
-  boot.kernelModules = ["kvm-intel" ];
-  boot.extraModulePackages = [];
-  # boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
-  # boot.blacklistedKernelModules = ["nouveau" "nvidia_drm" "nvidia_modeset" "nvidia"];
-  boot.kernelParams = [ "mem_sleep_default=deep" ];
+    boot.initrd.kernelModules = ["i915" ];
+    boot.kernelModules = ["kvm-intel" ];
+    boot.extraModulePackages = [];
+    # boot.blacklistedKernelModules = lib.mkDefault [ "nouveau" "nvidia" ];
+    # boot.blacklistedKernelModules = ["nouveau" "nvidia_drm" "nvidia_modeset" "nvidia"];
+    boot.kernelParams = [ "mem_sleep_default=deep" ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/6813901b-f560-44d1-a06c-5d7a3503b5ae";
+    fileSystems."/" =
+      { device = "/dev/disk/by-uuid/6813901b-f560-44d1-a06c-5d7a3503b5ae";
       fsType = "ext4";
-    };
+      };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/1FE8-921B";
-      fsType = "vfat";
-    };
+      fileSystems."/boot" =
+        { device = "/dev/disk/by-uuid/1FE8-921B";
+        fsType = "vfat";
+        };
 
 
-  swapDevices = [
-   {
-     device = "/.swapfile";
-   }
+        swapDevices = [
+          {
+            device = "/.swapfile";
+          }
 
-  ];
- # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
- powerManagement = {
-    enable = true;
-    powertop.enable = true;
-    cpuFreqGovernor = lib.mkDefault "ondemand";
-  };
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
-  hardware.bluetooth.enable = true;
-  hardware.pulseaudio.enable = true;
-#  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+        ];
+        # powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+        powerManagement = {
+          enable = true;
+          powertop.enable = true;
+          cpuFreqGovernor = lib.mkDefault "ondemand";
+        };
+        # high-resolution display
+        #
+        hardware = {
+          pulseaudio = {
+            enable = true;
+            extraModules = [ pkgs.pulseaudio-modules-bt ];
+            package = pkgs.pulseaudioFull;
+          };
+          bluetooth = {
+            enable = true;
+            hsphfpd.enable = true;
+            settings = {
+              General = {
+                Enable = "Source,Sink,Media,Socket";
+              };
+            };
+          };
+          video.hidpi.enable = lib.mkDefault true;
+          opengl.extraPackages = with pkgs; [
+            vaapiIntel
+            vaapiVdpau
+            libvdpau-va-gl
+            intel-media-driver
+          ];
+          cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+        };
 
-  # This runs only Intel and nvidia does not drain power.
+        #  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-  ##### disable nvidia, very nice battery life.
-# hardware.nvidiaOptimus.disable = lib.mkDefault true;
+        # This runs only Intel and nvidia does not drain power.
 
-  environment.variables = {
-    VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
-  };
+        ##### disable nvidia, very nice battery life.
+        # hardware.nvidiaOptimus.disable = lib.mkDefault true;
 
-  hardware.cpu.intel.updateMicrocode =
-    lib.mkDefault config.hardware.enableRedistributableFirmware;
+        environment.variables = {
+          VDPAU_DRIVER = lib.mkIf config.hardware.opengl.enable (lib.mkDefault "va_gl");
+        };
 
-  hardware.opengl.extraPackages = with pkgs; [
-    vaapiIntel
-    vaapiVdpau
-    libvdpau-va-gl
-    intel-media-driver
-  ];
+
 }

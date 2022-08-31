@@ -110,16 +110,6 @@ in
     sound.enable = true;
     # Enable sound.
 
-    hardware = {
-      pulseaudio = {
-        enable = true;
-        extraModules = [ pkgs.pulseaudio-modules-bt ];
-        package = pkgs.pulseaudioFull;
-      };
-      bluetooth.enable = true;
-    };
-
-
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
 
@@ -135,7 +125,7 @@ in
         "wheel"
         "scanner"
         "lp" ]; # wheel for ‘sudo’.
-      shell = pkgs.zsh;
+        shell = pkgs.zsh;
     };
 
 
@@ -200,7 +190,7 @@ in
           dates = "weekly";
         };
       };
-    libvirtd.enable = true;
+      libvirtd.enable = true;
 
     };
 
