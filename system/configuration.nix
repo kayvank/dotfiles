@@ -38,19 +38,9 @@ in
 
     # Set your time zone.
     time.timeZone = "America/Los_Angeles";
-
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
-    # Select internationalisation properties.
-    # i18n.defaultLocale = "en_US.UTF-8";
-    # console = {
-      #   font = "Lat2-Terminus16";
-      #   keyMap = "us";
-      #   useXkbConfig = true; # use xkbOptions in tty.
-      # };
-
       # Enable the X11 windowing system.
       services = {
 	      xserver = {
@@ -62,10 +52,8 @@ in
 			          Option "PreferredMode" "1920x1200"
 			          Option "Position" "0 0"
 			        '';
-
 		        }
 		      ];
-
 		      displayManager = {
 		        lightdm.enable = true;
 		        defaultSession = "none+xmonad";
@@ -74,16 +62,14 @@ in
 			      enable = true;
 			      enableContribAndExtras = true;
 		      };
-		      libinput = {
-			      enable = true;
-			      touchpad = {
-				      disableWhileTyping = true;
-				      tapping = true;
-				      buttonMapping = "lmr";
-
-			      };
+		      libinput = {  # Enable touchpad support (enabled default in most desktopManager).
+			    enable = true;
+			    touchpad = {
+				    disableWhileTyping = true;
+				    tapping = true;
+				    buttonMapping = "lmr";
+			    };
 		      };
-
         };
         gnome.gnome-keyring.enable = true;
         upower.enable = true;
@@ -92,27 +78,23 @@ in
           enable = true;
           packages = [ pkgs.dconf ];
         };
-
-        # Configure keymap in X11
-        # services.xserver.layout = "us";
-        # services.xserver.xkbOptions = {
-          #   "eurosign:e";
-          #   "caps:escape" # map caps to escape.
-          # };
-      printing.enable = true;
-      openssh.enable = true;
+        printing = { # Enable CUPS to print documents.
+          enable = true;
+          drivers = [pkgs.mfcj6510dwlpr];          ## printer driver
+          browsing = true;
+          listenAddresses = [ "*:631" ];
+          allowFrom = [ "all" ];
+          defaultShared = true;
+        };
+        openssh.enable = true;
       };
-      # Enable CUPS to print documents.
 
       # Enable sound.
       sound.enable = true;
       hardware.pulseaudio = {
-       enable = true;
+        enable = true;
         package = pkgs.pulseaudioFull;
       };
-
-      # Enable touchpad support (enabled default in most desktopManager).
-      ##services.xserver.libinput.enable = true;
 
       # Define a user account. Don't forget to set a password with ‘passwd’.
       users.users.kayvan = {
@@ -126,14 +108,13 @@ in
           "scanner"
           "lp"
           "libvirtd" "qemu-libvirtd" ]; # Enable ‘sudo’ for the user.
-        shell = pkgs.zsh;
-        packages = with pkgs; [
-          brave
-        ];
+          shell = pkgs.zsh;
+          packages = with pkgs; [
+            brave
+          ];
       };
 
       # List packages installed in system profile. To search, run:
-      # $ nix search wget
       environment.systemPackages = with pkgs; [
         vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
         wget
@@ -141,7 +122,6 @@ in
         home-manager
         pciutils
         konsole
-        # termonad
         xorg.xbacklight
         qemu_kvm
         cachix
@@ -168,13 +148,8 @@ in
         };
         libvirtd.enable = true;
       };
-      # List services that you want to enable:
-
-      # Enable the OpenSSH daemon.
-
 
       nix = {
-
         # Automate garbage collection
         gc = {
           automatic = true;
@@ -182,7 +157,6 @@ in
           options   = "--delete-older-than 7d";
         };
 
-        ##
         extraOptions = ''
           experimental-features = nix-command flakes
           keep-outputs          = true

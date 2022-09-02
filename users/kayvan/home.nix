@@ -31,7 +31,6 @@ let
     libnotify            # notify-send command
     multilockscreen      # fast lockscreen based on i3lock
     cinnamon.nemo        # file explorer
-    neovim
     neofetch             # command-line system information
     nixfmt
     nix-index            #  locate the package providing a certain file in nixpkgs
