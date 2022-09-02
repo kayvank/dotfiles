@@ -1,5 +1,9 @@
 { config, pkgs, lib, stdenv, ... }:
 let
+  username = "kayvan";
+  homeDirectory = "/home/${username}";
+  configHome = "${homeDirectory}/.config";
+
   defaultPkgs = with pkgs; [
     amazon-ecs-cli       # amazon ecs client
     arandr               # simple GUI for xrandr
@@ -50,7 +54,7 @@ let
     rnix-lsp             # nix lsp server
     sbcl
     sqlite               # db sqlite
-    # signal-desktop       # encrypted com
+    signal-desktop       # encrypted com
     starship             # zsh prompt
     slack                # messaging client
     terraform            # terraform
@@ -115,8 +119,10 @@ in
   programs.home-manager.enable = true;
   imports = (import ./programs) ++ (import ./services);
 
-  xdg.enable = true;
-
+  xdg = {
+    inherit configHome;
+    enable = true;
+  };
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -152,17 +158,11 @@ in
   systemd.user.startServices = "sd-switch";
   services = {
     flameshot.enable = true;
-    lorri.enable = true;
     nixos-vscode-ssh-fix.enable = true;
   };
 
   programs = {
-
     bash.enable = false;
-    # tmux = {
-    #   enable = true;
-    #   # shell = "${pkgs.bash}/bin/bash";
-    # };
     emacs = {
       enable = true;
       extraPackages = epkgs: [
@@ -186,7 +186,7 @@ in
       enable = true;
       # enableBashIntegration = true;
       enableZshIntegration = true;
-      # nix-direnv.enable = true;
+      nix-direnv.enable = true;
     };
 
 

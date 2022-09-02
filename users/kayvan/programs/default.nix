@@ -1,9 +1,8 @@
-[    ./termonad.nix
-
+[
   ./rofi
-  ./shell
+  ./tmux
+  ./zsh
   ./xmonad
   ./git
-  ./signal
-  ./neovim-idea
+  ./networkmanager
 ]
