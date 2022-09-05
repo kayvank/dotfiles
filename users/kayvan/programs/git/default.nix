@@ -60,7 +60,7 @@ let
     key = "F945A24367B4BE3371407FA54BA73381BCAE8840";
       signByDefault = true;
     };
-  };
     userEmail = "kayvan@q2io.com";
     userName = "kayvank";
+  };
 }

@@ -15,7 +15,6 @@ in
   imports =
     [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./wm/xmonad.nix
     ./cache.nix
     ];
 
@@ -24,15 +23,32 @@ in
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.initrd.kernelModules = [ ];
+    boot.initrd.availableKernelModules = [
+      "xhci_pci"
+      "nvme"
+      "usb_storage"
+      "sd_mod"
+    ];
+    # boot.kernelParams = [ "module_blacklist=hid_sensor_hub" ];
+    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelModules = [ "kvm-intel" "btqca" "btusb" "hci_qca" "hci_uart" "sg" "btintel" ];
+    boot.extraModulePackages = [ ];
 
+    # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+    # (the default) this is the recommended approach. When using systemd-networkd it's
+    # still possible to use this option, but it's recommended to use it in conjunction
+    # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+    networking.useDHCP = lib.mkDefault true;
+    # networking.interfaces.wlp108s0.useDHCP = lib.mkDefault true;
     networking.hostName = "saturn-xps"; # Define your hostname.
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager = {
 	    enable = true;  # Easiest to use and most distros use this by default.
-	    insertNameservers = [
-        "8.8.8.8"
-        "8.8.4.4"
+	    insertNameservers = [ ## google nameservers
+      "8.8.8.8"
+      "8.8.4.4"
       ];
     };
 
@@ -41,156 +57,183 @@ in
     # Configure network proxy if necessary
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-      # Enable the X11 windowing system.
-      services = {
-	      xserver = {
-		      enable = true;
-		      xrandrHeads = [
-		        {
-			        output = "eDP-1";
-			        monitorConfig = ''
-			          Option "PreferredMode" "1920x1200"
-			          Option "Position" "0 0"
-			        '';
-		        }
-		      ];
-		      displayManager = {
-		        lightdm.enable = true;
-		        defaultSession = "none+xmonad";
-		      };
-		      windowManager.xmonad = {
-			      enable = true;
-			      enableContribAndExtras = true;
-		      };
-		      libinput = {  # Enable touchpad support (enabled default in most desktopManager).
+    # Enable the X11 windowing system.
+    services = {
+	    xserver = {
+		    enable = true;
+		    xrandrHeads = [
+		      {
+			      output = "eDP-1";
+			      monitorConfig = ''
+			        Option "PreferredMode" "1920x1200"
+			        Option "Position" "0 0"
+			      '';
+		      }
+		    ];
+		    displayManager = {
+		      lightdm.enable = true;
+		      defaultSession = "none+xmonad";
+		    };
+		    windowManager.xmonad = {
 			    enable = true;
-			    touchpad = {
-				    disableWhileTyping = true;
-				    tapping = true;
-				    buttonMapping = "lmr";
-			    };
-		      };
-        };
-        gnome.gnome-keyring.enable = true;
-        upower.enable = true;
-
-        dbus = {
-          enable = true;
-          packages = [ pkgs.dconf ];
-        };
-        printing = { # Enable CUPS to print documents.
-          enable = true;
-          drivers = [pkgs.mfcj6510dwlpr];          ## printer driver
-          browsing = true;
-          listenAddresses = [ "*:631" ];
-          allowFrom = [ "all" ];
-          defaultShared = true;
-        };
-        openssh.enable = true;
+			    enableContribAndExtras = true;
+		    };
+		    libinput = {  # Enable touchpad support (enabled default in most desktopManager).
+			  enable = true;
+			  touchpad = {
+				  disableWhileTyping = true;
+				  tapping = true;
+				  buttonMapping = "lmr";
+			  };
+		    };
       };
+      gnome.gnome-keyring.enable = true;
+      upower.enable = true;
+      blueman.enable = true;
 
-      # Enable sound.
-      sound.enable = true;
-      hardware.pulseaudio = {
+      dbus = {
         enable = true;
-        package = pkgs.pulseaudioFull;
+        packages = [ pkgs.dconf ];
       };
-
-      # Define a user account. Don't forget to set a password with ‘passwd’.
-      users.users.kayvan = {
-        isNormalUser = true;
-        initialPassword = "123password";
-        extraGroups = [
-          "wheel"
-          "bluetooth"
-          "docker"
-          "networkmanager"
-          "scanner"
-          "lp"
-          "libvirtd" "qemu-libvirtd" ]; # Enable ‘sudo’ for the user.
-          shell = pkgs.zsh;
-          packages = with pkgs; [
-            brave
-          ];
+      printing = { # Enable CUPS to print documents.
+      enable = true;
+      drivers = [pkgs.mfcj6510dwlpr];    # printer driver
+      browsing = true;
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      defaultShared = true;
       };
+      openssh.enable = true;
+      # actkbd = {
+        #   enable = true;
+        #   bindings = [
+          #     { keys = [ 224 ];
+          #       events = [ "key" ];
+          #       command = "/run/current-system/sw/bin/light -A 10";
+          #     }
+          #     { keys = [ 225 ];
+          #       events = [ "key" ];
+          #       command = "/run/current-system/sw/bin/light -U 10";
+          #     }
+          #   ];
+          # };
+    };
 
-      # List packages installed in system profile. To search, run:
-      environment.systemPackages = with pkgs; [
-        vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-        wget
-        git
-        home-manager
-        pciutils
-        konsole
-        xorg.xbacklight
-        qemu_kvm
-        cachix
-      ];
+    # Enable sound.
+    sound.enable = true;
+    hardware.pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
 
-      # Some programs need SUID wrappers, can be configured further or are
-      # started in user sessions.
-      programs = {
-        mtr.enable = true;
-        dconf.enable = true;
-        gnupg.agent = {
+    # Define a user account. Don't forget to set a password with ‘passwd’.
+    users.users.kayvan = {
+      isNormalUser = true;
+      initialPassword = "123password";
+      extraGroups = [
+        "wheel"
+        "bluetooth"
+        "docker"
+        "networkmanager"
+        "scanner"
+        "lp"
+        "video"
+        "vboxusers"
+        "libvirtd" "qemu-libvirtd" ]; # Enable ‘sudo’ for the user.
+        shell = pkgs.zsh;
+        packages = with pkgs; [
+          brave
+        ];
+    };
+
+    # List packages installed in system profile. To search, run:
+    environment.systemPackages = with pkgs; [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      git
+      home-manager
+      pciutils
+      konsole
+      xorg.xbacklight
+      qemu_kvm
+      cachix
+    ];
+
+    # Some programs need SUID wrappers, can be configured further or are
+    # started in user sessions.
+    programs = {
+      light.enable = true;
+      mtr.enable = true;
+      dconf.enable = true;
+      gnupg.agent = {
+        enable = true;
+        enableSSHSupport = true;
+      };
+    };
+    # Enable Docker
+    virtualisation = {
+      docker = {
+        enable = true;
+        autoPrune = {
           enable = true;
-          enableSSHSupport = true;
+          dates = "weekly";
         };
       };
-      # Enable Docker
-      virtualisation = {
-        docker = {
+      libvirtd.enable = true;
+      virtualbox = {
+        host = {
           enable = true;
-          autoPrune = {
-            enable = true;
-            dates = "weekly";
-          };
+          enableExtensionPack = true;
         };
-        libvirtd.enable = true;
-      };
-
-      nix = {
-        # Automate garbage collection
-        gc = {
-          automatic = true;
-          dates     = "weekly";
-          options   = "--delete-older-than 7d";
-        };
-
-        extraOptions = ''
-          experimental-features = nix-command flakes
-          keep-outputs          = true
-          keep-derivations      = true
-        '';
-
-        # Required by Cachix to be used as non-root user
-        settings = {
-          trusted-users = [ "root" "kayvan" ];
-          auto-optimise-store = true;
+        guest = {
+          enable = true;
+          x11 = true;
         };
       };
+    };
+
+    nix = {
+      # Automate garbage collection
+      gc = {
+        automatic = true;
+        dates     = "weekly";
+        options   = "--delete-older-than 7d";
+      };
+
+      extraOptions = ''
+        experimental-features = nix-command flakes
+        keep-outputs          = true
+        keep-derivations      = true
+      '';
+
+      # Required by Cachix to be used as non-root user
+      settings = {
+        trusted-users = [ "root" "kayvan" ];
+        auto-optimise-store = true;
+      };
+    };
 
 
 
 
-      # Open ports in the firewall.
-      # networking.firewall.allowedTCPPorts = [ ... ];
-      # networking.firewall.allowedUDPPorts = [ ... ];
-      # Or disable the firewall altogether.
-      # networking.firewall.enable = false;
+    # Open ports in the firewall.
+    # networking.firewall.allowedTCPPorts = [ ... ];
+    # networking.firewall.allowedUDPPorts = [ ... ];
+    # Or disable the firewall altogether.
+    # networking.firewall.enable = false;
 
-      # Copy the NixOS configuration file and link it from the resulting system
-      # (/run/current-system/configuration.nix). This is useful in case you
-      # accidentally delete configuration.nix.
-      # system.copySystemConfiguration = true;
+    # Copy the NixOS configuration file and link it from the resulting system
+    # (/run/current-system/configuration.nix). This is useful in case you
+    # accidentally delete configuration.nix.
+    # system.copySystemConfiguration = true;
 
-      # This value determines the NixOS release from which the default
-      # settings for stateful data, like file locations and database versions
-      # on your system were taken. It‘s perfectly fine and recommended to leave
-      # this value at the release version of the first install of this system.
-      # Before changing this value read the documentation for this option
-      # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-      system.stateVersion = "22.05"; # Did you read the comment?
+    # This value determines the NixOS release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    # Before changing this value read the documentation for this option
+    # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+    system.stateVersion = "22.05"; # Did you read the comment?
 
 }
 

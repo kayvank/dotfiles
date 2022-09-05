@@ -54,8 +54,8 @@ For my system, I used [swap file](https://linuxize.com/post/create-a-linux-swap-
 To configure the system:
 
 ``` sh
-git clone git@github.com:kayvank/dotfiles.git ~/.dotfiles
-cd ~./dotfiles
+git clone git@github.com:kayvank/dotfiles.git ~/.config/dotfiles
+cd ~/.config/dotfiles
 ```
 + Installing system configurations:
 ``` sh

@@ -7,29 +7,32 @@ let
   defaultPkgs = with pkgs; [
     amazon-ecs-cli       # amazon ecs client
     arandr               # simple GUI for xrandr
+    mate.atril
     aspell
+    aspellDicts.en       # Aspell dictionary for English
     awscli2
     aws-mfa              # Manage AWS MFA Security Credentials
     bashmount            # mount usb
-    brightnessctl        ## Xbacklight (Hardware Level)
-    # bluez
-    # bluez-tools
-    blueman
+    brightnessctl        # Xbacklight (Hardware Level)
+    blueman              # GTK-based Bluetooth Manager
     brave                # www browser
     docker-compose       # docker manager
     direnv               # customize env per directory
-    discord
-    evince
+    element              #  Periodic table
+    element-desktop      #  A feature-rich client for Matrix.org
+    evince               # gnume document viewer
     exa                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
-    file
-    google-cloud-sdk
+    file                 # light weight image viewer
+    google-cloud-sdk     # gcp sdk
+    google-chrome        # google web browser
     google-drive-ocamlfuse # mount your Google Drive
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
-    gnumake
-    graphviz
+    gnumake              #  A tool to control the generation of non-source files from sources
+    graphviz             # grapsh visualization tool
+    irony-server         # c/c++ minor mode, emacs
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
@@ -38,28 +41,22 @@ let
     neofetch             # command-line system information
     nixfmt
     nix-index            #  locate the package providing a certain file in nixpkgs
-    # pavucontrol          # pulseaudio volume control
-    # paprefs              # pulseaudio preferences
     pa_applet            # pulseaudio applet for trayer
-    # pasystray            # pulseaudio systray
-    pgadmin4
+    pgadmin4             # postgres admin
     polybar
-    python39Full
+    python39Full         # pythong
     prettyping           # a nicer ping
-    # pulsemixer           # pulseaudio mixer
     ranger               # terminal file explorer
-    rtags
-    redis
+    rtags                # C/C++ client-server indexer based on clang
+    redis                # redis
     ripgrep              # fast grep
     rnix-lsp             # nix lsp server
-    sbcl
+    sbcl                 # lisp compiler
     sqlite               # db sqlite
     signal-desktop       # encrypted com
     starship             # zsh prompt
     slack                # messaging client
     terraform            # terraform
-    # tldr                 # summary of a man page
-    # tmux               # tmux
     trayer               # used by xmondad for little icons
     tree                 # display files in a tree view
     usbutils             # Tools for working with USB devices, such as lsusb

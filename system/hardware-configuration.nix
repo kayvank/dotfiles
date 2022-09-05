@@ -8,40 +8,24 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.initrd.availableKernelModules = [
-    "xhci_pci"
-    "nvme"
-    "usb_storage"
-    "sd_mod"
-  ];
-
-  boot.kernelModules = [ "kvm-intel" "btqca" "btusb" "hci_qca" "hci_uart" "sg" "btintel" ];
-  boot.initrd.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
-
-  fileSystems."/" =
-    { device = "/dev/disk/by-label/nixos";    ## uuid/980b1743-a0fd-4750-a8f1-1d1658a1114a";
+    fileSystems."/" =
+      { device = "/dev/disk/by-label/nixos";    ## uuid/980b1743-a0fd-4750-a8f1-1d1658a1114a";
       fsType = "ext4";
-    };
+      };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot"; ## uuid/6A8B-1125";
-      fsType = "vfat";
-    };
+      fileSystems."/boot" =
+        { device = "/dev/disk/by-label/boot"; ## uuid/6A8B-1125";
+        fsType = "vfat";
+        };
 
-  swapDevices = [ { device = "/.swapfile"; } ];
+        swapDevices = [
+          { device = "/.swapfile";
+          }
+        ];
 
-  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
-  # (the default) this is the recommended approach. When using systemd-networkd it's
-  # still possible to use this option, but it's recommended to use it in conjunction
-  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
-  networking.useDHCP = lib.mkDefault true;
-  # networking.interfaces.wlp108s0.useDHCP = lib.mkDefault true;
-
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  # high-resolution display
-  hardware.video.hidpi.enable = lib.mkDefault true;
+        powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+        hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+        # high-resolution display
+        hardware.video.hidpi.enable = lib.mkDefault true;
+        hardware.bluetooth.enable = true;
 }

@@ -84,11 +84,11 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
     -- launch a terminal
-    [ ((noModMask, xF86XK_AudioLowerVolume), spawn "amixer -D pulse sset Master on && amixer -D pulse sset Master 5%- && ogg123 /home/baerg/Sounds/volume.ogg"),
-      ((noModMask, xF86XK_AudioRaiseVolume), spawn "amixer -D pulse sset Master on && amixer -D pulse sset Master 5%+ && ogg123 /home/baerg/Sounds/volume.ogg"),
-      ((noModMask, xF86XK_AudioMute), spawn "amixer -D pulse sset Master toggle"),
-      ((noModMask, xF86XK_MonBrightnessUp), spawn "xbacklight -inc 10"),
-      ((noModMask, xF86XK_MonBrightnessDown), spawn "xbacklight -dec 10"),
+    [ ((noModMask, xF86XK_AudioLowerVolume), spawn "amixer -q set Master 5%- unmute"),
+      ((noModMask, xF86XK_AudioRaiseVolume), spawn "amixer -q set Master  5%+ unmute"),
+      ((noModMask, xF86XK_AudioMute), spawn "amixer -q set Master toggle"),
+      ((noModMask, xF86XK_MonBrightnessUp), spawn "/run/current-system/sw/bin/light -A 10"),
+      ((noModMask, xF86XK_MonBrightnessDown), spawn "/run/current-system/sw/bin/light -U 10"),
       ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf),
       -- launch dmenu
       ((modm, xK_p), spawn "rofi -sidebar-mode -show run"),
