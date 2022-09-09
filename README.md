@@ -66,7 +66,7 @@ cd ~/.config/dotfiles
 + Installing user configurations:
 
 ``` sh
-cd ~./dotfiles
+cd ~/.config/dotfiles
 ./apply-user.sh  ## installs user configs
 ./update
 ```

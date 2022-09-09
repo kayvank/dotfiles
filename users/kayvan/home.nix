@@ -20,13 +20,13 @@ let
     direnv               # customize env per directory
     element              #  Periodic table
     element-desktop      #  A feature-rich client for Matrix.org
-    evince               # gnume document viewer
+    # evince               # gnume document viewer
     exa                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
     google-cloud-sdk     # gcp sdk
-    google-chrome        # google web browser
+    # google-chrome        # google web browser
     google-drive-ocamlfuse # mount your Google Drive
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
@@ -57,7 +57,6 @@ let
     starship             # zsh prompt
     slack                # messaging client
     terraform            # terraform
-    trayer               # used by xmondad for little icons
     tree                 # display files in a tree view
     usbutils             # Tools for working with USB devices, such as lsusb
     volumeicon           # volume icon for trayer
@@ -145,18 +144,31 @@ in
   };
 
   # Let Home Manager install and manage itself.
-  services.gpg-agent = {
-    enable = true;
-    defaultCacheTtl = 1800;
-    enableSshSupport = true;
-  };
+  services = {
+    gpg-agent = {
+      enable = true;
+      defaultCacheTtl = 1800;
+      enableSshSupport = true;
+    };
+    flameshot.enable = true;
+    trayer = {
+      enable = true;
+      settings = {
 
+        edge = "top";
+        align = "right";
+        SetDockType  = true;
+        SetPartialStrut = true;
+        expand = true;
+        transparent = true;
+        width = 5;
+        height=15;
+        tint = "black";
+      };
+    };
+  };
   # restart services on change
   systemd.user.startServices = "sd-switch";
-  services = {
-    flameshot.enable = true;
-    nixos-vscode-ssh-fix.enable = true;
-  };
 
   programs = {
     bash.enable = false;
@@ -167,8 +179,6 @@ in
         epkgs.magit
       ];
     };
-
-
     htop = {
       enable = true;
       settings = {
@@ -176,17 +186,12 @@ in
         sort_key = "PERCENT_CPU";
       };
     };
-
     bat.enable = true;
-
     direnv = {
       enable = true;
-      # enableBashIntegration = true;
       enableZshIntegration = true;
       nix-direnv.enable = true;
     };
-
-
     jq.enable = true;
     ssh = {
       enable = true;
@@ -196,24 +201,41 @@ in
         ControlPath /tmp/%r@%h:%p
         ControlPersist 2h
         # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
-        Host dev-saturn
-        HostName 66.206.39.66
+#
+        Host saturn-vm
+        HostName 192.168.183.188
         User kayvan
+#
         Host saturn-t480
         HostName 192.168.183.240
         User kayvan
+#
         Host saturn-xeon
         HostName 192.168.183.166
         User kayvan
+#
+        Host github.com
+        HostName github.com
+        User git
+        IdentityFile ~/.ssh/id_rsa_q2io
+        IdentitiesOnly yes
+##
+## see  https://docs.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops#q-i-have-multiple-ssh-keys--how-do-i-use-different-ssh-keys-for-different-ssh-servers-or-repos
+##
+        Host ssh.dev.azure.com
+        HostName ssh.dev.azure.com
+        User git
+        PubkeyAcceptedAlgorithms +ssh-rsa
+        HostkeyAlgorithms +ssh-rsa
+        IdentityFile ~/.ssh/id_rsa_umbrage
+        IdentitiesOnly yes
       '';
     };
     zoxide = {
       enable = true;
-      # enableBashIntegration = true;
       enableZshIntegration = true;
       options = [];
     };
+  }; ## program
 
-
-  };
 }

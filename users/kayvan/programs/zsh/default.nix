@@ -29,6 +29,7 @@ in
       wproto    = "cd ~/dev/workspaces/workspace-proto";
       wnixos    = "cd ~/dev/workspaces/workspace-nixos";
       wiohk     = "cd ~/dev/workspaces/workspace-iohk";
+      wrust     = "cd ~/dev/workspaces/workspace-rust";
       tmx       = "tmux new-session -s $USER-`date +%s`";
     };
 
@@ -37,6 +38,7 @@ in
 
     };
     sessionVariables = { ## shell env vars are set here
+      "BROWSER" = "brave";
       "EDITOR" = "vim";
       "VISUAL" = "vim";
       "HISTFILESIZE" = "1000000000"; # Bigger history files for all users

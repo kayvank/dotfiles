@@ -282,15 +282,12 @@ myLogHook = return ()
 
 myStartupHook = do
   spawnOnce "xscreensaver"
-  -- spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/Fantastic-HD-Black-Wallpapers.jpg" -- ussInterprise.jpg"
-  spawnOnce "feh --bg-fill ~/.dotfiles/wallpapers/ussInterprise.jpg"
+  -- spawnOnce "feh --bg-fill ~/.config/dotfiles/wallpapers/saturn-moon-cassini.jpg"
   spawnOnce "xmobar "
   spawnOnce "blueman-applet"
   spawnOnce "nm-applet"
-  -- spawnOnce "volumeicon"
   spawnOnce "pa-applet"
-  spawnOnce "flameshot"
-  spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --width 5 --height 14  --tint black"
+  -- spawnOnce "flameshot"
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
 

@@ -19,6 +19,7 @@ in
     ];
 
     nixpkgs.config.allowUnfree = true;
+    nixpkgs.config.allow-import-from-derivation=true;
 
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
@@ -139,6 +140,7 @@ in
         "lp"
         "video"
         "vboxusers"
+        # "nixbld"
         "libvirtd" "qemu-libvirtd" ]; # Enable ‘sudo’ for the user.
         shell = pkgs.zsh;
         packages = with pkgs; [
