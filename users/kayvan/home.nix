@@ -28,6 +28,7 @@ let
     google-cloud-sdk     # gcp sdk
     # google-chrome        # google web browser
     google-drive-ocamlfuse # mount your Google Drive
+    grafana
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
     gnumake              #  A tool to control the generation of non-source files from sources
@@ -92,6 +93,7 @@ let
     nix-tree                # visualize nix dependencies
     ormolu
     stylish-haskell
+    hindent
     implicit-hie
     stack
     xmobar

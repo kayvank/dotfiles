@@ -2,7 +2,7 @@
 let
   gitConfig = {
     core = {
-      editor = "nvim";
+      editor = "vim";
       pager  = "diff-so-fancy | less --tabs=4 -RFX";
     };
     init.defaultBranch = "main";
@@ -11,7 +11,7 @@ let
       tool          = "vim_mergetool";
     };
     mergetool."vim_mergetool" = {
-      cmd    = "nvim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
+      cmd    = "vim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
       prompt = false;
     };
     pull.rebase = false;

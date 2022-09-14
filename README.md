@@ -44,6 +44,9 @@ $ sudo cp /nix/store/gnnbjvd916yh1f4svbgrssq94550pbxl-nixos-21.11pre304626.8ecc6
 $ sudo sync
 ```
 
+## BIOS related stuff
++ Disable RAID mode
+
 ## Installing minimal NixOs system
 Follow the [NixOs Chapter2 user-guide](https://nixos.org/manual/nixos/stable/index.html#sec-installation)
 
@@ -70,5 +73,9 @@ cd ~/.config/dotfiles
 ./apply-user.sh  ## installs user configs
 ./update
 ```
+
+### Reference
+The main idea for this repo is from:
+- [will T video](https://www.youtube.com/watch?v=mJbQ--iBc1U&list=PL-saUBvIJzOkjAw_vOac75v-x6EzNzZq-&index=8)
 
 
