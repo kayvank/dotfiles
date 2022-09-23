@@ -9,19 +9,15 @@
     ];
 
     fileSystems."/" =
-      { device = "/dev/disk/by-label/nixos";    ## uuid/980b1743-a0fd-4750-a8f1-1d1658a1114a";
+      { device = "/dev/disk/by-uuid/6813901b-f560-44d1-a06c-5d7a3503b5ae";
       fsType = "ext4";
       };
 
       fileSystems."/boot" =
-        { device = "/dev/disk/by-label/boot"; ## uuid/6A8B-1125";
+        { device = "/dev/disk/by-uuid/1FE8-921B";
         fsType = "vfat";
         };
 
-        swapDevices = [
-          { device = "/.swapfile";
-          }
-        ];
 
         powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
         hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

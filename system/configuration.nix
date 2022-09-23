@@ -42,7 +42,7 @@ in
     # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
     networking.useDHCP = lib.mkDefault true;
     # networking.interfaces.wlp108s0.useDHCP = lib.mkDefault true;
-    networking.hostName = "saturn-xps"; # Define your hostname.
+    networking.hostName = "saturn-xeon"; # Define your hostname.
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager = {
