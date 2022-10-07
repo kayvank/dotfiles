@@ -45,7 +45,7 @@ let
     pa_applet            # pulseaudio applet for trayer
     pgadmin4             # postgres admin
     polybar
-    python39Full         # pythong
+    # python39Full         # pythong
     prettyping           # a nicer ping
     ranger               # terminal file explorer
     rtags                # C/C++ client-server indexer based on clang

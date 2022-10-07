@@ -49,17 +49,55 @@ let
       "*.metals"
       "*.metals.sbt"
       "*metals.sbt"
+      "*~"              # vi tempfile
+      "*.swap"          # vi tempfile
       "*.direnv"
-      "*.envrc"        # there is lorri, nix-direnv & simple direnv; let people decide
-      "*hie.yaml"      # ghcide files
-      "*.mill-version" # used by metals
-      "*.jvmopts"      # should be local to every project
-      "*.jvmopts"      # should be local to every project
+      "*.envrc"         # there is lorri, nix-direnv & simple direnv; let people decide
+      "*hie.yaml"       # ghcide files
+      "*.mill-version"  # used by metals
+      "*.jvmopts"       # should be local to every project
+      "*.jvmopts"       # should be local to every project
     ];
+    includes = [
+      {
+        path = "configX.inc";
+      }
+      {
+        # path = "configX/conditional.inc";
+        condition = "gitdir:**/workspace-iohk/**/.git";
+        contentSuffix = "gitconfig-iohk";
+        contents = {
+          user = {
+            name = "Kayvan Kazeminejad";
+            email = "kayvan.kazeminejad@iohk.io";
+            signing = {
+              key = "4BA73381BCAE8840";
+              signByDefault = true;
+            };
+          };
+        };
+      }
+
+      {
+        condition = "gitdir:**/workspace-q2io/**/.git";
+        contentSuffix = "gitconfig-q2io";
+        contents = {
+          user = {
+            name = "kayvan Kazeminejad";
+            email = "kayvan@q2io.com";
+            signing = {
+              key = "D2B4E616C9524F86";
+              signByDefault = true;
+            };
+          };
+        };
+      }
+        ];
   signing = {
-    key = "F945A24367B4BE3371407FA54BA73381BCAE8840";
+    key = "D2B4E616C9524F86";
       signByDefault = true;
     };
+
     userEmail = "kayvan@q2io.com";
     userName = "kayvank";
   };
