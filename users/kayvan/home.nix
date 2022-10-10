@@ -58,6 +58,7 @@ let
     starship             # zsh prompt
     slack                # messaging client
     terraform            # terraform
+    termonad
     tree                 # display files in a tree view
     usbutils             # Tools for working with USB devices, such as lsusb
     volumeicon           # volume icon for trayer

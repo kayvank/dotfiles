@@ -23,13 +23,13 @@ in
       pbpaste   = "xsel -ob";
       wdev      = "cd ~/dev";
       wwork     = "cd ~/dev/workspaces";
-      whaskell  = "cd ~/dev/workspaces/workspace-haskell";
-      wsoos     = "cd ~/dev/workspaces/workspace-soostone";
-      wumb      = "cd ~/dev/workspaces/workspace-umbrage";
-      wproto    = "cd ~/dev/workspaces/workspace-proto";
-      wnixos    = "cd ~/dev/workspaces/workspace-nixos";
+      whaskell  = "cd ~/dev/workspaces/workspace-q2io/workspace-haskell";
+      wsoos     = "cd ~/dev/workspaces/workspae-q2io/workspace-soostone";
+      wumb      = "cd ~/dev/workspaces/workspace-q2io/workspace-umbrage";
+      wproto    = "cd ~/dev/workspaces/workspace-q2io/workspace-proto";
+      wnixos    = "cd ~/dev/workspaces/workspace-q2io/workspace-nixos";
       wiohk     = "cd ~/dev/workspaces/workspace-iohk";
-      wrust     = "cd ~/dev/workspaces/workspace-rust";
+      wrust     = "cd ~/dev/workspaces/workspace-q2io/workspace-rust";
       tmx       = "tmux new-session -s $USER-`date +%s`";
     };
 
@@ -44,7 +44,7 @@ in
       "HISTFILESIZE" = "1000000000"; # Bigger history files for all users
       "HISTSIZE" = "1000000000";
       "HISTTIMEFORMAT"="[%F %T] ";
-      "PATH" = "$PATH:$HOME/bin:$HOME/.local/bin";
+      "PATH" = "$PATH:$HOME/bin:$HOME/.cabal/bin:$HOME/.local/bin";
       DIRENV_ALLOW_NIX=1;
     };
     oh-my-zsh = {
