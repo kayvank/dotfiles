@@ -159,6 +159,7 @@ in
       xorg.xbacklight
       qemu_kvm
       cachix
+      dict
     ];
 
     # Some programs need SUID wrappers, can be configured further or are

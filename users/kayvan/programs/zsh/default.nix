@@ -23,6 +23,7 @@ in
       pbpaste   = "xsel -ob";
       wdev      = "cd ~/dev";
       wwork     = "cd ~/dev/workspaces";
+      wq2io     = "cd ~/dev/workspaces/workspace-q2io";
       whaskell  = "cd ~/dev/workspaces/workspace-q2io/workspace-haskell";
       wsoos     = "cd ~/dev/workspaces/workspae-q2io/workspace-soostone";
       wumb      = "cd ~/dev/workspaces/workspace-q2io/workspace-umbrage";

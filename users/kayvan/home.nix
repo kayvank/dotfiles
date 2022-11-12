@@ -10,12 +10,12 @@ let
     mate.atril
     aspell
     aspellDicts.en       # Aspell dictionary for English
-    awscli2
+    awscli2              # asw cli
     aws-mfa              # Manage AWS MFA Security Credentials
     bashmount            # mount usb
     brightnessctl        # Xbacklight (Hardware Level)
     blueman              # GTK-based Bluetooth Manager
-    brave                # www browser
+    # brave              # www browser, installed at system levele, no need to install it here.
     docker-compose       # docker manager
     direnv               # customize env per directory
     element              #  Periodic table
@@ -25,27 +25,31 @@ let
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
+    firefox
+    gcc                  # C/C++
     google-cloud-sdk     # gcp sdk
     # google-chrome        # google web browser
     google-drive-ocamlfuse # mount your Google Drive
     grafana
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
-    gnumake              #  A tool to control the generation of non-source files from sources
+    gnumake              # A tool to control the generation of non-source files from sources
     graphviz             # grapsh visualization tool
     irony-server         # c/c++ minor mode, emacs
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
+    libreoffice          # mostly for the pdf editor
     multilockscreen      # fast lockscreen based on i3lock
     cinnamon.nemo        # file explorer
     neofetch             # command-line system information
-    nixfmt
+    nixfmt               # format nix files
     nix-index            #  locate the package providing a certain file in nixpkgs
+    rclone              # sync with gdrive
     pa_applet            # pulseaudio applet for trayer
     pgadmin4             # postgres admin
-    polybar
-    # python39Full         # pythong
+    polybar              # use with xmonad bar
+    python39Full         # pythong
     prettyping           # a nicer ping
     ranger               # terminal file explorer
     rtags                # C/C++ client-server indexer based on clang
@@ -58,7 +62,7 @@ let
     starship             # zsh prompt
     slack                # messaging client
     terraform            # terraform
-    termonad
+    termonad             # haskell terminal emulator
     tree                 # display files in a tree view
     usbutils             # Tools for working with USB devices, such as lsusb
     volumeicon           # volume icon for trayer
@@ -67,11 +71,12 @@ let
     vscode               # ms visual studio
     xsel                 # clipboard support (also for neovim)
     xclip                # copy pate like mac does
+    xpdf
     yarn                 # js build
     zip                  # zip archive
 
     # fixes the `ar` error required by cabal
-    binutils-unwrapped
+    # binutils-unwrapped
   ];
   home.stateVersion = "22.05";
 
