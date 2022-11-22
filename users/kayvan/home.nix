@@ -71,7 +71,6 @@ let
     vscode               # ms visual studio
     xsel                 # clipboard support (also for neovim)
     xclip                # copy pate like mac does
-    xpdf
     yarn                 # js build
     zip                  # zip archive
 
@@ -209,6 +208,10 @@ in
         ControlPath /tmp/%r@%h:%p
         ControlPersist 2h
         # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
+#
+        Host q2io.dev
+        HostName q2io.dev
+        User iohk
 #
         Host saturn-vm
         HostName 192.168.183.188
