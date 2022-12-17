@@ -89,6 +89,7 @@ let
   haskellPkgs = with pkgs.haskellPackages; [
     cabal2nix               # convert cabal projects to nix
     cabal-install           # package manager
+    cabal-fmt               # cabal fomatter
     ghc                     # compiler
     ghcid                   # ghcid for continues build
     haskell-language-server # haskell IDE (ships with ghcide)
@@ -96,8 +97,9 @@ let
     hoogle                  # documentation
     hlint
     nix-tree                # visualize nix dependencies
-    ormolu
-    stylish-haskell
+    ormolu                  # code fomrater
+    stylish-haskell         # styilish haskell formatter
+    structured-haskell-mode # haskell structured mode
     hindent
     implicit-hie
     stack
