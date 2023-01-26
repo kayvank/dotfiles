@@ -63,6 +63,7 @@ let
     slack                # messaging client
     terraform            # terraform
     termonad             # haskell terminal emulator
+    tmate                # tmux like Terminal Sharing
     tree                 # display files in a tree view
     usbutils             # Tools for working with USB devices, such as lsusb
     volumeicon           # volume icon for trayer
