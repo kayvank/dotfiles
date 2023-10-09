@@ -7,6 +7,9 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs"; ## use our nixpkgs instead of HM one
     };
+    iohk-hix = {
+      url = "github:input-output-hk/haskell.nix";
+    };
     nurpkgs = {
       url = github:nix-community/NUR;
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +20,7 @@
     };
   };
 
-  outputs = inputs @ {self, nixpkgs, nurpkgs, home-manager, text2nix, ... }:
+  outputs = inputs @ {self, nixpkgs, nurpkgs, home-manager, iohk-hix, text2nix, ... }:
   let
     system = "x86_64-linux";
 

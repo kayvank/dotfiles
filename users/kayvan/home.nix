@@ -17,6 +17,7 @@ let
     blueman              # GTK-based Bluetooth Manager
     # brave              # www browser, installed at system levele, no need to install it here.
     docker-compose       # docker manager
+    duf                  # disk utility
     direnv               # customize env per directory
     element              #  Periodic table
     element-desktop      #  A feature-rich client for Matrix.org
@@ -27,6 +28,7 @@ let
     file                 # light weight image viewer
     firefox
     gcc                  # C/C++
+    gh                   # github CLI tool
     google-cloud-sdk     # gcp sdk
     # google-chrome        # google web browser
     google-drive-ocamlfuse # mount your Google Drive
@@ -50,6 +52,7 @@ let
     pgadmin4             # postgres admin
     polybar              # use with xmonad bar
     python39Full         # pythong
+    postgresql
     prettyping           # a nicer ping
     ranger               # terminal file explorer
     rtags                # C/C++ client-server indexer based on clang
@@ -88,7 +91,6 @@ let
   ];
 
   haskellPkgs = with pkgs.haskellPackages; [
-    cabal2nix               # convert cabal projects to nix
     cabal-install           # package manager
     cabal-fmt               # cabal fomatter
     ghc                     # compiler
@@ -105,6 +107,8 @@ let
     implicit-hie
     stack
     xmobar
+    # panda
+    postgresql-libpq
   ];
 
   xmonadPkgs = with pkgs; [
@@ -214,14 +218,22 @@ in
 #
         Host q2io.dev
         HostName q2io.dev
-        User iohk
+        User kayvan
 #
         Host saturn-vm
         HostName 192.168.183.188
         User kayvan
 #
+        Host saturn-iohk
+        HostName 192.168.183.179
+        User kayvan
+#
         Host saturn-t480
         HostName 192.168.183.240
+        User kayvan
+#
+        Host djed-dev-vm
+        HostName 192.168.183.231
         User kayvan
 #
         Host saturn-xeon
