@@ -22,7 +22,7 @@ let
     element              #  Periodic table
     element-desktop      #  A feature-rich client for Matrix.org
     # evince               # gnume document viewer
-    exa                  # a better `ls`
+    eza                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
@@ -93,18 +93,18 @@ let
   haskellPkgs = with pkgs.haskellPackages; [
     cabal-install           # package manager
     cabal-fmt               # cabal fomatter
-    ghc                     # compiler
-    ghcid                   # ghcid for continues build
+    # ghc                     # compiler
+    # ghcid                   # ghcid for continues build
     haskell-language-server # haskell IDE (ships with ghcide)
-    dhall-lsp-server
+    # dhall-lsp-server
     hoogle                  # documentation
-    hlint
-    nix-tree                # visualize nix dependencies
-    ormolu                  # code fomrater
-    stylish-haskell         # styilish haskell formatter
-    structured-haskell-mode # haskell structured mode
-    hindent
-    implicit-hie
+    # hlint
+    # nix-tree                # visualize nix dependencies
+    # ormolu                  # code fomrater
+    # stylish-haskell         # styilish haskell formatter
+    # structured-haskell-mode # haskell structured mode
+    # hindent
+    # implicit-hie
     stack
     xmobar
     # panda

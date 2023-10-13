@@ -10,17 +10,17 @@
     iohk-hix = {
       url = "github:input-output-hk/haskell.nix";
     };
-    nurpkgs = {
-      url = github:nix-community/NUR;
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    text2nix = {
-      url = github:Mic92/tex2nix/4b17bc0;
-      inputs.utils.follows = "nixpkgs";
-    };
+    # nurpkgs = {url = github:nix-community/NUR; inputs.nixpkgs.follows = "nixpkgs";};
+    # text2nix = {url = github:Mic92/tex2nix/4b17bc0; inputs.utils.follows = "nixpkgs";};
   };
 
-  outputs = inputs @ {self, nixpkgs, nurpkgs, home-manager, iohk-hix, text2nix, ... }:
+  outputs = inputs @
+    { self
+    , nixpkgs
+    # , nurpkgs , text2nix
+    , home-manager
+    , iohk-hix
+    , ... }:
   let
     system = "x86_64-linux";
 

@@ -172,6 +172,7 @@ in
         enable = true;
         enableSSHSupport = true;
       };
+      zsh.enable = true;
     };
     # Enable Docker
     virtualisation = {
@@ -183,16 +184,18 @@ in
         };
       };
       libvirtd.enable = true;
-      virtualbox = {
-        host = {
-          enable = true;
-          enableExtensionPack = true;
-        };
-        guest = {
-          enable = true;
-          x11 = true;
-        };
-      };
+
+      # virtualbox = {
+      #   host = {
+      #     enable = true;
+      #     enableExtensionPack = true;
+      #   };
+      #   guest = {
+      #     enable = true;
+      #     x11 = true;
+      #   };
+      # };
+
     };
 
     nix = {
