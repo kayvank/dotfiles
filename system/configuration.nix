@@ -24,6 +24,7 @@ in
     # Use the systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
+    boot.initrd.systemd.enable = true; ##K
     boot.initrd.kernelModules = [ ];
     boot.initrd.availableKernelModules = [
       "xhci_pci"
@@ -42,7 +43,7 @@ in
     # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
     networking.useDHCP = lib.mkDefault true;
     # networking.interfaces.wlp108s0.useDHCP = lib.mkDefault true;
-    networking.hostName = "saturn-xeon"; # Define your hostname.
+    networking.hostName = "saturn-iohk"; # Define your hostname.
     # Pick only one of the below networking options.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networking.networkmanager = {
@@ -52,25 +53,10 @@ in
       "8.8.4.4"
       ];
     };
-
-    # Set your time zone.
     time.timeZone = "America/Los_Angeles";
-    # Configure network proxy if necessary
-    # networking.proxy.default = "http://user:password@proxy:port/";
-    # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    # Enable the X11 windowing system.
     services = {
 	    xserver = {
 		    enable = true;
-		    xrandrHeads = [
-		      {
-			      output = "eDP-1";
-			      monitorConfig = ''
-			        Option "PreferredMode" "1920x1200"
-			        Option "Position" "0 0"
-			      '';
-		      }
-		    ];
 		    displayManager = {
 		      lightdm.enable = true;
 		      defaultSession = "none+xmonad";
@@ -79,14 +65,14 @@ in
 			    enable = true;
 			    enableContribAndExtras = true;
 		    };
-		    libinput = {  # Enable touchpad support (enabled default in most desktopManager).
-			  enable = true;
-			  touchpad = {
-				  disableWhileTyping = true;
-				  tapping = true;
-				  buttonMapping = "lmr";
-			  };
-		    };
+		    libinput = {
+          enable = true;
+			    touchpad = {
+				    disableWhileTyping = true;
+				    tapping = true;
+				    buttonMapping = "lmr";
+          };
+        };
       };
       gnome.gnome-keyring.enable = true;
       upower.enable = true;
@@ -105,28 +91,11 @@ in
       defaultShared = true;
       };
       openssh.enable = true;
-      # actkbd = {
-        #   enable = true;
-        #   bindings = [
-          #     { keys = [ 224 ];
-          #       events = [ "key" ];
-          #       command = "/run/current-system/sw/bin/light -A 10";
-          #     }
-          #     { keys = [ 225 ];
-          #       events = [ "key" ];
-          #       command = "/run/current-system/sw/bin/light -U 10";
-          #     }
-          #   ];
-          # };
     };
-
     # Enable sound.
     sound.enable = true;
-    hardware.pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-    };
-
+    hardware.pulseaudio.enable = true;
+    hardware.bluetooth.enable = true;
     # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.kayvan = {
       isNormalUser = true;
@@ -147,7 +116,6 @@ in
           brave
         ];
     };
-
     # List packages installed in system profile. To search, run:
     environment.systemPackages = with pkgs; [
       vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -184,18 +152,6 @@ in
         };
       };
       libvirtd.enable = true;
-
-      # virtualbox = {
-      #   host = {
-      #     enable = true;
-      #     enableExtensionPack = true;
-      #   };
-      #   guest = {
-      #     enable = true;
-      #     x11 = true;
-      #   };
-      # };
-
     };
 
     nix = {
@@ -218,9 +174,6 @@ in
         auto-optimise-store = true;
       };
     };
-
-
-
 
     # Open ports in the firewall.
     networking.firewall.allowedTCPPorts = [ 35901 8000 ];

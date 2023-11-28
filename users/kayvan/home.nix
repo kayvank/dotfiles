@@ -11,11 +11,11 @@ let
     aspell
     aspellDicts.en       # Aspell dictionary for English
     awscli2              # asw cli
-    aws-mfa              # Manage AWS MFA Security Credentials
     bashmount            # mount usb
     brightnessctl        # Xbacklight (Hardware Level)
     blueman              # GTK-based Bluetooth Manager
     # brave              # www browser, installed at system levele, no need to install it here.
+    cmake
     docker-compose       # docker manager
     duf                  # disk utility
     direnv               # customize env per directory
@@ -29,9 +29,9 @@ let
     firefox
     gcc                  # C/C++
     gh                   # github CLI tool
-    google-cloud-sdk     # gcp sdk
+    # google-cloud-sdk     # gcp sdk
     # google-chrome        # google web browser
-    google-drive-ocamlfuse # mount your Google Drive
+    # google-drive-ocamlfuse # mount your Google Drive
     grafana
     gimp                 # gnu image manipulation program
     glow                 # terminal markdown viewer
@@ -45,8 +45,9 @@ let
     multilockscreen      # fast lockscreen based on i3lock
     cinnamon.nemo        # file explorer
     neofetch             # command-line system information
-    nixfmt               # format nix files
+    #nixfmt               # format nix files
     nix-index            #  locate the package providing a certain file in nixpkgs
+    nix-prefetch-git
     rclone              # sync with gdrive
     pa_applet            # pulseaudio applet for trayer
     pgadmin4             # postgres admin
@@ -56,15 +57,15 @@ let
     prettyping           # a nicer ping
     ranger               # terminal file explorer
     rtags                # C/C++ client-server indexer based on clang
-    redis                # redis
+    # redis                # redis
     ripgrep              # fast grep
-    rnix-lsp             # nix lsp server
+    # rnix-lsp             # nix lsp server
     sbcl                 # lisp compiler
     sqlite               # db sqlite
     signal-desktop       # encrypted com
     starship             # zsh prompt
     slack                # messaging client
-    terraform            # terraform
+    # terraform            # terraform
     termonad             # haskell terminal emulator
     tmate                # tmux like Terminal Sharing
     tree                 # display files in a tree view
@@ -92,7 +93,7 @@ let
 
   haskellPkgs = with pkgs.haskellPackages; [
     cabal-install           # package manager
-    cabal-fmt               # cabal fomatter
+    # cabal-fmt               # cabal fomatter
     # ghc                     # compiler
     # ghcid                   # ghcid for continues build
     haskell-language-server # haskell IDE (ships with ghcide)
@@ -105,10 +106,10 @@ let
     # structured-haskell-mode # haskell structured mode
     # hindent
     # implicit-hie
-    stack
+    # stack
     xmobar
     # panda
-    postgresql-libpq
+    # postgresql-libpq
   ];
 
   xmonadPkgs = with pkgs; [
@@ -191,6 +192,8 @@ in
       extraPackages = epkgs: [
         epkgs.nix-mode
         epkgs.magit
+        epkgs.emacsql
+        epkgs.emacsql-sqlite
       ];
     };
     htop = {
@@ -224,18 +227,10 @@ in
         HostName 192.168.183.188
         User kayvan
 #
-        Host saturn-iohk
-        HostName 192.168.183.179
-        User kayvan
-#
         Host saturn-t480
         HostName 192.168.183.240
         User kayvan
-#
-        Host djed-dev-vm
-        HostName 192.168.183.231
-        User kayvan
-#
+
         Host saturn-xeon
         HostName 192.168.183.166
         User kayvan
@@ -244,16 +239,6 @@ in
         HostName github.com
         User git
         IdentityFile ~/.ssh/id_rsa_q2io
-        IdentitiesOnly yes
-##
-## see  https://docs.microsoft.com/en-us/azure/devops/repos/git/use-ssh-keys-to-authenticate?view=azure-devops#q-i-have-multiple-ssh-keys--how-do-i-use-different-ssh-keys-for-different-ssh-servers-or-repos
-##
-        Host ssh.dev.azure.com
-        HostName ssh.dev.azure.com
-        User git
-        PubkeyAcceptedAlgorithms +ssh-rsa
-        HostkeyAlgorithms +ssh-rsa
-        IdentityFile ~/.ssh/id_rsa_umbrage
         IdentitiesOnly yes
       '';
     };

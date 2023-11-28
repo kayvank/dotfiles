@@ -48,7 +48,7 @@ modules = [
       };
     };
     nixosConfigurations = {
-      saturn-xeon = lib.nixosSystem { ## gets all the system stuff by hostname
+      saturn-iohk = lib.nixosSystem { ## gets all the system stuff by hostname
       inherit system;
 
       modules = [
