@@ -37,6 +37,7 @@ let
     glow                 # terminal markdown viewer
     gnumake              # A tool to control the generation of non-source files from sources
     graphviz             # grapsh visualization tool
+    gvfs                 # gnu Virtual Filesystem support library
     irony-server         # c/c++ minor mode, emacs
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
@@ -45,7 +46,7 @@ let
     multilockscreen      # fast lockscreen based on i3lock
     cinnamon.nemo        # file explorer
     neofetch             # command-line system information
-    #nixfmt               # format nix files
+    nixfmt               # format nix files
     nix-index            #  locate the package providing a certain file in nixpkgs
     nix-prefetch-git
     rclone              # sync with gdrive
@@ -54,7 +55,7 @@ let
     polybar              # use with xmonad bar
     python39Full         # pythong
     postgresql
-    prettyping           # a nicer ping
+    prettyping           # a nicer pingpdfmixtool
     ranger               # terminal file explorer
     rtags                # C/C++ client-server indexer based on clang
     # redis                # redis
@@ -93,23 +94,10 @@ let
 
   haskellPkgs = with pkgs.haskellPackages; [
     cabal-install           # package manager
-    # cabal-fmt               # cabal fomatter
-    # ghc                     # compiler
-    # ghcid                   # ghcid for continues build
     haskell-language-server # haskell IDE (ships with ghcide)
-    # dhall-lsp-server
     hoogle                  # documentation
-    # hlint
-    # nix-tree                # visualize nix dependencies
-    # ormolu                  # code fomrater
-    # stylish-haskell         # styilish haskell formatter
-    # structured-haskell-mode # haskell structured mode
-    # hindent
-    # implicit-hie
-    # stack
+    implicit-hie
     xmobar
-    # panda
-    # postgresql-libpq
   ];
 
   xmonadPkgs = with pkgs; [
@@ -137,7 +125,6 @@ in
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-
     packages =
       defaultPkgs ++
       gitPkgs ++
@@ -169,7 +156,6 @@ in
     trayer = {
       enable = true;
       settings = {
-
         edge = "top";
         align = "right";
         SetDockType  = true;
@@ -221,7 +207,7 @@ in
 #
         Host q2io.dev
         HostName q2io.dev
-        User kayvan
+        User q2io
 #
         Host saturn-vm
         HostName 192.168.183.188
@@ -240,6 +226,12 @@ in
         User git
         IdentityFile ~/.ssh/id_rsa_q2io
         IdentitiesOnly yes
+
+        Host github.com-schwarzer-swan
+          HostName github.com
+          User schwarzer-swan
+          IdentityFile ~/.ssh/schwarzer_swan_rsa
+          IdentitiesOnly yes
       '';
     };
     zoxide = {

@@ -3,15 +3,15 @@ let
   gitConfig = {
     core = {
       editor = "vim";
-      pager  = "diff-so-fancy | less --tabs=4 -RFX";
+      pager = "diff-so-fancy | less --tabs=4 -RFX";
     };
     init.defaultBranch = "main";
     merge = {
       conflictStyle = "diff3";
-      tool          = "vim_mergetool";
+      tool = "vim_mergetool";
     };
     mergetool."vim_mergetool" = {
-      cmd    = "vim -f -c \"MergetoolStart\" \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"";
+      cmd = ''vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'';
       prompt = false;
     };
     pull.rebase = false;
@@ -25,19 +25,22 @@ let
   };
 
   rg = "${pkgs.ripgrep}/bin/rg";
-   in
-{
+in {
   programs.git = {
     enable = true;
     aliases = {
       amend = "commit --amend -m";
-      fixup = "!f(){ git reset --soft HEAD~\${1} && git commit --amend -C HEAD; };f";
-      loc   = "!f(){ git ls-files | ${rg} \"\\.\${1}\" | xargs wc -l; };f"; # lines of code
+      fixup =
+        "!f(){ git reset --soft HEAD~\${1} && git commit --amend -C HEAD; };f";
+      loc = ''
+        !f(){ git ls-files | ${rg} "\.''${1}" | xargs wc -l; };f''; # lines of code
       br = "branch";
       co = "checkout";
       st = "status";
-      ls = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate";
-      ll = "log --pretty=format:\"%C(yellow)%h%Cred%d\\\\ %Creset%s%Cblue\\\\ [%cn]\" --decorate --numstat";
+      ls = ''
+        log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate'';
+      ll = ''
+        log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat'';
       cm = "commit -m";
       ca = "commit -am";
       dc = "diff --cached";
@@ -49,19 +52,17 @@ let
       "*.metals"
       "*.metals.sbt"
       "*metals.sbt"
-      "*~"              # vi tempfile
-      "*.swap"          # vi tempfile
+      "*~" # vi tempfile
+      "*.swap" # vi tempfile
       "*.direnv"
-      "*.envrc"         # there is lorri, nix-direnv & simple direnv; let people decide
-      "*hie.yaml"       # ghcide files
-      "*.mill-version"  # used by metals
-      "*.jvmopts"       # should be local to every project
-      "*.jvmopts"       # should be local to every project
+      "*.envrc" # there is lorri, nix-direnv & simple direnv; let people decide
+      "*hie.yaml" # ghcide files
+      "*.mill-version" # used by metals
+      "*.jvmopts" # should be local to every project
+      "*.jvmopts" # should be local to every project
     ];
     includes = [
-      {
-        path = "configX.inc";
-      }
+      { path = "configX.inc"; }
       {
         # path = "configX/conditional.inc";
         condition = "gitdir:**/workspace-iohk/**/.git";
@@ -70,10 +71,9 @@ let
           user = {
             name = "Kayvan Kazeminejad";
             email = "kayvan.kazeminejad@iohk.io";
-            signing = {
-              key = "4BA73381BCAE8840";
-              signByDefault = true;
-            };
+            userName = "kayvank";
+            sshCommand = "ssh -i ~/.ssh/id_rsa_q2io";
+            signingkey = "4BA73381BCAE8840";
           };
         };
       }
@@ -85,20 +85,29 @@ let
           user = {
             name = "kayvan Kazeminejad";
             email = "kayvan@q2io.com";
-            signing = {
-              key = "D2B4E616C9524F86";
-              signByDefault = true;
-            };
+            userName = "kayvank";
+            sshCommand = "ssh -i ~/.ssh/id_rsa_q2io";
+            signingkey = "D2B4E616C9524F86";
           };
         };
       }
-        ];
-  signing = {
-    key = "D2B4E616C9524F86";
-      signByDefault = true;
-    };
+      {
+        condition = "gitdir:**/workspace-schwarzer-swan/**/.git";
+        contentSuffix = "gitconfig-schwarzer-swan";
+        contents = {
+          user = {
+            name = "Schwarzer Swan";
+            email = "schwarzer.swan@gmail.com";
+            userName = "schwarzer-swan";
+            sshCommand = "ssh -i ~/.ssh/schwazer_swan_rsa";
+            signingkey = "542015B83D61D66A";
+          };
+        };
+      }
+    ];
 
-    userEmail = "kayvan@q2io.com";
-    userName = "kayvank";
+    # signingkey = "D2B4E616C9524F86";
+    # userEmail = "kayvan@q2io.com";
+    # userName = "kayvank";
   };
 }
