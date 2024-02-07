@@ -16,6 +16,7 @@ let
     blueman              # GTK-based Bluetooth Manager
     # brave              # www browser, installed at system levele, no need to install it here.
     cmake
+    cowsay               # cow shell ouput
     docker-compose       # docker manager
     duf                  # disk utility
     direnv               # customize env per directory
@@ -38,11 +39,14 @@ let
     gnumake              # A tool to control the generation of non-source files from sources
     graphviz             # grapsh visualization tool
     gvfs                 # gnu Virtual Filesystem support library
+    # ipython
+    jupyter
     irony-server         # c/c++ minor mode, emacs
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
     libnotify            # notify-send command
     libreoffice          # mostly for the pdf editor
+    lsof                 # A tool to list open files
     multilockscreen      # fast lockscreen based on i3lock
     cinnamon.nemo        # file explorer
     neofetch             # command-line system information
@@ -52,8 +56,9 @@ let
     rclone              # sync with gdrive
     pa_applet            # pulseaudio applet for trayer
     pgadmin4             # postgres admin
+    pgformatter          # postgresql sql syntax beatifier
     polybar              # use with xmonad bar
-    python39Full         # pythong
+    python311Full         # pythong
     postgresql
     prettyping           # a nicer pingpdfmixtool
     ranger               # terminal file explorer
@@ -79,12 +84,17 @@ let
     xclip                # copy pate like mac does
     yarn                 # js build
     zip                  # zip archive
+    zeal                 # offline api docs
 
     # fixes the `ar` error required by cabal
     # binutils-unwrapped
   ];
   home.stateVersion = "22.05";
 
+  pythonPkgs = with pkgs.python311Packages;[
+    ipython
+    pip
+  ];
   gitPkgs = with pkgs.gitAndTools; [
     diff-so-fancy # git diff with colors
     git-crypt     # git files encryption
@@ -129,6 +139,7 @@ in
       defaultPkgs ++
       gitPkgs ++
       haskellPkgs ++
+      pythonPkgs ++
       xmonadPkgs ;
 
       sessionVariables = {

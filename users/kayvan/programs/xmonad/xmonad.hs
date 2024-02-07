@@ -84,6 +84,7 @@ myFocusedBorderColor = "#ff0000"
 myKeys conf@(XConfig {XMonad.modMask = modm}) =
   M.fromList $
     -- launch a terminal
+  -- see https://megamorf.gitlab.io/2018/12/16/set-audio-volume-from-command-line/
     [ ((noModMask, xF86XK_AudioLowerVolume), spawn "amixer -q set Master 5%- unmute"),
       ((noModMask, xF86XK_AudioRaiseVolume), spawn "amixer -q set Master  5%+ unmute"),
       ((noModMask, xF86XK_AudioMute), spawn "amixer -q set Master toggle"),
