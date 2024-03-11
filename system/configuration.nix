@@ -168,7 +168,7 @@ in {
 
     # Required by Cachix to be used as non-root user
     settings = {
-      trusted-users = [ "root" "kayvan" ];
+      trusted-users = [ "root" "kayvan" "@wheel"];
       auto-optimise-store = true;
     };
   };
