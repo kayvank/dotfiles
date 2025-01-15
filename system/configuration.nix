@@ -12,7 +12,8 @@ let
   '';
 in {
 
-  time.timeZone = "America/Los_Angeles";
+  ## time.timeZone = "America/Los_Angeles"; ## @home
+  time.timeZone = "Asia/Bangkok" ; ## Thailand
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.allow-import-from-derivation = true;
   nix = {
