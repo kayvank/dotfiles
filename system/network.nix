@@ -21,16 +21,12 @@
   };
 
   # Open ports in the firewall.
-  #
-  #
-#   networking.firewall = {
-#   enable = true;
-#   allowedTCPPorts = [ 8080 443 3000 ];
-#   allowedUDPPortRanges = [
-#     { from = 4000; to = 4007; }
-#     { from = 9990; to = 9999; }
-#   ];
-# };
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
+   networking.firewall = {
+   enable = true;
+   allowedTCPPorts = [ 8080 443 3000 ];
+   allowedUDPPortRanges = [
+     { from = 44440; to = 44449; }
+     { from = 33330; to = 33339; }
+   ];
+ };
 }

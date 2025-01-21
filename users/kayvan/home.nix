@@ -60,7 +60,7 @@ let
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
-    firefox
+    # firefox
     gcc                  # C/C++
     gh                   # github CLI tool
     gimp                 # gnu image manipulation program
