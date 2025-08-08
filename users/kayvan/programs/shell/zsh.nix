@@ -43,6 +43,7 @@ in
       theme = "robbyrussell" ; ## lambda
     };
 
-    initExtra   = zshConfig;
+    # initExtra   = zshConfig;
+    initContent   = zshConfig;
   };
 }

@@ -25,6 +25,7 @@ in {
       # defaultShell = "${pkgs.bash}/bin/bash";
       extraConfig = ''
         set -g status off
+        setw -g mode-keys vi
         setw -g mouse on
         bind-key | split-window -h
         bind-key - split-window

@@ -5,9 +5,13 @@
     fontconfig = {
       enable = true;
       defaultFonts = {
-        monospace = [ "Monospace" ];
-        sansSerif = [ "Source Sans Pro" ];
-        serif = [ "Source Serif Pro" ];
+        serif = [ "Gentium" ];
+        sansSerif = [ "Cantarell" ];
+        monospace = [ "Source Code Pro" ];
+        emoji = [ "Twitter Color Emoji" ];
+
+
+
       };
     };
     enableDefaultPackages = true;
@@ -17,7 +21,12 @@
       iosevka
       source-sans-pro
       source-serif-pro
-      (nerdfonts.override { fonts = [ "DroidSansMono" ]; })
+      source-code-pro
+      noto-fonts-color-emoji
+      twitter-color-emoji
+      gentiu
+      cantarell-fonts
+      jetbrains-mono
     ];
   };
 }

@@ -23,7 +23,7 @@
   # Open ports in the firewall.
    networking.firewall = {
    enable = true;
-   allowedTCPPorts = [ 8080 443 3000 ];
+   allowedTCPPorts = [ 8000 8080 443 3000 ];
    allowedUDPPortRanges = [
      { from = 44440; to = 44449; }
      { from = 33330; to = 33339; }

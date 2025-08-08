@@ -20,15 +20,69 @@ let
 
     ${pkgs.swww}/bin/swww img ${./wallpapers/saturn.jpg} &
   '';
+
+tex = (pkgs.texlive.combine {
+    inherit (pkgs.texlive)
+      adjustbox
+      amsmath
+      babel
+      capt-of
+      dvisvgm
+      dvipng # for preview and export as html
+      digestif
+      enumitem
+      # fontenc
+      fontawesome5
+      fira
+      fp
+      framed
+      geometry
+      graphicxpsd
+      pst-graphicx
+      hyperref
+      # inputenc
+      ifmtarg
+      jknapltx
+      latex-uni8
+      lipsum
+      listingsutf8
+      luainputenc
+      marvosym
+      microtype
+      mlmodern
+      paralist
+      pdfcol
+      pgf
+      pgfkeyx
+      rsfs
+      scheme-medium
+      tcolorbox
+      tikzfill
+      titlesec
+      titling
+      trimspaces
+      wrapfig
+      ucs
+      ulem
+      upquote
+      url
+      xcolor
+      xifthen
+    ;
+      #(setq org-latex-compiler "lualatex")
+      #(setq org-preview-latex-default-process 'dvisvgm)
+  });
+
   fontPkgs = with pkgs; [
     font-awesome # awesome fonts
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.space-mono
+    nerd-fonts.ubuntu-mono
+    nerd-fonts.symbols-only
+    nerd-fonts.geist-mono
+    nerd-fonts.inconsolata
+    nerd-fonts.iosevka
     material-design-icons # fonts with glyphs
-    (nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-        "Iosevka"
-      ];
-    })
   ];
 
   audioPkgs = with pkgs; [
@@ -40,6 +94,7 @@ let
   ];
 
   defaultPkgs = with pkgs; [
+    tex
     arandr               # simple GUI for xrandr
     mate.atril           # A simple multi-page document viewer
     aspell
@@ -52,6 +107,7 @@ let
     cmake
     code-cursor          # cursor ai tool
     cowsay               # cow shell ouput
+    # chromium             ## google open source browser
     docker-compose       # docker manager
     duf                  # disk utility
     devenv               # A simple multi-page document viewer
@@ -60,6 +116,7 @@ let
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
+    firefox-devedition
     # firefox
     gcc                  # C/C++
     gh                   # github CLI tool
@@ -67,12 +124,14 @@ let
     glow                 # terminal markdown viewer
     gnumake              # A tool to control the generation of non-source files from sources
     grim                 # screenshots
+    graphviz             # graph visualization
     grimblast            # screenshot program from hyprland
     gvfs                 # gnu Virtual Filesystem support library
     html-tidy            # html vlidator
     imv                  # image viewer
     ispell               # An interactive spell-checking program for Unix usec by emacs
     killall              # kill processes by name
+    lf                   # termina file manager in Go, like ranger
     libnotify            # notificationsk
     loupe                # image viewer
     lsof                 # A tool to list open files
@@ -89,11 +148,12 @@ let
     ripgrep              # fast grep
     sbcl                 # lisp compiler
     shfmt                # a shell parser and formatter
+    # signal-cli
+    signal-desktop
     sqlite               # db sqlite
     slack                # messaging client
     solc                 # Compiler for Ethereum smart contract language Solidity
     stylelint            # CSS linter
-    telegram-desktop
     tmate                # tmux like Terminal Sharing
     tree                 # display files in a tree view
     volumeicon           # volume icon for trayer
@@ -105,14 +165,19 @@ let
     vscode               # ms visual studio
     watchexec            # execute commands in response to file change
     wayfarer             # Screen recording for wayland
+    wezterm
     wl-clipboard         # clipboard support
     wofi                 # app launcher
-    xwaylandvideobridge  # screensharing bridge
+    # xwaylandvideobridge  # screensharing bridge
     zip                  # zip archive
+    unzip                  # zip archive
     zeal                 # offline api docs
+    zoom-us
+    emacsPackages.pdf-tools
 
   ] ++ fontPkgs ++ audioPkgs;
   home.stateVersion = "22.05";
+
 
   nodePackages = with pkgs.nodePackages; [
     cspell
@@ -246,12 +311,12 @@ in
   programs = {
     emacs = {
       enable = true;
-      package = pkgs.emacs29-gtk3;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+      package = pkgs.emacs30-gtk3;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
       extraPackages = epkgs: [
         epkgs.nix-mode
         epkgs.magit
         epkgs.emacsql
-        epkgs.emacsql-sqlite
+        # epkgs.emacsql-sqlite
       ];
     };
     htop = {
