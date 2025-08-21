@@ -27,9 +27,9 @@ tex = (pkgs.texlive.combine {
       amsmath
       babel
       capt-of
+      digestif
       dvisvgm
       dvipng # for preview and export as html
-      digestif
       enumitem
       # fontenc
       fontawesome5
@@ -108,6 +108,7 @@ tex = (pkgs.texlive.combine {
     code-cursor          # cursor ai tool
     cowsay               # cow shell ouput
     # chromium             ## google open source browser
+    discord
     docker-compose       # docker manager
     duf                  # disk utility
     devenv               # A simple multi-page document viewer
