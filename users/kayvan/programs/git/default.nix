@@ -13,18 +13,18 @@ in {
     includes = [
       {
         ##  include for all repositories inside workspace-iohk
-        condition = "gitdir:$HOME/dev/workspaces/workspace-iohk/";
+        condition = "gitdir:$HOME/dev/workspaces/iohk/";
         path = "$HOME/.config/dotfiles/git-configs/iohk.inc";
       }
 
       {
         ##  include for all repositories inside workspace-q2io
-        condition = "gitdir:$HOME/dev/worksapces/workspace-q2io/";
+        condition = "gitdir:$HOME/dev/worksapces/q2io/";
         path = "$HOME/.config/dotfiles/git-configs/q2io.inc";
       }
       {
         ##  include for all repositories inside workspace-schwarzer-swan
-        condition = "gitdir:$HOME/dev/workspaces/workspace-schwarzer-swan/";
+        condition = "gitdir:$HOME/dev/workspaces/schwarzer-swan/";
         path = "$HOME/.config/dotfiles/git-configs/schwarzer-swan.inc";
       }
       {

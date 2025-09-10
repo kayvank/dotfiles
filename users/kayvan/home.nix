@@ -95,6 +95,7 @@ tex = (pkgs.texlive.combine {
 
   defaultPkgs = with pkgs; [
     tex
+    asdf-vm
     arandr               # simple GUI for xrandr
     mate.atril           # A simple multi-page document viewer
     aspell
@@ -103,7 +104,6 @@ tex = (pkgs.texlive.combine {
 
 	  bemenu #  	#App launcher
     brightnessctl        # Xbacklight (Hardware Level)
-    nemo        # file explorer
     cmake
     code-cursor          # cursor ai tool
     cowsay               # cow shell ouput
@@ -136,8 +136,11 @@ tex = (pkgs.texlive.combine {
     libnotify            # notificationsk
     loupe                # image viewer
     lsof                 # A tool to list open files
+    nemo        # file explorer
+    mimeo
     mp4v2                # Provides functions to read, create, and modify mp4 files
     nerdfetch            # command-line system information
+    nil                  # yet another language server for nix
     nixpkgs-fmt          # format nix files
     nix-prefetch-git
     nix-search-cli       # faster nix serach client
