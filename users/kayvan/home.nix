@@ -117,8 +117,7 @@ tex = (pkgs.texlive.combine {
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
-    firefox-devedition
-    # firefox
+    # firefox-devedition
     gcc                  # C/C++
     gh                   # github CLI tool
     gimp                 # gnu image manipulation program
@@ -144,6 +143,7 @@ tex = (pkgs.texlive.combine {
     nixpkgs-fmt          # format nix files
     nix-prefetch-git
     nix-search-cli       # faster nix serach client
+    parted               # disk partion tool
     pa_applet            # pulseaudio applet for trayer
     pgformatter          # postgresql sql syntax beatifier
     prettyping           # like ping
