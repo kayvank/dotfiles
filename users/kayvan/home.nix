@@ -26,7 +26,12 @@ tex = (pkgs.texlive.combine {
       adjustbox
       amsmath
       babel
+      bbm
+      bbold
+      booktabs
       capt-of
+      cleveref
+      comment
       digestif
       dvisvgm
       dvipng # for preview and export as html
@@ -37,6 +42,8 @@ tex = (pkgs.texlive.combine {
       fp
       framed
       geometry
+      graphicxbox
+      graphicx-psmin
       graphicxpsd
       pst-graphicx
       hyperref
@@ -50,13 +57,17 @@ tex = (pkgs.texlive.combine {
       marvosym
       microtype
       mlmodern
+      multirow
       paralist
       pdfcol
       pgf
       pgfkeyx
       rsfs
+      savetrees
       scheme-medium
+      stmaryrd
       tcolorbox
+      threeparttable
       tikzfill
       titlesec
       titling
@@ -68,6 +79,7 @@ tex = (pkgs.texlive.combine {
       url
       xcolor
       xifthen
+      xstring
     ;
       #(setq org-latex-compiler "lualatex")
       #(setq org-preview-latex-default-process 'dvisvgm)
@@ -117,7 +129,7 @@ tex = (pkgs.texlive.combine {
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
-    # firefox-devedition
+    firefox-devedition
     gcc                  # C/C++
     gh                   # github CLI tool
     gimp                 # gnu image manipulation program
@@ -127,9 +139,11 @@ tex = (pkgs.texlive.combine {
     graphviz             # graph visualization
     grimblast            # screenshot program from hyprland
     gvfs                 # gnu Virtual Filesystem support library
+    hexxy                # hexdump like xxd but nicer
     html-tidy            # html vlidator
     imv                  # image viewer
     ispell               # An interactive spell-checking program for Unix usec by emacs
+    just                 # Like Make. Handy way to save and run project-specific commands
     killall              # kill processes by name
     lf                   # termina file manager in Go, like ranger
     libnotify            # notificationsk
@@ -138,11 +152,14 @@ tex = (pkgs.texlive.combine {
     nemo        # file explorer
     mimeo
     mp4v2                # Provides functions to read, create, and modify mp4 files
+    multipass            # Ubuntu VMs on demand for any worksation
     nerdfetch            # command-line system information
     nil                  # yet another language server for nix
     nixpkgs-fmt          # format nix files
     nix-prefetch-git
     nix-search-cli       # faster nix serach client
+    nodejs_24
+    pandoc               # Conversion between documents
     parted               # disk partion tool
     pa_applet            # pulseaudio applet for trayer
     pgformatter          # postgresql sql syntax beatifier

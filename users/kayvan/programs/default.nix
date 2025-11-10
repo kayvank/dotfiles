@@ -1,13 +1,14 @@
 [
-  ./rofi ## menu
-  ./shell
-  ./kitty ## terminal
   ./git
-  ./networkmanager
-  ./waybar
   ./kanshi
-  ./neovim
+  ./kitty ## terminal
   ./hyprlock
   ./hyprpaper
+  ./neovim
+  ./networkmanager
+  ./rofi ## menu
+  ./shell
+  ./tmux
+  ./waybar
   ./waybar
 ]

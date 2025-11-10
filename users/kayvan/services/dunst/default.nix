@@ -22,7 +22,7 @@ in
         frame_width = 3;
         frame_color = "${base00}";
         separator_color = "frame";
-        font = "JetBrainsMono Nerd Font 10";
+        # font = "JetBrainsMono Nerd Font 10";
         line_height = 4;
         idle_threshold = 120;
         markup = "full";

@@ -17,7 +17,7 @@ in
       dc        = "docker-compose";
       dps       = "docker-compose ps";
       dcd       = "docker-compose down --remove-orphans";
-      emc       = "nohup emacsclient -c &> /dev/null &";
+      emc       = "nohup emacsclient -c &> /desv/null &";
       emd       = "emacs --daemon";
       ping      = "prettyping";
       pbcopy    = "wl-copy";
@@ -27,7 +27,8 @@ in
       wdev      = "cd ~/dev";
       wwork     = "cd ~/dev/workspaces";
       tmx       = "tmux new-session -s $USER-`date +%s`";
-      kssh       = "kitten ssh";
+      kssh      = "kitten ssh";
+      xxd       = "hexxy";
     };
     sessionVariables = { ## shell env vars are set here
       "EDITOR" = "vim";
@@ -35,7 +36,7 @@ in
       "HISTFILESIZE" = "1000000000"; # Bigger history files for all users
       "HISTSIZE" = "1000000000";
       "HISTTIMEFORMAT"="[%F %T] ";
-      "PATH" = "$PATH:/home/kayvan/bin";
+      # "PATH" = "$PATH:/home/kayvan/bin:/home/kayvan/.local/share/npm_global/bin";
       DIRENV_ALLOW_NIX=1;
     };
     oh-my-zsh = {

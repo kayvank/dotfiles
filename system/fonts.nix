@@ -18,15 +18,19 @@
     fontDir.enable = true;
     packages = with pkgs; [
       font-awesome
-      iosevka
+      texlivePackages.jetbrainsmono-otf
+      source-sans
       source-sans-pro
       source-serif-pro
       source-code-pro
+      material-design-icons
       noto-fonts-color-emoji
       twitter-color-emoji
       gentiu
       cantarell-fonts
-      jetbrains-mono
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.iosevka
+      nerd-fonts.ubuntu-sans
     ];
   };
 }
