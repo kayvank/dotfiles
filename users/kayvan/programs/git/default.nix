@@ -6,9 +6,14 @@ in {
   programs.git = {
     signing.key = "D2B4E616C9524F86";
     signing.signByDefault=true;
-    userEmail = "kayvan@q2io.com";
-    userName = "kayvank";
+    settings = {
+      user.email = "kayvan@q2io.com";
+      user.name = "kayvank";
+    };
+
+
     enable = true;
+    lfs.enable = true;
     # extraConfig = gitConfig;
     includes = [
       {

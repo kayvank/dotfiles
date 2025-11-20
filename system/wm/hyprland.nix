@@ -3,15 +3,13 @@
 {
   programs.hyprland = {
   enable=true;
-  package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
   xwayland.enable = true;
+  withUWSM = false;
+  portalPackage = pkgs.xdg-desktop-portal-hyprland; # xdph none git
   };
   environment.sessionVariables = {
-   WLR_NO_HARDWARE_CURSORS = "1";
    NIXOS_OZONE_WL = "1";
-  };
-  xdg.portal = {
-   enable = true;
-   extraPortals = [pkgs.xdg-desktop-portal-gtk];
+   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
   };
 }

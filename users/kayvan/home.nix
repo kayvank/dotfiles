@@ -16,7 +16,7 @@ let
     ${pkgs.waybar}/bin/waybar &
     ${pkgs.swww}/bin/swww init &
 
-    sleep 1
+/   sleep 1
 
     ${pkgs.swww}/bin/swww img ${./wallpapers/saturn.jpg} &
   '';
@@ -116,6 +116,7 @@ tex = (pkgs.texlive.combine {
 
 	  bemenu #  	#App launcher
     brightnessctl        # Xbacklight (Hardware Level)
+    buku                # bookmark manager
     cmake
     code-cursor          # cursor ai tool
     cowsay               # cow shell ouput
@@ -125,11 +126,14 @@ tex = (pkgs.texlive.combine {
     duf                  # disk utility
     devenv               # A simple multi-page document viewer
     direnv               # customize env per directory
+    evince               # document viewer, pdf viewer
     eza                  # a better `ls`
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
-    firefox-devedition
+    # firefox-devedition
+    firefox             # web browser
+    flamegraph           # performance profiling
     gcc                  # C/C++
     gh                   # github CLI tool
     gimp                 # gnu image manipulation program
@@ -146,13 +150,14 @@ tex = (pkgs.texlive.combine {
     just                 # Like Make. Handy way to save and run project-specific commands
     killall              # kill processes by name
     lf                   # termina file manager in Go, like ranger
+    librewolf            # privacy focused browser, fork of firefox
     libnotify            # notificationsk
     loupe                # image viewer
     lsof                 # A tool to list open files
     nemo        # file explorer
     mimeo
     mp4v2                # Provides functions to read, create, and modify mp4 files
-    multipass            # Ubuntu VMs on demand for any worksation
+    # multipass            # Ubuntu VMs on demand for any worksation
     nerdfetch            # command-line system information
     nil                  # yet another language server for nix
     nixpkgs-fmt          # format nix files
@@ -171,6 +176,7 @@ tex = (pkgs.texlive.combine {
     shfmt                # a shell parser and formatter
     # signal-cli
     signal-desktop
+    speedtest-cli
     sqlite               # db sqlite
     slack                # messaging client
     solc                 # Compiler for Ethereum smart contract language Solidity
@@ -197,28 +203,7 @@ tex = (pkgs.texlive.combine {
     emacsPackages.pdf-tools
 
   ] ++ fontPkgs ++ audioPkgs;
-  home.stateVersion = "22.05";
 
-
-  nodePackages = with pkgs.nodePackages; [
-    cspell
-    js-beautify
-  ];
-
-  gitPkgs = with pkgs.gitAndTools; [
-    diff-so-fancy # git diff with colors
-    git-crypt     # git files encryption
-    hub           # github command-line client
-    tig           # diff and commit view
-  ];
-
-  haskellPkgs = with pkgs.haskellPackages; [
-    cabal-install           # package manager
-    # haskell-language-server # haskell IDE (ships with ghcide)
-    hoogle                  # documentation
-    implicit-hie
-    # ghc
-  ];
   pythonPkgs = [
     (pkgs.python3.withPackages (python-pkgs: [
       python-pkgs.pandas
@@ -234,7 +219,6 @@ tex = (pkgs.texlive.combine {
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
 hyprpaper  = "${pkgs.hyprpaper}/bin/hyprpaper";
 
-scripts = import ./wm/hyprland/scripts.nix { inherit pkgs; } ;
 
   workspaceConf = { monitor }: ''
     workspace=1,persistent:true,monitor:${monitor}
@@ -264,8 +248,6 @@ in
   home = {
     packages =
       defaultPkgs ++
-      gitPkgs ++
-      haskellPkgs ++
       pythonPkgs;
 
       sessionVariables = {

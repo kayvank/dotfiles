@@ -17,7 +17,6 @@
     mako # notification system developed by swaywm maintainer
     pciutils
     qemu
-    rofi-wayland
     slurp # screenshot functionality
     swww # wallpaper
     udiskie
