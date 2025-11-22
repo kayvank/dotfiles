@@ -21,69 +21,6 @@ let
     ${pkgs.swww}/bin/swww img ${./wallpapers/saturn.jpg} &
   '';
 
-tex = (pkgs.texlive.combine {
-    inherit (pkgs.texlive)
-      adjustbox
-      amsmath
-      babel
-      bbm
-      bbold
-      booktabs
-      capt-of
-      cleveref
-      comment
-      digestif
-      dvisvgm
-      dvipng # for preview and export as html
-      enumitem
-      # fontenc
-      fontawesome5
-      fira
-      fp
-      framed
-      geometry
-      graphicxbox
-      graphicx-psmin
-      graphicxpsd
-      pst-graphicx
-      hyperref
-      # inputenc
-      ifmtarg
-      jknapltx
-      latex-uni8
-      lipsum
-      listingsutf8
-      luainputenc
-      marvosym
-      microtype
-      mlmodern
-      multirow
-      paralist
-      pdfcol
-      pgf
-      pgfkeyx
-      rsfs
-      savetrees
-      scheme-medium
-      stmaryrd
-      tcolorbox
-      threeparttable
-      tikzfill
-      titlesec
-      titling
-      trimspaces
-      wrapfig
-      ucs
-      ulem
-      upquote
-      url
-      xcolor
-      xifthen
-      xstring
-    ;
-      #(setq org-latex-compiler "lualatex")
-      #(setq org-preview-latex-default-process 'dvisvgm)
-  });
 
   fontPkgs = with pkgs; [
     font-awesome # awesome fonts
@@ -106,7 +43,7 @@ tex = (pkgs.texlive.combine {
   ];
 
   defaultPkgs = with pkgs; [
-    tex
+    texlive.combined.scheme-full  # latex
     asdf-vm
     arandr               # simple GUI for xrandr
     mate.atril           # A simple multi-page document viewer
@@ -131,7 +68,6 @@ tex = (pkgs.texlive.combine {
     fd                   # "find" for files
     feh                  # image viewer
     file                 # light weight image viewer
-    # firefox-devedition
     firefox             # web browser
     flamegraph           # performance profiling
     gcc                  # C/C++
@@ -187,15 +123,12 @@ tex = (pkgs.texlive.combine {
     virt-manager         # mange vms
     virt-viewer          # view vmx
     virtiofsd
-
-    # vivaldi              # brwoser
     vscode               # ms visual studio
     watchexec            # execute commands in response to file change
     wayfarer             # Screen recording for wayland
     wezterm
     wl-clipboard         # clipboard support
     wofi                 # app launcher
-    # xwaylandvideobridge  # screensharing bridge
     zip                  # zip archive
     unzip                  # zip archive
     zeal                 # offline api docs
@@ -296,7 +229,6 @@ in
   nixpkgs.config = {
     allowUnfree = true;
     allowBroken = true;
-    # packageOverrides = p: {nur = import (import pinned/nur.nix) { inherit pkgs; };};
   };
 
   # Let Home Manager install and manage itself.
@@ -319,7 +251,6 @@ in
         epkgs.nix-mode
         epkgs.magit
         epkgs.emacsql
-        # epkgs.emacsql-sqlite
       ];
     };
     htop = {
@@ -333,44 +264,9 @@ in
     direnv = {
       enable = true;
       enableZshIntegration = true;
-      # enableBashIntegration = true;
       nix-direnv.enable = true;
     };
     jq.enable = true;
-    #
-    # vscode remote gets mad at the ~/.ssh/config symlink from nix. Thus hand writting this for now
-    #
-    # ssh = {enable = true;
-      # extraConfig = ''
-      #   Host *
-      #   ControlMaster auto
-      #   ControlPath /tmp/%r@%h:%p
-      #   ControlPersist 2h
-      #   # Read more about SSH config files: https://linux.die.net/man/5/ssh_config
-      #   #
-      #   Host saturn-vm
-      #   HostName 192.168.122.156
-      #   User kayvan
-      #   #
-      #   Host github.com
-      #   HostName github.com
-      #   User git
-      #   IdentityFile ~/.ssh/id_rsa_q2io
-      #   IdentitiesOnly yes
-
-      #   Host github.com-schwarzer-swan
-      #   HostName github.com
-      #   User schwarzer-swan
-      #   IdentityFile ~/.ssh/schwarzer_swan_rsa
-      #   IdentitiesOnly yes
-      # '';
-    # };
-    # zoxide = {
-    #   enable = true;
-    #   # enableBashIntegration = true;
-    #   enableZshIntegration = true;
-    #   options = [];
-    # };
   }; ## program
 
 
@@ -401,3 +297,4 @@ in
     xwayland.enable = true;
   };
 }
+

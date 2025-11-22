@@ -1,6 +1,11 @@
 { config, lib, pkgs, ... }:
 
 {
+  xdg.portal = {
+    enable = true;
+    config.common.default = ["hyprland"];
+  };
+
   programs = {
     light.enable = true;
     mtr.enable = true;

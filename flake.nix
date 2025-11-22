@@ -15,6 +15,13 @@
     iohk-hix = {
       url = "github:input-output-hk/haskell.nix";
     };
+        nur = {
+            url = "github:nix-community/NUR";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        firefox-addons = {
+          url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+        };
   };
 
   outputs =
@@ -25,6 +32,8 @@
   , iohk-hix
   , hyprland
   , hyprland-plugins
+  , nur
+  , firefox-addons
   , ... } @ inputs:
   let
     system = "x86_64-linux";
@@ -32,6 +41,7 @@
     pkgs = import nixpkgs {
       inherit system;
       config = { allowUnfree = true; };
+      overlays = [nur.overlay];
     };
     lib = nixpkgs.lib;
 

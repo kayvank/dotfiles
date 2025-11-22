@@ -29,6 +29,10 @@ in
       tmx       = "tmux new-session -s $USER-`date +%s`";
       kssh      = "kitten ssh";
       xxd       = "hexxy";
+      firefox-iohk = "firefox -P 'iohk' ";
+      firefox-q2io = "firefox -P 'q2io' ";
+      firefox-kayvan = "firefox -P 'kayvan' ";
+      firefox-schwarzer-swan = "firefox -P 'schwarzer-swan' ";
     };
     sessionVariables = { ## shell env vars are set here
       "EDITOR" = "vim";

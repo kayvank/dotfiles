@@ -10,5 +10,6 @@
   ./shell
   ./tmux
   ./waybar
-  ./waybar
+  ./xdg-defaults.nix
+  ./firefox
 ]
