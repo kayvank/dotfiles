@@ -23,6 +23,7 @@ let
           darkreader
           ublock-origin
           vimium
+          multi-account-containers
         ];
 
   # extensions = with inputs.firefox-addons; [

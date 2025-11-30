@@ -137,6 +137,10 @@ let
 
   ] ++ fontPkgs ++ audioPkgs;
 
+  haskellPkgs = [
+    pkgs.haskellPackages.hoogle
+  ];
+
   pythonPkgs = [
     (pkgs.python3.withPackages (python-pkgs: [
       python-pkgs.pandas
@@ -181,6 +185,7 @@ in
   home = {
     packages =
       defaultPkgs ++
+      haskellPkgs ++
       pythonPkgs;
 
       sessionVariables = {

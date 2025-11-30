@@ -5,5 +5,6 @@
   ./hypridle
   ./flameshot
   ./dunst
+  ./hoogle
   # ./signald
 ]
