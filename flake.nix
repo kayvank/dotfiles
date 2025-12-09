@@ -22,6 +22,7 @@
         firefox-addons = {
           url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
         };
+        swww.url = "github:LGFae/swww";
   };
 
   outputs =
@@ -34,6 +35,7 @@
   , hyprland-plugins
   , nur
   , firefox-addons
+  , swww
   , ... } @ inputs:
   let
     system = "x86_64-linux";

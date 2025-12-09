@@ -42,6 +42,12 @@ in {
         unbind-key -T copy-mode-vi ]
         bind-key -T copy-mode-vi ] send-keys -X copy-selection
       '';
+      plugins = with pkgs.tmuxPlugins; [
+        sensible
+        resurrect
+        catppuccin
+        yank
+      ];
     };
   };
 }

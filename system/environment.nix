@@ -25,6 +25,7 @@
     wget
     wl-clipboard # wl-copy and wl-paste for copy/paste from stdin / stdout
     wofi
+    xclip
     xorg.xbacklight
   ];
 }
