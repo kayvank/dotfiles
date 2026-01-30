@@ -16,4 +16,5 @@
     boot.kernelModules = [ "kvm-intel" "btqca" "btusb" "hci_qca" "hci_uart" "sg" "btintel" ];
     boot.extraModulePackages = [ ];
 
+    boot.kernelParams = [ "nvidia_drm.modeset=1" "nvidia_drm.fbdev=1" ];
 }

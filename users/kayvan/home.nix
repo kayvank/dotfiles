@@ -49,6 +49,7 @@ let
     mate.atril           # A simple multi-page document viewer
     aspell
     aspellDicts.en       # Aspell dictionary for English
+    bfg-repo-cleaner     # git repository cleaner
     bgs # Extremely fast and small background setter for X
 
 	  bemenu #  	#App launcher
@@ -89,6 +90,7 @@ let
     librewolf            # privacy focused browser, fork of firefox
     libnotify            # notificationsk
     loupe                # image viewer
+    lshw                 # get display info
     lsof                 # A tool to list open files
     nemo        # file explorer
     mimeo
@@ -110,19 +112,20 @@ let
     ripgrep              # fast grep
     sbcl                 # lisp compiler
     shfmt                # a shell parser and formatter
-    # signal-cli
     signal-desktop
-    speedtest-cli
-    sqlite               # db sqlite
     slack                # messaging client
+    speedtest-cli
+    spotify              # music streaming service
+    sqlite               # db sqlite
     solc                 # Compiler for Ethereum smart contract language Solidity
     stylelint            # CSS linter
     tmate                # tmux like Terminal Sharing
     tree                 # display files in a tree view
-    volumeicon           # volume icon for trayer
+    vifm
     virt-manager         # mange vms
     virt-viewer          # view vmx
     virtiofsd
+    volumeicon           # volume icon for trayer
     vscode               # ms visual studio
     watchexec            # execute commands in response to file change
     wayfarer             # Screen recording for wayland
@@ -192,7 +195,7 @@ in
         DISPLAY = ":0";
         EDITOR = "vim";
         NIXOS_OZONE_WL = 1;
-        MOZ_ENABLE_WAYLAND = 1;
+        MOZ_ENABLE_WAYLAND = "1";
         XDG_CURRENT_DESKTOP = "Hyprland";
         XDG_SESSION_DESKTOP = "Hyprland";
         XDG_SESSION_TYPE = "wayland";
@@ -288,18 +291,19 @@ in
       bindl=,XF86AudioMute,exec,${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle
       bindl=,Print,exec,${screenCapture}
       monitor = , preferred, auto, 1
- ${workspaceConf { monitor = ", preferred, auto, 1"; }}
-
+      ${workspaceConf { monitor = ", preferred, auto, 1"; }}
       exec-once=${hyprpaper}
       exec-once=${pkgs.blueman}/bin/blueman-applet
       exec-once=${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator
     '';
+
     plugins = [ ];
+
     systemd = {
       enable = true;
       variables = [ "--all" ];
     };
-    xwayland.enable = true;
+    # xwayland.enable = true;
   };
 }
 

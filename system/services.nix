@@ -2,7 +2,7 @@
 
 {
   services = {
-
+    xserver.videoDrivers = ["nvidia"];
     gnome.gnome-keyring.enable = false;
 
     upower.enable = true;

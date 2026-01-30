@@ -29,10 +29,10 @@ in
       tmx       = "tmux new-session -s $USER-`date +%s`";
       kssh      = "kitten ssh";
       xxd       = "hexxy";
-      firefox-iohk = "firefox -P 'iohk' ";
-      firefox-q2io = "firefox -P 'q2io' ";
-      firefox-kayvan = "firefox -P 'kayvan' ";
-      firefox-schwarzer-swan = "firefox -P 'schwarzer-swan' ";
+      firefox-iohk = "nohup firefox -P 'iohk' 2>&1 > /dev/null &";
+      firefox-q2io = "nohup firefox -P 'q2io'  2>&1 > /dev/null &";
+      firefox-kayvan = "nohup firefox -P 'kayvan' 2>&1 > /dev/null &";
+      firefox-schwarzer-swan = "nonup firefox -P 'schwarzer-swan' 2>&1 > /dev/null &";
     };
     sessionVariables = { ## shell env vars are set here
       "EDITOR" = "vim";

@@ -3,8 +3,6 @@
   ./networkmanager
   ./nixos-vscode-ssh-fix
   ./hypridle
-  ./flameshot
   ./dunst
   ./hoogle
-  # ./signald
 ]
