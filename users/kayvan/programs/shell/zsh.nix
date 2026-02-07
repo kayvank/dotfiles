@@ -11,6 +11,7 @@ in
 
   programs.zsh = {
     enable = true;
+    dotDir = "${config.xdg.configHome}/zsh";
     shellAliases = {
       # cat     = "bat";
       config    = "git --git-dir=$HOME/.cfg/ --work-tree=$HOME";

@@ -9,6 +9,7 @@
     dict
     dunst
     git
+    go
     grim # screenshot functionality
     home-manager
     kitty

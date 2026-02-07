@@ -7,7 +7,7 @@
   #shift + g go to bottom of the file
   #g + g go to start of the file
   #shift + up/down arrow scroll faster
-  programs.neovim =
+  programs.neovim.initLua =
     let
       toLua = str: "lua << EOF\n${str}\nEOF\n";
       toLuaFile = file: "lua << EOF\n${builtins.readFile file}\nEOF\n";
