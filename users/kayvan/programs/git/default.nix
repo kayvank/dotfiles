@@ -9,6 +9,7 @@ in {
     settings = {
       user.email = "kayvan@q2io.com";
       user.name = "kayvank";
+      init.defaultBranch = "main";
     };
 
 

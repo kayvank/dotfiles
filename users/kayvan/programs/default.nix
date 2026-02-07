@@ -10,6 +10,6 @@
   ./shell
   ./tmux
   ./waybar
-  ./xdg-defaults.nix
+  # ./xdg-defaults.nix
   ./firefox
 ]
