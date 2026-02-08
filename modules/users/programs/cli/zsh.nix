@@ -11,6 +11,23 @@ in
 
   programs.zsh = {
     enable = true;
+
+
+    autosuggestion.enable = true;
+    syntaxHighlighting = {
+      enable = true;
+      highlighters = ["main" "brackets" "pattern" "regexp" "root" "line"];
+    };
+    historySubstringSearch.enable = true;
+
+    history = {
+      ignoreDups = true;
+      save = 10000;
+      size = 10000;
+    };
+
+
+
     dotDir = "${config.xdg.configHome}/zsh";
     shellAliases = {
       # cat     = "bat";
