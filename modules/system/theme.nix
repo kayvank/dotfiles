@@ -16,7 +16,7 @@
   # Avoid hard overrides so tools like nwg-look can preview/apply themes dynamically.
   environment.variables = {
     GTK2_RC_FILES = "${pkgs.gnome-themes-extra}/share/themes/Adwaita-dark/gtk-2.0/gtkrc"; # GTK2 fallback only
-    QT_QPA_PLATFORMTHEME = "gtk3"; # Qt apps follow GTK portal/theme
+    # QT_QPA_PLATFORMTHEME = "gtk3"; # Qt apps follow GTK portal/theme
   };
 
   # Cursor defaults for XDG/Wayland sessions

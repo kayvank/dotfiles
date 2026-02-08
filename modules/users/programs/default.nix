@@ -1,14 +1,10 @@
 [
-  ./git
   ./kanshi
-  ./kitty ## terminal
+  ./cli
   ./hyprlock
   ./hyprpaper
-  ./neovim
   ./networkmanager
   ./rofi ## menu
-  ./shell
-  ./tmux
   ./waybar
   # ./xdg-defaults.nix
   ./firefox

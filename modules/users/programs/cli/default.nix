@@ -3,6 +3,8 @@
 
   imports = [
     ./zsh.nix
-    ./fish
+    ./tmux
+    ./kitty
+    ./git
   ];
 }

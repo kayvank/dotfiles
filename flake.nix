@@ -26,10 +26,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs"; ## use our nixpkgs instead of HM one
     };
-    iohk-hix = {
-      url = "github:input-output-hk/haskell.nix";
-    };
-        nur = {
+    nur = {
             url = "github:nix-community/NUR";
             inputs.nixpkgs.follows = "nixpkgs";
         };
@@ -42,6 +39,11 @@
   outputs = inputs@{ self, ...}:
 
   let
+    host = "saturn-iohk";
+    username = "kayvan";
+    useremail = "kayvan@q2io.com";
+    profile = "nvidia-laptop";
+
     system = "x86_64-linux";
 
       # create patched nixpkgs
@@ -83,21 +85,20 @@
       # configure lib
       lib = inputs.nixpkgs.lib;
 
-      # create a list of all directories inside of ./hosts
-      # every directory in ./hosts has config for that machine
-      hosts = builtins.filter (x: x != null) (
-        lib.mapAttrsToList (name: value: if (value == "directory") then name else null) (
-          builtins.readDir ./hosts
-        )
-      );
-
   in {
     homeManagerConfigurations = {
       kayvan = inputs.home-manager.lib.homeManagerConfiguration {
-      extraSpecialArgs = { inherit inputs; };
+      extraSpecialArgs = {
+        inherit inputs;
+        inherit host;
+        inherit username;
+        inherit useremail;
+        inherit profile;
+      };
+       # extraSpecialArgs = { inherit inputs; };
         pkgs = inputs.nixpkgs.legacyPackages.${system};
         modules = [
-          ./modules/users/kayvan/home.nix
+          ./modules/users/home.nix
           {
             home = {
               username = "kayvan";
@@ -112,8 +113,15 @@
     nixosConfigurations = {
       saturn-iohk = lib.nixosSystem { ## gets all the system stuff by hostname
       inherit system;
-      specialArgs = { inherit inputs; };
+      specialArgs = {
+        inherit inputs;
+        inherit host;
+        inherit username;
+        inherit useremail;
+        inherit profile;
+      };
       modules = [
+        inputs.stylix.nixosModules.stylix
         ./modules/system/configuration.nix
       ];
       };

@@ -200,7 +200,7 @@ in
         XDG_SESSION_DESKTOP = "Hyprland";
         XDG_SESSION_TYPE = "wayland";
         GDK_BACKEND = "wayland,x11";
-        QT_QPA_PLATFORM = "wayland;xcb";
+        # QT_QPA_PLATFORM = "wayland;xcb";
       };
   };
 
