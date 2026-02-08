@@ -34,13 +34,17 @@ in {
     ./boot.nix
     ./cache.nix
     ./environment.nix
+    ./fonts.nix
     ./greetd.nix
     ./network.nix
+    ./nvidia-drivers.nix
+    ./nvidia-prime-drivers.nix
     ./opengl.nix
     ./printing.nix
     ./programs.nix
     ./security.nix
     ./services.nix
+    ./theme.nix
     # ./sound.nix
     ./users.nix
     ./virtualisation.nix

@@ -1,36 +1,50 @@
-{ config, lib, pkgs, ... }:
-
-{
-   fonts = {
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "Gentium" ];
-        sansSerif = [ "Cantarell" ];
-        monospace = [ "Source Code Pro" ];
-        emoji = [ "Twitter Color Emoji" ];
-
-
-
-      };
-    };
-    enableDefaultPackages = true;
-    fontDir.enable = true;
+{pkgs, ... }: {
+  fonts = {
     packages = with pkgs; [
+      dejavu_fonts
+      fira-code
+      fira-code-symbols
       font-awesome
-      texlivePackages.jetbrainsmono-otf
-      source-sans
-      source-sans-pro
-      source-serif-pro
-      source-code-pro
-      material-design-icons
+      hackgen-nf-font
+      iosevka
+      nerd-fonts.iosevka-term
+      nerd-fonts.iosevka-term-slab
+      ibm-plex
+      inter
+      lilex
+      material-icons
+      material-symbols
+      maple-mono.NF
+      meslo-lg
+      jetbrains-mono
+      material-icons
+      maple-mono.NF
+      minecraftia
+      nerd-fonts.im-writing
+      nerd-fonts.blex-mono
+      nerd-fonts.caskaydia-cove
+      nerd-fonts.caskaydia-mono
+      nerd-fonts.code-new-roman
+      noto-fonts
       noto-fonts-color-emoji
-      twitter-color-emoji
-      gentiu
-      cantarell-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-monochrome-emoji
+      nerd-fonts.hack
       nerd-fonts.jetbrains-mono
+      nerd-fonts.im-writing
       nerd-fonts.iosevka
-      nerd-fonts.ubuntu-sans
+      nerd-fonts.lilex
+      nerd-fonts.meslo-lg
+      nerd-fonts.fira-mono
+      nerd-fonts.space-mono
+      nerd-fonts.ubuntu
+      powerline-fonts
+      roboto
+      roboto-mono
+      symbola
+      terminus_font
+      victor-mono
     ];
   };
 }
