@@ -22,7 +22,7 @@
   # Cursor defaults for XDG/Wayland sessions
   environment.sessionVariables = {
     XCURSOR_THEME = "Bibata-Modern-Classic";
-    XCURSOR_SIZE = "24";
+    XCURSOR_SIZE = "20";
   };
 
   # Set system dconf defaults so new users prefer dark by default.

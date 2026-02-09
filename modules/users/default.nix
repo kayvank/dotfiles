@@ -157,7 +157,8 @@ let
   wpctl = "${pkgs.wireplumber}/bin/wpctl";
   gblast = "${pkgs.grimblast}/bin/grimblast";
   hyprlock = "${pkgs.hyprlock}/bin/hyprlock";
-hyprpaper  = "${pkgs.hyprpaper}/bin/hyprpaper";
+  hyprctl = "${pkgs.hyprland}/bin/hyprctl";
+  hyprpaper = "${pkgs.hyprpaper}/bin/hyprpaper";
 
 
   workspaceConf = { monitor }: ''
@@ -178,7 +179,9 @@ in
 
   programs.home-manager.enable = true;
 
-  imports = (import ./programs) ++ (import ./services);
+  imports =
+    (import ./programs) ++
+    (import ./services);
 
   xdg = {
     inherit configHome;
@@ -240,6 +243,17 @@ in
       '';
     };
 
+gtk = {
+  enable = true;
+  iconTheme = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+  };
+  theme = {
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+  };
+};
 
 
 
@@ -252,16 +266,8 @@ in
   };
 
   # Let Home Manager install and manage itself.
-  services = {
-    gpg-agent = {
-      enable = true;
-      defaultCacheTtl = 1800;
-      enableSshSupport = true;
-    };
-  };
   # restart services on change
   systemd.user.startServices = "sd-switch";
-
 
   programs = {
     emacs = {
@@ -304,7 +310,6 @@ in
       bindl=,Print,exec,${screenCapture}
       monitor = , preferred, auto, 1
       ${workspaceConf { monitor = ", preferred, auto, 1"; }}
-      exec-once=${hyprpaper}
       exec-once=${pkgs.blueman}/bin/blueman-applet
       exec-once=${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator
     '';

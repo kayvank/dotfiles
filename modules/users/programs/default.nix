@@ -2,8 +2,7 @@
   ./kanshi
   ./cli
   ./hyprlock
-  ./hyprpaper
-  ./networkmanager
+  # ./hyprpaper
   ./rofi ## menu
   ./waybar
   # ./xdg-defaults.nix
