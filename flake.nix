@@ -98,7 +98,7 @@
        # extraSpecialArgs = { inherit inputs; };
         pkgs = inputs.nixpkgs.legacyPackages.${system};
         modules = [
-          ./modules/users/home.nix
+          ./modules/users
           {
             home = {
               username = "kayvan";
