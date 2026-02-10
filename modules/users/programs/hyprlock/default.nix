@@ -4,85 +4,159 @@
   home.packages = [ pkgs.hyprlock ];
 
   xdg.configFile."hypr/hyprlock.conf".text = ''
-    general {
-        hide_cursor=true
-    }
 
-    background {
-        monitor =
-        path = screenshot
+   $background = rgb(171717)
+    $foreground = rgb(F9F9F9)
+    $color0 = rgb(3E3E3E)
+    $color1 = rgb(181818)
+    $color2 = rgb(454545)
+    $color3 = rgb(505050)
+    $color4 = rgb(6C6C6C)
+    $color5 = rgb(797979)
+    $color6 = rgb(B2B2B2)
+    $color7 = rgb(EEEEEE)
+   $color8 = rgb(A6A6A6)
+   $color9 = rgb(202020)
+   $color10 = rgb(5C5C5C)
+   $color11 = rgb(6A6A6A)
+   $color12 = rgb(909090)
+   $color13 = rgb(A1A1A1)
+   $color14 = rgb(EDEDED)
+   $color15 = rgb(EEEEEE)
+general {
+    grace = 1
+    fractional_scaling = 2
+    immediate_render = true
+}
 
-        blur_passes = 1
-        blur_size = 7
-        noise = 0.0117
-        contrast = 0.8916
-        brightness = 0.8172
-        vibrancy = 0.1696
-        vibrancy_darkness = 0.0
-    }
+background {
+    monitor =
+    # NOTE: use only 1 path
+	#path = screenshot   # screenshot of your desktop
+	#path = $HOME/.config/hypr/wallpaper_effects/.wallpaper_modified # by wallpaper effects
+   path = $HOME/.config/wallpapers/night-monochrome.jpg  # current wallpaper
 
-    image {
-        monitor =
-        path = ${../hyprpaper/wallpapers/night-monochrome.jpg}
-        size = 700 # lesser side if not 1:1 ratio
-        rounding = -1 # negative values mean circle
-        border_size = 4
-        border_color = rgb(221, 221, 221)
-        rotate = 0 # degrees, counter-clockwise
-        reload_time = -1 # seconds between reloading, 0 to reload with SIGUSR2
-        reload_cmd =  # command to get new path. if empty, old path will be used. don't run "follow" commands like tail -F
+    color = rgb(0,0,0) # color will be rendered initially until path is available
 
-        position = 0, 0
-        halign = center
-        valign = center
+    # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
+    blur_size = 3
+    blur_passes = 2 # 0 disables blurring
+    noise = 0.0117
+    contrast = 1.3000 # Vibrant!!!
+    brightness = 0.8000
+    vibrancy = 0.2100
+    vibrancy_darkness = 0.0
+}
 
-        shadow_size = 10
-    }
 
-    label {
-        monitor =
-        # take a screenshot of the screen lock
-        # text = cmd[update:2000] grimblast save screen > /dev/null && echo "Enter your password, gvolpe"
-        text = Enter your password, $USER
-        color = rgba(200, 200, 200, 1.0)
-        font_size = 25
-        font_family = Noto Sans
-        rotate = 0 # degrees, counter-clockwise
+# Date
+label {
+    monitor =
+    text = cmd[update:18000000] echo "<b> "$(date +'%A, %-d %B')" </b>"
+    color = $color13
+    font_size = 64
+    font_family = Victor Mono Bold Italic
+    position = 0, -20
+    halign = center
+    valign = center
+}
 
-        position = 0, 180
-        halign = center
-        valign = center
-    }
+# Hour-Time (single horizontal time like 1080p variant)
+label {
+    monitor =
+#     text = cmd[update:1000] echo "$(date +"%H:%M")"   # 24h option
+    text = cmd[update:1000] echo "$(date +"%I:%M %p")" # AM/PM
+	#color = rgba(255, 185, 0, .8)
+    color = $color8
+    font_size = 173
+    font_family = JetBrainsMono ExtraBold
+    position = 0, -133
+    halign = center
+    valign = top
+}
 
-    input-field {
-        monitor =
-        size = 200, 50
-        outline_thickness = 3
-        dots_size = 0.33 # Scale of input-field height, 0.2 - 0.8
-        dots_spacing = 0.15 # Scale of dots' absolute size, 0.0 - 1.0
-        dots_center = false
-        dots_rounding = -1 # -1 default circle, -2 follow input-field rounding
-        outer_color = rgb(151515)
-        inner_color = rgb(200, 200, 200)
-        font_color = rgb(10, 10, 10)
-        fade_on_empty = true
-        fade_timeout = 1000 # Milliseconds before fade_on_empty is triggered.
-        placeholder_text = <i>Input Password...</i> # Text rendered in the input box when it's empty.
-        hide_input = false
-        rounding = -1 # -1 means complete rounding (circle/oval)
-        check_color = rgb(204, 136, 34)
-        fail_color = rgb(204, 34, 34) # if authentication failed, changes outer_color and fail message color
-        fail_text = <i>$FAIL <b>($ATTEMPTS)</b></i> # can be set to empty
-        fail_transition = 300 # transition time in ms between normal outer_color and fail_color
-        capslock_color = -1
-        numlock_color = -1
-        bothlock_color = -1 # when both locks are active. -1 means don't change outer color (same for above)
-        invert_numlock = false # change color if numlock is off
-        swap_font_color = false # see below
+# USER
+label {
+    monitor =
+    text =   $USER
+    color = $color9
+    font_size = 48
+    font_family = Victor Mono Bold Oblique
+    position = 0, 300
+    halign = center
+    valign = bottom
+}
 
-        position = 0, -180
-        halign = center
-        valign = center
-    }
+# INPUT FIELD
+input-field {
+    monitor =
+    size = 306, 93
+    outline_thickness = 2
+    dots_size = 0.2 # Scale of input-field height, 0.2 - 0.8
+    dots_spacing = 0.2 # Scale of dots' absolute size, 0.0 - 1.0
+    dots_center = true
+    outer_color = $color8
+    inner_color = rgba(255, 255, 255, 0.1)
+	capslock_color = rgb(255,255,255)
+    font_color = $color13
+    fade_on_empty = false
+    font_family = Victor Mono Bold Oblique
+    placeholder_text = <i><span foreground="##ffffff99">🔒 Type Password</span></i>
+    hide_input = false
+    position = 0, 100
+    halign = center
+    valign = bottom
+}
+
+# Keyboard LAYOUT
+label {
+    monitor =
+    text = $LAYOUT
+    color = $color8
+    font_size = 19
+    font_family = Victor Mono Bold Oblique
+    position = 0, 53
+    halign = center
+    valign = bottom
+}
+
+# uptime
+label {
+    monitor =
+    text = cmd[update:60000] echo "<b> "$(uptime -p || ~/.config/scripts/UptimeNixOS.sh)" </b>"
+    color = $color8
+    font_size = 32
+    font_family = Victor Mono Bold Oblique
+    position = 0, 0
+    halign = right
+    valign = bottom
+}
+
+# battery information
+label {
+    monitor =
+    text = cmd[update:1000] echo "<b> "$(~/.config/scripts/Battery.sh)" </b>"
+    color = $color8
+    font_size = 21
+    font_family = Victor Mono Bold Oblique
+    position = 0, 40
+    halign = right
+    valign = bottom
+}
+# weather edit the scripts for locations
+# weather scripts are located in ~/.config/hypr/UserScripts Weather.sh and/or Weather.py
+# see https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS#%EF%B8%8F-weather-app-related-for-waybar-and-hyprlock
+label {
+    monitor =
+    text = cmd[update:3600000] [ -f "$HOME/.cache/.weather_cache" ] && cat  "$HOME/.cache/.weather_cache"
+    color = $color8
+    font_size = 19
+    font_family = Victor Mono Bold Oblique
+    position = 50, 0
+    halign = left
+    valign = bottom
+}
+
+
   '';
 }

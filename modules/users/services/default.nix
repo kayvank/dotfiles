@@ -4,5 +4,5 @@
   ./nixos-vscode-ssh-fix
   ./hypridle
   ./hyprpaper
-  ./hoogle
+  # ./hoogle // emacs gets confused
 ]

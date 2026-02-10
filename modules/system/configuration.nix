@@ -43,7 +43,7 @@ in {
     ./printing.nix
     ./programs.nix
     ./security.nix
-    ./services.nix
+    ./services
     ./stylix.nix
     ./theme.nix
     # ./sound.nix
@@ -51,6 +51,7 @@ in {
     ./virtualisation.nix
     ./wm/hyprland.nix
     ./zsa-keyboard.nix
+    ./services
   ];
 
  systemd.user.services.kanshi = {

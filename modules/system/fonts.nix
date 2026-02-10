@@ -32,6 +32,7 @@
       noto-fonts-monochrome-emoji
       nerd-fonts.hack
       nerd-fonts.jetbrains-mono
+      nerd-fonts.victor-mono
       nerd-fonts.im-writing
       nerd-fonts.iosevka
       nerd-fonts.lilex

@@ -25,6 +25,7 @@ let
   fontPkgs = with pkgs; [
     font-awesome # awesome fonts
     nerd-fonts.jetbrains-mono
+    nerd-fonts.victor-mono
     nerd-fonts.space-mono
     nerd-fonts.ubuntu-mono
     nerd-fonts.symbols-only
