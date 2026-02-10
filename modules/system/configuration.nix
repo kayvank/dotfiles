@@ -44,7 +44,7 @@ in {
     ./programs.nix
     ./security.nix
     ./services.nix
-    ./stylix.nix ## this errors out
+    ./stylix.nix
     ./theme.nix
     # ./sound.nix
     ./users.nix

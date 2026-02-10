@@ -6,10 +6,26 @@
     splash = false;
     wallpaper = [
       {
-        monitor="eDP1";
+        monitor="eDP-1";
         path = "/home/kayvan/wallpapers/night-monochrome.jpg";
-        fit_mode = "tile";
+        fit_mode = "cover";
       }
+      {
+        monitor="DP-1";
+        path = "/home/kayvan/wallpapers/night-monochrome.jpg";
+        fit_mode = "cover";
+      }
+      {
+        monitor="DP-2";
+        path = "/home/kayvan/wallpapers/night-monochrome.jpg";
+        fit_mode = "cover";
+      }
+      {
+        monitor="DP-3";
+        path = "/home/kayvan/wallpapers/night-monochrome.jpg";
+        fit_mode = "cover";
+      }
+
     ];
   };
 };

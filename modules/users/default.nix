@@ -178,6 +178,7 @@ in
 {
 
   programs.home-manager.enable = true;
+# config.stylix.autoEnable= true;
 
   imports =
     (import ./programs) ++
