@@ -23,7 +23,7 @@ let
           darkreader
           ublock-origin
           vimium
-          multi-account-containers
+          # multi-account-containers
         ];
 
   # extensions = with inputs.firefox-addons; [
@@ -76,7 +76,7 @@ let
     "browser.shell.checkDefaultBrowser" = false;
     "browser.startup.homepage" = "https://nixos.org";
     "browser.tabs.loadInBackground" = true;
-    "browser.urlbar.placeholderName" = "DuckDuckGo";
+    # "browser.urlbar.placeholderName" = "DuckDuckGo";
     "browser.urlbar.showSearchSuggestionsFirst" = false;
 
     # disable all the annoying quick actions
@@ -85,10 +85,10 @@ let
     "browser.urlbar.shortcuts.quickactions" = false;
     "browser.urlbar.suggest.quickactions" = false;
 
-    "distribution.searchplugins.defaultLocale" = "en-US";
+    # "distribution.searchplugins.defaultLocale" = "en-US";
 
-    "doh-rollout.balrog-migration-done" = true;
-    "doh-rollout.doneFirstRun" = true;
+    # "doh-rollout.balrog-migration-done" = true;
+    # "doh-rollout.doneFirstRun" = true;
 
     "dom.forms.autocomplete.formautofill" = false;
 
@@ -97,17 +97,17 @@ let
 
     "extensions.activeThemeID" = "firefox-dark@mozilla.org";
 
-    "extensions.extensions.activeThemeID" = "firefox-dark@mozilla.org";
-    "extensions.update.enabled" = false;
-    "extensions.webcompat.enable_picture_in_picture_overrides" = true;
-    "extensions.webcompat.enable_shims" = true;
-    "extensions.webcompat.perform_injections" = true;
-    "extensions.webcompat.perform_ua_overrides" = true;
+    # "extensions.extensions.activeThemeID" = "firefox-dark@mozilla.org";
+    # "extensions.update.enabled" = false;
+    # "extensions.webcompat.enable_picture_in_picture_overrides" = true;
+    # "extensions.webcompat.enable_shims" = true;
+    # "extensions.webcompat.perform_injections" = true;
+    # "extensions.webcompat.perform_ua_overrides" = true;
 
-    "print.print_footerleft" = "";
-    "print.print_footerright" = "";
-    "print.print_headerleft" = "";
-    "print.print_headerright" = "";
+    # "print.print_footerleft" = "";
+    # "print.print_footerright" = "";
+    # "print.print_headerleft" = "";
+    # "print.print_headerright" = "";
 
     "privacy.donottrackheader.enabled" = true;
 

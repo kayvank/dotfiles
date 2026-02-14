@@ -50,6 +50,9 @@ let
     mate.atril           # A simple multi-page document viewer
     aspell
     aspellDicts.en       # Aspell dictionary for English
+    aspellDicts.en-computers
+    aspellDicts.en-science
+
     bfg-repo-cleaner     # git repository cleaner
     bgs # Extremely fast and small background setter for X
 
@@ -59,7 +62,7 @@ let
     cmake
     code-cursor          # cursor ai tool
     cowsay               # cow shell ouput
-    # chromium             ## google open source browser
+    chromium             ## google open source browser
     discord
     docker-compose       # docker manager
     duf                  # disk utility
