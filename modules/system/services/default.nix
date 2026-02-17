@@ -29,14 +29,6 @@
       jack.enable = true;
     };
 
-    cron = {
-      enable = true;
-      systemCronJobs = [
-        # Run weahter report as kayvan every 4 hours
-        "0 */4 * * * kayvan $HOME/.config/scripts/UserScripts/WeatherWrap.sh"
-      ];
-    };
-
   };
   systemd.user.services.gpaste = {
     description = "GPaste clipboard manager";

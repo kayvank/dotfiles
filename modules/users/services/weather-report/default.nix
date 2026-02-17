@@ -38,21 +38,14 @@ in
         Description = "${name} timer";
       };
       Timer = {
-        # onBootSec = "5m";
-        # onUnitActiveSec = "5h";
-        OnCalendar = "hourly";
+        OnBootSec = "2m"; ## run 2 min after boot up
+        OnUnitActiveSec = "4h"; ## run 4 hours after the last run
+        # OnCalendar = "hourly";
         Unit = "${name}.service";
       };
       Install = {
         WantedBy = ["timers.target"];
       };
-
-      # timerConfig = {
-      #   Unit = "${name}.service";
-      #   OnCalendar = "daily"; # Runs once a day at 12:00 am
-      #   Persistent = true;    # Ensures the job runs if a start time was missed (e.g., system off)
-      #   description = "Timer for ${name}-service";
-      #   };
 
     };
 
