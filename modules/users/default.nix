@@ -237,6 +237,9 @@ in
       default = [ "hyprland" ];
       "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
     };
+    xdg.portal.configPackages = {
+      default = [ "hyprland" ];
+    };
 
     home.sessionVariables.TERMCMD = "kitty --class=filechoose_yazi";
 

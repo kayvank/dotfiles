@@ -15,6 +15,21 @@
     boot.kernelModules = [ "kvm-intel" "btqca" "hci_qca" "hci_uart" "sg" "btintel" ];
     boot.extraModulePackages = [ ];
 
-    boot.kernelParams = [ "nvidia_drm.modeset=1" "nvidia_drm.fbdev=1" ];
+    boot.kernelParams =
+      [
+        "nvidia_drm.modeset=1"
+        "nvidia_drm.fbdev=1"
+        "quiet"
+        "splash"
+      ];
     boot.loader.systemd-boot.configurationLimit = 5;
+
+# Enable Plymouth for graphical boot
+boot.plymouth.enable = true;
+
+# Hide boot messages (optional, but recommended for a clean logo screen)
+boot.initrd.verbose = false;
+
+# Optional: Set a specific theme (nixos-bgrt often shows the logo)
+ # boot.plymouth.theme = "nixos-bgrt";
 }

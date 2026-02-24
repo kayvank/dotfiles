@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     cachix
     dict
+    dnsmasq
     dunst
     git
     go
@@ -39,10 +40,9 @@
     scowl
     gnome-terminal
     gpaste
-
-# Link to a standard location if required by tools
-
-
   ];
   environment.etc."scowl-dict".source = "${pkgs.scowl}/share/dict";
+  environment.sessionVariables.MOZ_ENABLE_WAYLAND = "1";
+
+
 }

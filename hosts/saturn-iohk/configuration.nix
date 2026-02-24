@@ -20,7 +20,12 @@
       virtualization = {
         docker.enable = true;
         virtualMachines.enable = true;
-      };
+        libvirtd = {
+          enable = true;
+          qemu = {
+            swtpm.enable = true;
+          };
+        };
       brave.enable = true;
       firefox.enable = true;
 

@@ -2,6 +2,7 @@
 
 {
   services = {
+    qemuGuest.enable = true;
     xserver = {
       enable = true;
       videoDrivers = ["nvidia"];
