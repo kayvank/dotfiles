@@ -95,7 +95,8 @@
   # This will set your color palette
   # Default background
   # Add new images to ~/zaneyos/wallpapers
-  stylixImage = ../../wallpapers/night-monochrome.jpg;
+  # stylixImage = ../../wallpapers/night-monochrome.jpg;
+  stylixImage = ../../wallpapers/alien-blue.jpg;
   #stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
   #stylixImage = ../../wallpapers/Anime-Purple-eyes.png;
   #stylixImage = ../../wallpapers/Rainnight.jpg;

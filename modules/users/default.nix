@@ -12,15 +12,6 @@ let
     imv $FILE_PATH
 '';
 
-  startupScript = pkgs.pkgs.writeShellScriptBin "start" ''
-    # ${pkgs.waybar}/bin/waybar &
-    ${pkgs.swww}/bin/swww init &
-
-/   sleep 1
-
-    ${pkgs.swww}/bin/swww img ${./wallpapers/saturn.jpg} &
-  '';
-
 
   fontPkgs = with pkgs; [
     font-awesome # awesome fonts
@@ -236,9 +227,6 @@ in
     xdg.portal.config.hyprland = {
       default = [ "hyprland" ];
       "org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
-    };
-    xdg.portal.configPackages = {
-      default = [ "hyprland" ];
     };
 
     home.sessionVariables.TERMCMD = "kitty --class=filechoose_yazi";

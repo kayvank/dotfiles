@@ -54,7 +54,6 @@
       };
     };
 
-    users.users.kayvan.description = "Kayvan";
     home-manager.users.USERNAME.userSettings = {
       name = "Kayvan";
       email = "kayvan@q2io.com";

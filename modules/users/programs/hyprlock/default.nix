@@ -34,7 +34,8 @@ background {
     # NOTE: use only 1 path
 	#path = screenshot   # screenshot of your desktop
 	#path = $HOME/.config/hypr/wallpaper_effects/.wallpaper_modified # by wallpaper effects
-   path = $HOME/.config/wallpapers/night-monochrome.jpg  # current wallpaper
+   # path = $HOME/.config/wallpapers/night-monochrome.jpg  # current wallpaper
+   path = $HOME/.config/wallpapers/alien-blue.jpg  # current wallpaper
 
     color = rgb(0,0,0) # color will be rendered initially until path is available
 
@@ -55,7 +56,8 @@ label {
     text = cmd[update:18000000] echo "<b> "$(date +'%A, %-d %B')" </b>"
     color = $color13
     font_size = 64
-    font_family = Victor Mono Bold Italic
+    # font_family = Victor Mono Bold Italic
+    font_family = JetBrainsMono
     position = 0, -20
     halign = center
     valign = center
@@ -81,7 +83,8 @@ label {
     text =   $USER
     color = $color9
     font_size = 48
-    font_family = Victor Mono Bold Oblique
+    # font_family = Victor Mono Bold Oblique
+    font_family = JetBrainsMono
     position = 0, 300
     halign = center
     valign = bottom
@@ -100,7 +103,8 @@ input-field {
 	capslock_color = rgb(255,255,255)
     font_color = $color13
     fade_on_empty = false
-    font_family = Victor Mono Bold Oblique
+    # font_family = Victor Mono Bold Oblique
+    font_family = JetBrainsMono
     placeholder_text = <i><span foreground="##ffffff99">🔒 Type Password</span></i>
     hide_input = false
     position = 0, 100
@@ -114,7 +118,8 @@ label {
     text = $LAYOUT
     color = $color8
     font_size = 19
-    font_family = Victor Mono Bold Oblique
+    # font_family = Victor Mono Bold Oblique
+    font_family = JetBrainsMono
     position = 0, 53
     halign = center
     valign = bottom
@@ -126,7 +131,8 @@ label {
     text = cmd[update:60000] echo "<b> "$(uptime -p || ~/.config/scripts/UptimeNixOS.sh)" </b>"
     color = $color8
     font_size = 32
-    font_family = Victor Mono Bold Oblique
+    # font_family = Victor Mono Bold Oblique
+    font_family = JetBrainsMono
     position = 0, 0
     halign = right
     valign = bottom
@@ -135,23 +141,24 @@ label {
 # battery information
 label {
     monitor =
-    text = cmd[update:1000] echo "<b> "$(~/.config/scripts/Battery.sh)" </b>"
+    text = cmd[update:1000] echo "<b> "$(~/.config/scripts/UserScripts/Battery.sh)" </b>"
     color = $color8
     font_size = 21
-    font_family = Victor Mono Bold Oblique
+    # font_family = Victor Mono Bold Oblique
+    font_family = JetBrainsMono
     position = 0, 40
     halign = right
     valign = bottom
 }
 # weather edit the scripts for locations
-# weather scripts are located in ~/.config/hypr/UserScripts Weather.sh and/or Weather.py
-# see https://github.com/JaKooLit/Hyprland-Dots/wiki/TIPS#%EF%B8%8F-weather-app-related-for-waybar-and-hyprlock
+# weather report is created by weather-report service in ~/.config/dotfiles/modules/users/services/weather-report/
 label {
     monitor =
     text = cmd[update:3600000] [ -f "$HOME/.cache/.weather_cache" ] && cat  "$HOME/.cache/.weather_cache"
     color = $color8
     font_size = 19
-    font_family = Victor Mono Bold Oblique
+    # font_family = Victor Mono Bold Oblique
+    font_family = JetBrainsMono
     position = 50, 0
     halign = left
     valign = bottom
