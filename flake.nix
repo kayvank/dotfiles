@@ -33,7 +33,6 @@
         firefox-addons = {
           url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
         };
-        swww.url = "github:LGFae/swww";
   };
 
   outputs = inputs@{ self, ...}:
@@ -41,6 +40,7 @@
   let
     host = "saturn-iohk";
     username = "kayvan";
+    userhome = "/home/kayvan";
     useremail = "kayvan@q2io.com";
     profile = "nvidia-laptop";
 
@@ -101,8 +101,8 @@
           ./modules/users
           {
             home = {
-              username = "kayvan";
-              homeDirectory = "/home/kayvan";
+              username = "${username}";
+              homeDirectory = "${userhome}";
               stateVersion = "26.05";
             };
           }

@@ -1,7 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:  {
 
-{
-  home.packages = [ pkgs.hyprlock ];
+  imports =
+    [
+      ../../scripts/battery.nix
+    ];
 
   xdg.configFile."hypr/hyprlock.conf".text = ''
 
@@ -32,10 +34,7 @@ general {
 background {
     monitor =
     # NOTE: use only 1 path
-	#path = screenshot   # screenshot of your desktop
-	#path = $HOME/.config/hypr/wallpaper_effects/.wallpaper_modified # by wallpaper effects
-   # path = $HOME/.config/wallpapers/night-monochrome.jpg  # current wallpaper
-   path = $HOME/.config/wallpapers/alien-blue.jpg  # current wallpaper
+   path = $HOME/.config/dotfiles/wallpapers/alien-blue.jpg  # current wallpaper
 
     color = rgb(0,0,0) # color will be rendered initially until path is available
 
@@ -129,8 +128,8 @@ label {
 label {
     monitor =
     text = cmd[update:60000] echo "<b> "$(uptime -p || ~/.config/scripts/UptimeNixOS.sh)" </b>"
-    color = $color8
-    font_size = 32
+    color = $color9
+    font_size = 21
     # font_family = Victor Mono Bold Oblique
     font_family = JetBrainsMono
     position = 0, 0
@@ -141,12 +140,12 @@ label {
 # battery information
 label {
     monitor =
-    text = cmd[update:1000] echo "<b> "$(~/.config/scripts/UserScripts/Battery.sh)" </b>"
-    color = $color8
+    text = cmd[update:1000] echo "<b> "$(${config.scripts.battery}/bin/${config.scripts.battery.name})" </b>"
+    color = $color9
     font_size = 21
     # font_family = Victor Mono Bold Oblique
     font_family = JetBrainsMono
-    position = 0, 40
+    position = 0, 45
     halign = right
     valign = bottom
 }
