@@ -2,6 +2,7 @@
 
 {
   users.users.kayvan = {
+    name = "kayvan";
     isNormalUser = true;
     initialPassword = "123password";
     extraGroups = [

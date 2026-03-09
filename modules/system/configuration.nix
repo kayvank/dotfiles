@@ -52,7 +52,15 @@ in {
     ./wm/hyprland.nix
     ./zsa-keyboard.nix
     ./services
+    inputs.sops-nix.nixosModules.sops
   ];
+  sops.defaultSopsFile = ../../secrets/secrets.yaml;
+  sops.defaultSopsFormat = "yaml";
+  sops.age.keyFile = "/home/kayvan/.config/sops/age/keys.txt";
+  sops.secrets.example-key = {}; ## this must math what is in secrets.yaml
+  sops.secrets."myservice/my_subdir/my_secret" = {
+    owner = config.users.users.kayvan.name;
+  };
 
  systemd.user.services.kanshi = {
     description = "kanshi daemon";

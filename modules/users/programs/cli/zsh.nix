@@ -40,8 +40,8 @@ in
       ping      = "prettyping";
       pbcopy    = "wl-copy";
       pbpaste   = "wl-paste";
-      wiohk     = "cd ~/dev/workspaces/iohk";
-      wq2io     = "cd ~/dev/workspaces/q2io";
+      wiohk     = "cd ~/dev/iohk";
+      wq2io     = "cd ~/dev/q2io";
       wdev      = "cd ~/dev";
       wwork     = "cd ~/dev/workspaces";
       tmx       = "tmux new-session -s $USER-`date +%s`";

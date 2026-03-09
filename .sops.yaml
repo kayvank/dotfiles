@@ -1,0 +1,9 @@
+## see ./secrets/README.org
+##
+keys:
+  - &primary age1zp3v2qsyrzr4dnamv5mhp0pj2j5pvtrqxe3vmqzntyndd5s9ev6qhd9pvh
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+      - age:
+          - *primary

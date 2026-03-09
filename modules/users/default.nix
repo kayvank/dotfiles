@@ -10,7 +10,7 @@ let
     FILE_PATH=$DIR_PATH/$(date +'%s_grim.png')
     grim -g "$(slurp)" $FILE_PATH
     imv $FILE_PATH
-'';
+  '';
 
 
   fontPkgs = with pkgs; [
@@ -109,6 +109,7 @@ let
     shfmt                # a shell parser and formatter
     signal-desktop
     slack                # messaging client
+
     speedtest-cli
     spotify              # music streaming service
     sqlite               # db sqlite
@@ -173,44 +174,44 @@ in
 {
 
   programs.home-manager.enable = true;
-# config.stylix.autoEnable= true;
+  # config.stylix.autoEnable= true;
 
   imports =
     (import ./programs) ++
     (import ./services);
 
-  xdg = {
-    inherit configHome;
-    enable = true;
-  };
+    xdg = {
+      inherit configHome;
+      enable = true;
+    };
 
-  home = {
-    packages =
-      defaultPkgs ++
-      haskellPkgs ++
-      pythonPkgs;
+    home = {
+      packages =
+        defaultPkgs ++
+        haskellPkgs ++
+        pythonPkgs;
 
-      sessionVariables = {
-        DISPLAY = ":0";
-        EDITOR = "vim";
-        NIXOS_OZONE_WL = 1;
-        MOZ_ENABLE_WAYLAND = "1";
-        XDG_CURRENT_DESKTOP = "Hyprland";
-        XDG_SESSION_DESKTOP = "Hyprland";
-        XDG_SESSION_TYPE = "wayland";
-        GDK_BACKEND = "wayland,x11";
-        # QT_QPA_PLATFORM = "wayland;xcb";
-      };
-  };
+        sessionVariables = {
+          DISPLAY = ":0";
+          EDITOR = "vim";
+          NIXOS_OZONE_WL = 1;
+          MOZ_ENABLE_WAYLAND = "1";
+          XDG_CURRENT_DESKTOP = "Hyprland";
+          XDG_SESSION_DESKTOP = "Hyprland";
+          XDG_SESSION_TYPE = "wayland";
+          GDK_BACKEND = "wayland,x11";
+          # QT_QPA_PLATFORM = "wayland;xcb";
+        };
+    };
 
 
-  fonts.fontconfig.enable = true;
+    fonts.fontconfig.enable = true;
 
-  # e.g. for slack, signal, etc
-  xdg.configFile."electron-flags.conf".text = ''
-    --enable-features=UseOzonePlatform
-    --ozone-platform=wayland
-  '';
+    # e.g. for slack, signal, etc
+    xdg.configFile."electron-flags.conf".text = ''
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
+    '';
 
     xdg.portal = {
       enable = true;
@@ -239,84 +240,93 @@ in
       '';
     };
 
-gtk = {
-  enable = true;
-  iconTheme = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-  };
-  theme = {
-    name = "Adwaita";
-    package = pkgs.adwaita-icon-theme;
-  };
-};
 
-
-
-  # notifications about home-manager news
-  news.display = "silent";
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowBroken = true;
-  };
-
-  # Let Home Manager install and manage itself.
-  # restart services on change
-  systemd.user.startServices = "sd-switch";
-
-  programs = {
-    emacs = {
+    qt = {
       enable = true;
-      package = pkgs.emacs30-gtk3;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
-      extraPackages = epkgs: [
-        epkgs.nix-mode
-        epkgs.magit
-        epkgs.emacsql
-      ];
     };
-    htop = {
+    gtk = {
       enable = true;
-      settings = {
-        sort_direction = true;
-        sort_key = "PERCENT_CPU";
+      iconTheme = {
+        name = "GruvboxPLus";
+        package = pkgs.gruvbox-plus-icons;
       };
+      theme = {
+        name = "Adwaita";
+        package = pkgs.adwaita-icon-theme;
+      };
+      cursorTheme = {
+        package = pkgs.bibata-cursors;
+        name = "adw-gtk3";
+      };
+
     };
-    bat.enable = true;
-    direnv = {
+
+
+
+    # notifications about home-manager news
+    news.display = "silent";
+
+    nixpkgs.config = {
+      allowUnfree = true;
+      allowBroken = true;
+    };
+
+    # Let Home Manager install and manage itself.
+    # restart services on change
+    systemd.user.startServices = "sd-switch";
+
+    programs = {
+      emacs = {
+        enable = true;
+        package = pkgs.emacs30-gtk3;  # replace with pkgs.emacs-gtk, or a version provided by the community overlay if desired.
+        extraPackages = epkgs: [
+          epkgs.nix-mode
+          epkgs.magit
+          epkgs.emacsql
+        ];
+      };
+      htop = {
+        enable = true;
+        settings = {
+          sort_direction = true;
+          sort_key = "PERCENT_CPU";
+        };
+      };
+      bat.enable = true;
+      direnv = {
+        enable = true;
+        enableZshIntegration = true;
+        nix-direnv.enable = true;
+      };
+      jq.enable = true;
+    }; ## program
+
+
+    wayland.windowManager.hyprland = {
       enable = true;
-      enableZshIntegration = true;
-      nix-direnv.enable = true;
+      extraConfig = (builtins.readFile ./wm/hyprland/hyprland.conf) + ''
+        bind=SUPER,P,exec,"wofi" --show run --style=${./wm/hyprland/wofi.css} --term=footclient --prompt=Run
+        bind=SUPER,A,exec,${gblast} save area
+        bind=SUPER,S,exec,${gblast} save screen
+        bind=SUPERCTRL,L,exec,${hyprlock}
+        # audio volume bindings
+        bindel=,XF86AudioRaiseVolume,exec,${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+
+        bindel=,XF86AudioLowerVolume,exec,${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-
+        bindl=,XF86AudioMute,exec,${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle
+        bindl=,Print,exec,${screenCapture}
+        monitor = , preferred, auto, 1
+        ${workspaceConf { monitor = ", preferred, auto, 1"; }}
+        exec-once=${pkgs.blueman}/bin/blueman-applet
+        exec-once=${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator
+      '';
+
+      plugins = [ ];
+
+      systemd = {
+        enable = true;
+        variables = [ "--all" ];
+      };
+      # xwayland.enable = true;
     };
-    jq.enable = true;
-  }; ## program
-
-
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = (builtins.readFile ./wm/hyprland/hyprland.conf) + ''
-      bind=SUPER,P,exec,"wofi" --show run --style=${./wm/hyprland/wofi.css} --term=footclient --prompt=Run
-      bind=SUPER,A,exec,${gblast} save area
-      bind=SUPER,S,exec,${gblast} save screen
-      bind=SUPERCTRL,L,exec,${hyprlock}
-      # audio volume bindings
-      bindel=,XF86AudioRaiseVolume,exec,${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%+
-      bindel=,XF86AudioLowerVolume,exec,${wpctl} set-volume @DEFAULT_AUDIO_SINK@ 5%-
-      bindl=,XF86AudioMute,exec,${wpctl} set-mute @DEFAULT_AUDIO_SINK@ toggle
-      bindl=,Print,exec,${screenCapture}
-      monitor = , preferred, auto, 1
-      ${workspaceConf { monitor = ", preferred, auto, 1"; }}
-      exec-once=${pkgs.blueman}/bin/blueman-applet
-      exec-once=${pkgs.networkmanagerapplet}/bin/nm-applet --sm-disable --indicator
-    '';
-
-    plugins = [ ];
-
-    systemd = {
-      enable = true;
-      variables = [ "--all" ];
-    };
-    # xwayland.enable = true;
-  };
 }
 

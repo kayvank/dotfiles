@@ -3,7 +3,6 @@
 let
   inherit (specialArgs);
 
-  customAddons = pkgs.callPackage ./addons.nix { };
 
   # extensions =
   #   with inputs.nur.legacyPackages."x86_64-linux".repos.rycee.firefox-addons; [
