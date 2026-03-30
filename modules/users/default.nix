@@ -128,6 +128,7 @@ let
     wezterm
     wl-clipboard         # clipboard support
     wofi                 # app launcher
+    yazi                 # Blazing fast terminal file manager written in Rust, based on async I/O
     zip                  # zip archive
     unzip                  # zip archive
     zeal                 # offline api docs

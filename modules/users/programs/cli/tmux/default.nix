@@ -24,6 +24,14 @@ in {
       # shell.default = "bash";
       # defaultShell = "${pkgs.bash}/bin/bash";
       extraConfig = ''
+        set-option -g extended-keys
+        set -g default-terminal "xterm-256color"
+        set -g xterm-keys on
+        set -s escape-time 0
+        set -ga terminal-overrides ",*256col*:Tc"
+        set -ga terminal-overrides '*:Ss=\E[%p1%d q:Se=\E[ q'
+        set-environment -g COLORTERM "truecolor"
+
         set -g status off
         setw -g mode-keys vi
         setw -g mouse on

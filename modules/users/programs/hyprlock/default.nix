@@ -5,6 +5,7 @@
       ../../scripts/battery.nix
     ];
 
+  home.packages = [ pkgs.hyprlock ];
   xdg.configFile."hypr/hyprlock.conf".text = ''
 
    $background = rgb(171717)
